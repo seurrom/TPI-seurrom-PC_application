@@ -1,12 +1,19 @@
 <template>
   <div class="q-pa-md">
-    <q-btn style="background: #DC006B" text-color="white" label="Ajouter" />
-    <q-btn>
-      <img src="~assets/tabl_bord.png" width="18" height="18">
-    </q-btn>
-    <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
-    <q-input v-model="numInterne" type="numInt" label="Numéro interne" />
-    <q-input v-model="formuleBrute" type="formBru" label="Formule brute" />
+    <div>
+      <q-btn style="background: #DC006B" text-color="white" label="Ajouter" />
+      <q-btn>
+        <img src="~assets/tabl_bord.png" width="18" height="18">
+      </q-btn>
+    </div>
+    <div class="q-gutter-md row items-start">
+      <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
+      <q-input v-model="numInterne" type="numInt" label="Numéro interne" />
+      <q-input v-model="formuleBrute" type="formBru" label="Formule brute" />
+      <q-btn>
+        <img src="~assets/recherche.png" width="18" height="18">
+      </q-btn>
+    </div>
     <q-table
       title="Liste des produits"
       :data="data"
