@@ -5,6 +5,9 @@
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
           Gestion des produits
         </q-toolbar-title>
+        <q-btn @click="deconnexion" size="lg">
+          <img src="~assets/deconnexion.png" width="22" height="18">
+        </q-btn>
       </q-toolbar>
       <q-toolbar style="background: #DC006B">
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
@@ -20,7 +23,7 @@
 
 <script>
 export default {
-  name: 'MainLayout',
+  name: 'InfoProduitLayout',
   data () {
     return {
     }

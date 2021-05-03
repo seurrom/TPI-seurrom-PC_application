@@ -10,10 +10,10 @@
             <q-form @submit="clickMethod" class="q-gutter-md">
               <q-input square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" />
               <q-input square filled clearable v-model="mdp" type="password" label="Mot de passe" />
-              <q-btn type="submit" color="black" size="lg" class="full-width" label="Connexion"/>
+              <q-btn type="submit" color="pink" size="lg" class="full-width" label="Connexion"/>
             </q-form>
           </q-card-section>
-          <q-card-section class="text-center q-pa-none">
+          <q-card-section class="text-center q-pa-none q-gutter-md row items-start">
             <input type="checkbox" id="souvenirMdp" value="">
             <label for="souvenirMdp" class="text-grey-6">Se souvenir de moi</label>
             <p class="text-grey-6">Mot de passe oublié ?</p>
