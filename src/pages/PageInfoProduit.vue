@@ -33,6 +33,14 @@
     <div class="q-gutter-md row items-start">
       <q-input v-model="densite" type="densite" label="Densité" suffix="g/ml" />
     </div>
+    <div class="q-pa-md">
+    <q-table
+      title="Stockage"
+      :data="data"
+      :columns="columns"
+      row-key="name"
+    />
+  </div>
   </div>
 </template>
 <script>
@@ -61,6 +69,44 @@ export default {
         { label: 'Minéral', value: 'mineral' },
         { label: 'Organique', value: 'organique' },
         { label: 'Solution', value: 'solution' }
+      ],
+      columns: [
+        {
+          name: 'name',
+          required: true,
+          label: 'Salle',
+          align: 'left',
+          field: row => row.name,
+          format: val => `${val}`,
+          sortable: true
+        },
+        { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
+      ],
+      data: [
+        {
+          name: 'A2',
+          quantite: '5L'
+        },
+        {
+          name: 'B4',
+          quantite: '35L'
+        },
+        {
+          name: 'B8',
+          quantite: '1L'
+        },
+        {
+          name: 'K56',
+          quantite: '5L'
+        },
+        {
+          name: 'S34',
+          quantite: '67L'
+        },
+        {
+          name: 'T6',
+          quantite: '2L'
+        }
       ]
     }
   }
