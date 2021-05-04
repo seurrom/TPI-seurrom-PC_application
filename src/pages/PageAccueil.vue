@@ -72,17 +72,17 @@
 
 <script>
 export default {
-  //Nom de la page
+  // Nom de la page
   name: 'PageAccueil',
   data () {
     return {
-      //Déclaration des variables
+      // Déclaration des variables
       nomOfficiel: '',
       numInterne: '',
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
-      //Retourne les noms des colonnes
+      // Retourne les noms des colonnes
       columns: [
         {
           name: 'desc',
@@ -97,7 +97,7 @@ export default {
         { name: 'nomOff', label: 'Nom officiel', field: 'nomOff', sortable: true, style: 'width: 10px' },
         { name: 'formBrute', label: 'Formule brute', field: 'formBrute' }
       ],
-      //Retourne les informations liées au produit
+      // Retourne les informations liées au produit
       data: [
         {
           name: '12030',
@@ -156,7 +156,7 @@ export default {
       ]
     }
   },
-  //Création des méthodes pour effectuer la navigation
+  // Création des méthodes pour effectuer la navigation
   methods: {
     infoproduit () {
       this.$router.push('infoproduit')

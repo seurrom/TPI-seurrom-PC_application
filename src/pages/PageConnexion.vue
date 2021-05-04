@@ -32,12 +32,12 @@ export default {
   name: 'PageAccueil',
   data () {
     return {
-      //Retourne le user et le pwd
+      // Retourne le user et le pwd
       identifiant: '',
       mdp: ''
     }
   },
-  //Permet d'effectuer la navigation
+  // Permet d'effectuer la navigation
   methods: {
     clickMethod () {
       this.$router.push('accueil')

@@ -5,6 +5,7 @@
         <!-- Input des informations du produit -->
         <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
         <q-input v-model="famille" type="famille" label="Famille" />
+        <!-- Bouton radio pour le choix "Sorte de produit" -->
         <q-option-group
         :options="options"
         type="radio"
@@ -53,7 +54,7 @@ export default {
   name: 'PageInfoProduit',
   data () {
     return {
-      //Déclaration des variables
+      // Déclaration des variables
       text: '',
       ph: '',
       nomOfficiel: 'Hexanol',
@@ -71,13 +72,13 @@ export default {
       densite: '0.814',
       dense: false,
       group: null,
-      //Retourne les choix dans le bouton radio
+      // Retourne les choix dans le bouton radio
       options: [
         { label: 'Minéral', value: 'mineral' },
         { label: 'Organique', value: 'organique' },
         { label: 'Solution', value: 'solution' }
       ],
-      //Affectation des colonnes 
+      // Affectation des colonnes
       columns: [
         {
           name: 'name',
@@ -90,7 +91,7 @@ export default {
         },
         { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
       ],
-      //Affectation des lignes des quantités et des salles
+      // Affectation des lignes des quantités et des salles
       data: [
         {
           name: 'A2',
