@@ -1,12 +1,14 @@
 <template>
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
+      <!-- Boutons "ajouter" et "tableau de bord" -->
       <q-btn @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter" />
       <q-btn @click="tablbord">
         <img src="~assets/tabl_bord.png" width="18" height="18">
       </q-btn>
     </div>
     <div class="recherche q-gutter-md row items-start">
+      <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="recherche2" v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
       <q-input class="recherche2" v-model="numInterne" type="numInt" label="Numéro interne" />
       <q-input class="recherche2" v-model="formuleBrute" type="formBru" label="Formule brute" />
@@ -14,6 +16,7 @@
         <img src="~assets/recherche.png" width="18" height="18">
       </q-btn>
     </div>
+    <!-- Tableau de produit chimique -->
     <q-table
       title="Liste des produits"
       :data="data"
@@ -23,6 +26,7 @@
       <template v-slot:header="props">
         <q-tr :props="props">
           <q-th auto-width />
+          <!-- Affectation de chaque nom de colonne -->
           <q-th
             v-for="col in props.cols"
             :key="col.name"
@@ -37,6 +41,7 @@
           <q-td auto-width>
             <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
           </q-td>
+        <!-- Affectation de chaque ligne -->
           <q-td
             v-for="col in props.cols"
             :key="col.name"
@@ -45,6 +50,7 @@
             {{ col.value }}
           </q-td>
           <q-td auto-width>
+            <!-- Bouton de navigation par rapport au produit en question -->
             <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
@@ -52,6 +58,7 @@
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
+            <!-- Deuxième partie du tableau -->
             <div class="salleQuantite q-gutter-md row">
               <q-input v-model="salle" type="salle" label="Salle" />
               <q-input v-model="quantite" type="quantite" label="Quantité" />
@@ -65,14 +72,17 @@
 
 <script>
 export default {
+  //Nom de la page
   name: 'PageAccueil',
   data () {
     return {
+      //Déclaration des variables
       nomOfficiel: '',
       numInterne: '',
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
+      //Retourne les noms des colonnes
       columns: [
         {
           name: 'desc',
@@ -87,6 +97,7 @@ export default {
         { name: 'nomOff', label: 'Nom officiel', field: 'nomOff', sortable: true, style: 'width: 10px' },
         { name: 'formBrute', label: 'Formule brute', field: 'formBrute' }
       ],
+      //Retourne les informations liées au produit
       data: [
         {
           name: '12030',
@@ -145,6 +156,7 @@ export default {
       ]
     }
   },
+  //Création des méthodes pour effectuer la navigation
   methods: {
     infoproduit () {
       this.$router.push('infoproduit')
