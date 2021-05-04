@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
       <q-btn @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter" />
-      <q-btn @click="tableauDeBord">
+      <q-btn @click="tablbord">
         <img src="~assets/tabl_bord.png" width="18" height="18">
       </q-btn>
     </div>
@@ -45,7 +45,7 @@
             {{ col.value }}
           </q-td>
           <q-td auto-width>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
           </q-td>
@@ -152,8 +152,11 @@ export default {
     ajout () {
       this.$router.push('infoproduit')
     },
-    tableauDeBord () {
-      this.$router.push('infoproduit')
+    etiquette () {
+      this.$router.push('etiquette')
+    },
+    tablbord () {
+      this.$router.push('tablbord')
     }
   }
 }

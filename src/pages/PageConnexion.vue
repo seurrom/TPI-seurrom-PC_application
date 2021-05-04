@@ -1,7 +1,7 @@
 <template>
   <q-page class="window-height window-width row justify-center items-center">
     <div class="column">
-      <div class="row">
+      <div class="logoDivtec row">
         <img src="~assets/logo-divtec.png" alt="Logo de la DIVTEC">
       </div>
       <div class="row">
@@ -42,5 +42,8 @@ export default {
 <style>
 .q-card {
   width: 360px;
+}
+.logoDivtec {
+  margin-bottom: 25px;
 }
 </style>
