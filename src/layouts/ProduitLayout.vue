@@ -2,6 +2,9 @@
   <q-layout>
     <q-header elevated>
       <q-toolbar style="background: #DC006B">
+        <q-btn @click="retour" size="lg">
+          <img src="~assets/back.png" width="10" height="18">
+        </q-btn>
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
           Gestion des produits
         </q-toolbar-title>

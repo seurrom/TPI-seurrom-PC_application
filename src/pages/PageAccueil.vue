@@ -1,15 +1,15 @@
 <template>
   <div class="q-pa-md">
-    <div>
-      <q-btn style="background: #DC006B" text-color="white" label="Ajouter" />
-      <q-btn>
+    <div class="btnAjoutTablBord">
+      <q-btn @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter" />
+      <q-btn @click="tableauDeBord">
         <img src="~assets/tabl_bord.png" width="18" height="18">
       </q-btn>
     </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
-      <q-input v-model="numInterne" type="numInt" label="Numéro interne" />
-      <q-input v-model="formuleBrute" type="formBru" label="Formule brute" />
+    <div class="recherche q-gutter-md row items-start">
+      <q-input class="recherche2" v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
+      <q-input class="recherche2" v-model="numInterne" type="numInt" label="Numéro interne" />
+      <q-input class="recherche2" v-model="formuleBrute" type="formBru" label="Formule brute" />
       <q-btn>
         <img src="~assets/recherche.png" width="18" height="18">
       </q-btn>
@@ -52,7 +52,10 @@
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <div class="text-left">This is expand slot for row above: {{ props.row.name }}.</div>
+            <div class="salleQuantite q-gutter-md row">
+              <q-input v-model="salle" type="salle" label="Salle" />
+              <q-input v-model="quantite" type="quantite" label="Quantité" />
+            </div>
           </q-td>
         </q-tr>
       </template>
@@ -68,6 +71,8 @@ export default {
       nomOfficiel: '',
       numInterne: '',
       formuleBrute: '',
+      salle: 'A2',
+      quantite: '43L',
       columns: [
         {
           name: 'desc',
@@ -143,7 +148,32 @@ export default {
   methods: {
     infoproduit () {
       this.$router.push('infoproduit')
+    },
+    ajout () {
+      this.$router.push('infoproduit')
+    },
+    tableauDeBord () {
+      this.$router.push('infoproduit')
     }
   }
 }
 </script>
+
+<style scoped>
+  .btnAjoutTablBord {
+    text-align: right;
+  }
+  .recherche {
+    text-align: center;
+    display: block;
+    margin-top: 0.3%;
+    margin-bottom: 3%;
+  }
+  .recherche2 {
+    display: inline-block;
+  }
+  .salleQuantite {
+    text-align: center;
+  }
+
+</style>

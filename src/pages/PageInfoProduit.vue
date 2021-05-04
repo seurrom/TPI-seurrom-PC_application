@@ -1,39 +1,42 @@
 <template>
   <div class="q-pa-md">
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
-      <q-input v-model="famille" type="famille" label="Famille" />
-      <q-option-group
-      :options="options"
-      type="radio"
-      v-model="group"
-      />
-      <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
+    <div class="infoProduit">
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
+        <q-input v-model="famille" type="famille" label="Famille" />
+        <q-option-group
+        :options="options"
+        type="radio"
+        v-model="group"
+        />
+        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="autreNom" type="autreNom" label="Autre nom" />
+        <q-input v-model="concentration" type="concentration" label="Concentration" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="autreNom2" type="autreNom2" label="Autre nom 2" />
+        <q-input v-model="purete" type="purete" label="Pureté" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="nomAnglais" type="nomAnglais" label="Nom anglais" />
+        <q-input v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="formBrute" type="formBrute" label="Formule brute" />
+        <q-input v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="formDev" type="formDev" label="Formule développée" />
+        <q-input v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" />
+      </div>
+      <div class="q-gutter-md row items-start">
+        <q-input v-model="densite" type="densite" label="Densité" suffix="g/ml" />
+        <q-btn class="btnEnregistrer" style="background: #DC006B" text-color="white" label="Enregistrer" />
+      </div>
     </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="autreNom" type="autreNom" label="Autre nom" />
-      <q-input v-model="concentration" type="concentration" label="Concentration" />
-    </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="autreNom2" type="autreNom2" label="Autre nom 2" />
-      <q-input v-model="purete" type="purete" label="Pureté" />
-    </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="nomAnglais" type="nomAnglais" label="Nom anglais" />
-      <q-input v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" />
-    </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="formBrute" type="formBrute" label="Formule brute" />
-      <q-input v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" />
-    </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="formDev" type="formDev" label="Formule développée" />
-      <q-input v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" />
-    </div>
-    <div class="q-gutter-md row items-start">
-      <q-input v-model="densite" type="densite" label="Densité" suffix="g/ml" />
-    </div>
-    <div class="q-pa-md">/*
+    <div class="q-pa-md">
     <q-table
       title="Stockage"
       :data="data"
@@ -112,3 +115,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .btnEnregistrer {
+    text-align: right;
+  }
+  .infoProduit {
+    text-align: center;
+  }
+</style>

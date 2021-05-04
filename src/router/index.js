@@ -8,6 +8,9 @@ Vue.mixin({
   methods: {
     deconnexion () {
       this.$router.push('/')
+    },
+    retour () {
+      this.$router.push('accueil')
     }
   }
 })
