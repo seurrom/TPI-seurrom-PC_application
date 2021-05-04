@@ -33,7 +33,7 @@
     <div class="q-gutter-md row items-start">
       <q-input v-model="densite" type="densite" label="Densité" suffix="g/ml" />
     </div>
-    <div class="q-pa-md">
+    <div class="q-pa-md">/*
     <q-table
       title="Stockage"
       :data="data"
