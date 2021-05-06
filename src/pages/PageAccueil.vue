@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
       <!-- Boutons "ajouter" et "tableau de bord" -->
-      <q-btn @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter" />
+      <q-btn @click="ajout" color="primary" text-color="white" label="Ajouter" />
       <q-btn @click="tablbord">
         <img src="~assets/tabl_bord.png" width="18" height="18">
       </q-btn>
@@ -174,21 +174,20 @@ export default {
 }
 </script>
 
-<style scoped>
-  .btnAjoutTablBord {
-    text-align: right;
-  }
-  .recherche {
-    text-align: center;
-    display: block;
-    margin-top: 0.3%;
-    margin-bottom: 3%;
-  }
-  .recherche2 {
-    display: inline-block;
-  }
-  .salleQuantite {
-    text-align: center;
-  }
+<style scoped lang="sass">
+.btnAjoutTablBord
+  text-align: right
+
+.recherche
+  text-align: center
+  display: block
+  margin-top: 0.3%
+  margin-bottom: 3%
+
+.recherche2
+  display: inline-block
+
+.salleQuantite
+  text-align: center
 
 </style>

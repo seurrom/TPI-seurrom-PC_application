@@ -14,7 +14,7 @@
       </q-toolbar>
       <q-toolbar style="background: #DC006B">
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
-          Produit
+          {{ $route.meta.titrePage }}
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -27,7 +27,14 @@
 <script>
 export default {
   name: 'ProduitLayout',
-  data () {
+  methods: {
+    deconnexion () {
+      this.$router.push('/')
+    },
+    retour () {
+      // this.$router.push('accueil')
+      this.$router.push({ path: 'accueil' })
+    }
   }
 }
 </script>
