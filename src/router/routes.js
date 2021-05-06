@@ -23,6 +23,7 @@ const routes = [
   },
   {
     path: '/',
+    name: 'PageInfoProduit',
     component: () => import('src/layouts/InfoProduitLayout.vue'),
     children: [
       { path: 'infoproduit', component: () => import('src/pages/PageInfoProduit.vue') }

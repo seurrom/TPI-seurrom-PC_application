@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 import routes from './routes'
 
 Vue.use(VueRouter)
@@ -10,7 +9,8 @@ Vue.mixin({
       this.$router.push('/')
     },
     retour () {
-      this.$router.push('accueil')
+      // this.$router.push('accueil')
+      this.$router.push({ path: 'accueil' })
     }
   }
 })
