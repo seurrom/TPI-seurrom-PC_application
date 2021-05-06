@@ -3,17 +3,7 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 
 Vue.use(VueRouter)
-Vue.mixin({
-  methods: {
-    deconnexion () {
-      this.$router.push('/')
-    },
-    retour () {
-      // this.$router.push('accueil')
-      this.$router.push({ path: 'accueil' })
-    }
-  }
-})
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;

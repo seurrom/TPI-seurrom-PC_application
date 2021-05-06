@@ -174,21 +174,20 @@ export default {
 }
 </script>
 
-<style scoped>
-  .btnAjoutTablBord {
-    text-align: right;
-  }
-  .recherche {
-    text-align: center;
-    display: block;
-    margin-top: 0.3%;
-    margin-bottom: 3%;
-  }
-  .recherche2 {
-    display: inline-block;
-  }
-  .salleQuantite {
-    text-align: center;
-  }
+<style scoped lang="sass">
+.btnAjoutTablBord
+  text-align: right
+
+.recherche
+  text-align: center
+  display: block
+  margin-top: 0.3%
+  margin-bottom: 3%
+
+.recherche2
+  display: inline-block
+
+.salleQuantite
+  text-align: center
 
 </style>

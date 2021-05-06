@@ -27,7 +27,14 @@
 <script>
 export default {
   name: 'ProduitLayout',
-  data () {
+  methods: {
+    deconnexion () {
+      this.$router.push('/')
+    },
+    retour () {
+      // this.$router.push('accueil')
+      this.$router.push({ path: 'accueil' })
+    }
   }
 }
 </script>
