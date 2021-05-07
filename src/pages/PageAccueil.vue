@@ -7,61 +7,31 @@
         <img src="~assets/tabl_bord.png" width="18" height="18">
       </q-btn>
     </div>
-    <div class="recherche q-gutter-md row items-start">
+    <div>
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="recherche2" v-model="filters.ninterne.value" label="Numéro interne" />
-      <q-input class="recherche2" v-model="filters.nomOff.value" label="Nom officiel" />
-      <q-input class="recherche2" v-model="filters.formBrut.value" label="Formule brute" />
+      <label>Nom officiel</label>
+      <q-input class="form-control" v-model="filters.nomOff.value"/>
     </div>
     <!-- Tableau de produit chimique -->
     <q-table
       title="Liste des produits"
       :data="data"
-      :columns="columns"
       :filters="filters"
-      row-key="name"
     >
-      <template v-slot:header="props">
-        <q-tr :props="props">
-          <q-th auto-width />
-          <!-- Affectation de chaque nom de colonne -->
-          <q-th
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-          >
-            {{ col.label }}
-          </q-th>
-        </q-tr>
-      </template>
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td auto-width>
-            <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-          </q-td>
+      <q-thead slot="head">
+        <!-- Affectation de chaque nom de colonne -->
+          <q-th>N°CAS</q-th>
+          <q-th>N° Interne</q-th>
+          <q-th>Nom officiel</q-th>
+          <q-th>Formule brute</q-th>
+      </q-thead>
+      <template v-slot-scope="data">
+        <q-tr  v-for="row in data" :key="row.name">
         <!-- Affectation de chaque ligne -->
-          <q-td
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-          >
-            {{ col.value }}
-          </q-td>
-          <q-td auto-width>
-            <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
-          </q-td>
-        </q-tr>
-        <q-tr v-show="props.expand" :props="props">
-          <q-td colspan="100%">
-            <!-- Deuxième partie du tableau -->
-            <div class="salleQuantite q-gutter-md row">
-              <q-input v-model="salle" type="salle" label="Salle" />
-              <q-input v-model="quantite" type="quantite" label="Quantité" />
-            </div>
-          </q-td>
+          <q-td>{{ row.name }}</q-td>
+          <q-td>{{ row.ninterne }}</q-td>
+          <q-td>{{ row.nomOff }}</q-td>
+          <q-td>{{ row.formBrut }}</q-td>
         </q-tr>
       </template>
     </q-table>
@@ -75,9 +45,7 @@ export default {
   data () {
     return {
       filters: {
-        nomOff: { value: '', keys: ['nomOff'] },
-        ninterne: { value: '', keys: ['ninterne'] },
-        formBrut: { value: '', keys: ['formBrut'] }
+        nomOff: { value: '', keys: ['nomOff'] }
       },
       // Déclaration des variables
       nomOfficiel: '',
@@ -86,20 +54,6 @@ export default {
       salle: 'A2',
       quantite: '43L',
       // Retourne les noms des colonnes
-      columns: [
-        {
-          name: 'desc',
-          required: true,
-          label: 'N° CAS',
-          align: 'left',
-          field: row => row.name,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'ninterne', sortable: true },
-        { name: 'nomOff', label: 'Nom officiel', field: 'nomOff', sortable: true, style: 'width: 10px' },
-        { name: 'formBrute', label: 'Formule brute', field: 'formBrute' }
-      ],
       // Retourne les informations liées au produit
       data: [
         {
