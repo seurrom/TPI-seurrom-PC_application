@@ -9,16 +9,14 @@
     </div>
     <div class="recherche q-gutter-md row items-start">
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="recherche2" v-model="filters.ninterne.value" label="Numéro interne" />
-      <q-input class="recherche2" v-model="filters.nomOff.value" label="Nom officiel" />
-      <q-input class="recherche2" v-model="filters.formBrut.value" label="Formule brute" />
+      <q-input class="recherche2" v-model="recherche" label="Numéro interne" />
     </div>
     <!-- Tableau de produit chimique -->
     <q-table
       title="Liste des produits"
       :data="data"
       :columns="columns"
-      :filters="filters"
+      :filter="recherche"
       row-key="name"
     >
       <template v-slot:header="props">
@@ -74,11 +72,7 @@ export default {
   name: 'PageAccueil',
   data () {
     return {
-      filters: {
-        nomOff: { value: '', keys: ['nomOff'] },
-        ninterne: { value: '', keys: ['ninterne'] },
-        formBrut: { value: '', keys: ['formBrut'] }
-      },
+      recherche: '',
       // Déclaration des variables
       nomOfficiel: '',
       numInterne: '',

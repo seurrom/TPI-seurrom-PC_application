@@ -14,8 +14,7 @@
     "@vue/composition-api": "^1.0.0-rc.8",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "quasar": "^1.0.0",
-    "vuejs-smart-table": "^0.1.9"
+    "quasar": "^1.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
