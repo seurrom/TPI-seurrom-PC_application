@@ -10,13 +10,13 @@
     <div>
       <!-- Input pour effectuer une recherche dans le tableau -->
       <label>Nom officiel</label>
-      <q-input class="form-control" v-model="filters.nomOff.value"/>
+      <q-input class="form-control" v-model="recherche"/>
     </div>
     <!-- Tableau de produit chimique -->
     <q-table
       title="Liste des produits"
       :data="data"
-      :filters="filters"
+      :filter="recherche"
     >
       <q-thead slot="head">
         <!-- Affectation de chaque nom de colonne -->
@@ -44,9 +44,7 @@ export default {
   name: 'PageAccueil',
   data () {
     return {
-      filters: {
-        nomOff: { value: '', keys: ['nomOff'] }
-      },
+      recherche: '',
       // Déclaration des variables
       nomOfficiel: '',
       numInterne: '',
