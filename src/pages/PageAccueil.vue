@@ -8,6 +8,7 @@
       </q-btn>
     </div>
     <div class="recherche q-gutter-md row items-start">
+      <label>Recherche</label>
       <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="recherche2" v-model="recherche" label="Numéro interne" />
       <q-input class="recherche2" v-model="recherche" label="Nom officiel" />

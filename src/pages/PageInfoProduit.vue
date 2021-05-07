@@ -84,7 +84,7 @@ export default {
           name: 'name',
           required: true,
           label: 'Salle',
-          align: 'left',
+          align: 'center',
           field: row => row.name,
           format: val => `${val}`,
           sortable: true
