@@ -10,6 +10,8 @@
     <div class="recherche q-gutter-md row items-start">
       <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="recherche2" v-model="recherche" label="Numéro interne" />
+      <q-input class="recherche2" v-model="recherche" label="Nom officiel" />
+      <q-input class="recherche2" v-model="recherche" label="Formule Brute" />
     </div>
     <!-- Tableau de produit chimique -->
     <q-table
@@ -85,7 +87,7 @@ export default {
           name: 'desc',
           required: true,
           label: 'N° CAS',
-          align: 'left',
+          align: 'center',
           field: row => row.name,
           format: val => `${val}`,
           sortable: true

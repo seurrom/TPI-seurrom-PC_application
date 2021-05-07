@@ -11,8 +11,8 @@
           <q-card-section>
             <q-form @submit="clickMethod" class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
-              <q-input square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" />
-              <q-input square filled clearable v-model="mdp" type="password" label="Mot de passe" />
+              <q-input color="pink" square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" />
+              <q-input color="pink" square filled clearable v-model="mdp" type="password" label="Mot de passe" />
               <q-btn type="submit" color="pink" size="lg" class="full-width" label="Connexion"/>
             </q-form>
           </q-card-section>
