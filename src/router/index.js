@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './routes'
+import SmartTable from 'vuejs-smart-table'
 
+Vue.use(SmartTable)
 Vue.use(VueRouter)
 
 /*

@@ -9,18 +9,16 @@
     </div>
     <div class="recherche q-gutter-md row items-start">
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="recherche2" v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
-      <q-input class="recherche2" v-model="numInterne" type="numInt" label="Numéro interne" />
-      <q-input class="recherche2" v-model="formuleBrute" type="formBru" label="Formule brute" />
-      <q-btn>
-        <img src="~assets/recherche.png" width="18" height="18">
-      </q-btn>
+      <q-input class="recherche2" v-model="filters.ninterne.value" label="Numéro interne" />
+      <q-input class="recherche2" v-model="filters.nomOff.value" label="Nom officiel" />
+      <q-input class="recherche2" v-model="filters.formBrut.value" label="Formule brute" />
     </div>
     <!-- Tableau de produit chimique -->
     <q-table
       title="Liste des produits"
       :data="data"
       :columns="columns"
+      :filters="filters"
       row-key="name"
     >
       <template v-slot:header="props">
@@ -76,6 +74,11 @@ export default {
   name: 'PageAccueil',
   data () {
     return {
+      filters: {
+        nomOff: { value: '', keys: ['nomOff'] },
+        ninterne: { value: '', keys: ['ninterne'] },
+        formBrut: { value: '', keys: ['formBrut'] }
+      },
       // Déclaration des variables
       nomOfficiel: '',
       numInterne: '',
@@ -108,19 +111,19 @@ export default {
         {
           name: '57653',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
+          nomOff: 'Albert',
           formBrute: '6H14O'
         },
         {
           name: '876655',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
+          nomOff: 'Bernard',
           formBrute: '6H14O'
         },
         {
           name: '5644535',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
+          nomOff: 'Claude',
           formBrute: '6H14O'
         },
         {
