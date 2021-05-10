@@ -1,5 +1,6 @@
 const routes = [
   {
+    // Route permettant d'afficher le MainLayout à la page PageConnexion.vue
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -7,6 +8,8 @@ const routes = [
     ]
   },
   {
+    // Route permettant d'afficher le ProduitLayout aux pages suivantes
+    // titrePage = permet d'afficher le titre suivant sur quelle page on est
     path: '/',
     component: () => import('layouts/Produitlayout.vue'),
     children: [

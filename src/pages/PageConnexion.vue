@@ -11,6 +11,7 @@
           <q-card-section>
             <q-form @submit="clickMethod" class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
+              <!-- Règle permettant de gérer les erreurs dans l'adresse mail et dans le mot de passe -->
               <q-input
                 color="pink"
                 square filled clearable
@@ -55,12 +56,14 @@ export default {
     clickMethod () {
       this.$router.push('accueil')
     },
+    // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     }
   },
+  // Permet de mettre le focus sur l'élément "Identifiant"
   async mounted () {
     await this.$nextTick()
     this.$refs.elementReference.$el.focus()

@@ -1,3 +1,4 @@
+<!-- Layout permettant de ne rien afficher sur la page de connexion -->
 <template>
   <q-layout>
     <q-header elevated>

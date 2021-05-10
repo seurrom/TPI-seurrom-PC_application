@@ -5,6 +5,7 @@
         <q-btn style="background: #DC006B" text-color="white" size="lg"  label="Supprimer" />
       </div>
       <div>
+        <!-- Titre de la page -->
         <h6>Information du produit</h6>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
@@ -12,6 +13,7 @@
         <q-input  class="element"  outlined  v-model="nomOfficiel"   label="Nom officiel"/>
         <q-input  class="element"  outlined  v-model="famille"       label="Famille"/>
         <q-input  class="element"  outlined  v-model="autreNom"      label="Autre nom"/>
+        <!-- Liste déroulante pour les sortes de produits -->
         <q-select class="element"  outlined  v-model="sorteproduit"  label="Sorte de produit" :options="options"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
@@ -31,6 +33,7 @@
         <q-input class="element" outlined v-model="densite" type="densite" label="Densité" suffix="g/ml" />
       </div>
       <div class="btnEnregistrer">
+        <!-- Bouton enregistrer -->
         <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" />
       </div>
     </div>
@@ -71,11 +74,13 @@ export default {
       dense: false,
       group: null,
       sorteproduit: 'Minéral',
+      // Permet d'afficher plus d'élément dans le tableau
       pagination: {
         sortBy: 'desc',
         descending: false,
         rowsPerPage: 10
       },
+      // Option de la liste déroulante
       options: [
         'Minéral', 'Organique', 'Solution'
       ],

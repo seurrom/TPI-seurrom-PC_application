@@ -43,7 +43,7 @@
             <!-- Permet de dérouler une partie du tableau -->
             <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
           </q-td>
-        <!-- Affectation de chaque ligne -->
+          <!-- Affectation de chaque ligne -->
           <q-td
             v-for="col in props.cols"
             :key="col.name"
