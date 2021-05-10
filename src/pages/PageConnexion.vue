@@ -11,16 +11,15 @@
           <q-card-section>
             <q-form @submit="clickMethod" class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
-              <q-input color="pink" square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" />
+              <q-input color="pink" square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" ref="elementReference" />
               <q-input color="pink" square filled clearable v-model="mdp" type="password" label="Mot de passe" />
               <q-btn type="submit" color="pink" size="lg" class="full-width" label="Connexion"/>
             </q-form>
           </q-card-section>
-          <q-card-section class="text-center q-pa-none q-gutter-md row items-start">
-            <!--  Case et lien "Se souvenir de moi " et "Mot de passe oublié ?" -->
-            <input type="checkbox" id="souvenirMdp" value="">
+          <q-card-section class="text-center q-pa-none q-gutter-md">
+            <!--  Case et lien "Se souvenir de moi "-->
+            <input type="checkbox" id="souvenirMdp" value="" label="Se souvenir de moi">
             <label for="souvenirMdp" class="text-grey-6">Se souvenir de moi</label>
-            <p class="text-grey-6">Mot de passe oublié ?</p>
           </q-card-section>
         </q-card>
       </div>
@@ -42,6 +41,10 @@ export default {
     clickMethod () {
       this.$router.push('accueil')
     }
+  },
+  async mounted () {
+    await this.$nextTick()
+    this.$refs.elementReference.$el.focus()
   }
 }
 </script>

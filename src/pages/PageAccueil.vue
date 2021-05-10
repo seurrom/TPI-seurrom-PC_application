@@ -65,6 +65,11 @@
           </q-td>
         </q-tr>
       </template>
+      <template v-slot:bottom>
+        <q-chip icon="event">Add to calendar</q-chip>
+        <div class="absolute-bottom-right">
+        </div>
+      </template>
     </q-table>
   </div>
 </template>
