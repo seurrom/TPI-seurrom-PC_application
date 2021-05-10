@@ -21,6 +21,7 @@
       :columns="columns"
       :filter="recherche"
       row-key="name"
+      :pagination.sync="pagination"
     >
       <template v-slot:header="props">
         <q-tr :props="props">
@@ -65,11 +66,6 @@
           </q-td>
         </q-tr>
       </template>
-      <template v-slot:bottom>
-        <q-chip icon="event">Add to calendar</q-chip>
-        <div class="absolute-bottom-right">
-        </div>
-      </template>
     </q-table>
   </div>
 </template>
@@ -87,6 +83,12 @@ export default {
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
+      // Permet d'afficher + d'éléments dans le tableau
+      pagination: {
+        sortBy: 'desc',
+        descending: false,
+        rowsPerPage: 10
+      },
       // Retourne les noms des colonnes
       columns: [
         {
@@ -154,6 +156,36 @@ export default {
         },
         {
           name: '345678',
+          ninterne: 300,
+          nomOff: 'Alcool Hexylique',
+          formBrute: '6H14O'
+        },
+        {
+          name: '12030',
+          ninterne: 300,
+          nomOff: 'Alcool Hexylique',
+          formBrute: '6H14O'
+        },
+        {
+          name: '12030',
+          ninterne: 300,
+          nomOff: 'Alcool Hexylique',
+          formBrute: '6H14O'
+        },
+        {
+          name: '12030',
+          ninterne: 300,
+          nomOff: 'Alcool Hexylique',
+          formBrute: '6H14O'
+        },
+        {
+          name: '12030',
+          ninterne: 300,
+          nomOff: 'Alcool Hexylique',
+          formBrute: '6H14O'
+        },
+        {
+          name: '12030',
           ninterne: 300,
           nomOff: 'Alcool Hexylique',
           formBrute: '6H14O'

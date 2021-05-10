@@ -1,52 +1,50 @@
 <template>
   <div class="q-pa-md">
-    <div class="infoProduit">
-      <div class="q-gutter-md row items-start">
+    <div class="q-ml-xl">
+      <div class="supprimer">
+        <q-btn style="background: #DC006B" text-color="white" size="lg"  label="Supprimer" />
+      </div>
+      <div>
+        <h6>Information du produit</h6>
+      </div>
+      <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input v-model="nomOfficiel" type="nomOff" label="Nom officiel" />
-        <q-input v-model="famille" type="famille" label="Famille" />
-        <!-- Bouton radio pour le choix "Sorte de produit" -->
-        <q-option-group
-        :options="options"
-        type="radio"
-        v-model="group"
-        />
-        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
+        <q-input  class="element"  outlined  v-model="nomOfficiel"   label="Nom officiel"/>
+        <q-input  class="element"  outlined  v-model="famille"       label="Famille"/>
+        <q-input  class="element"  outlined  v-model="autreNom"      label="Autre nom"/>
+        <q-select class="element"  outlined  v-model="sorteproduit"  label="Sorte de produit" :options="options"/>
       </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="autreNom" type="autreNom" label="Autre nom" />
-        <q-input v-model="concentration" type="concentration" label="Concentration" />
+      <div class="q-gutter-md row items-start infoProduit q-pb-md">
+        <q-input class="element" outlined v-model="concentration" label="Concentration"/>
+        <q-input class="element" outlined v-model="autreNom2"     label="Autre nom 2"/>
+        <q-input class="element" outlined v-model="purete"        label="Pureté"/>
+        <q-input class="element" outlined v-model="nomAnglais"    label="Nom anglais"/>
       </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="autreNom2" type="autreNom2" label="Autre nom 2" />
-        <q-input v-model="purete" type="purete" label="Pureté" />
+      <div class="q-gutter-md row items-start infoProduit q-pb-md">
+        <q-input class="element" outlined v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" />
+        <q-input class="element" outlined v-model="formBrute" type="formBrute" label="Formule brute" />
+        <q-input class="element" outlined v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" />
+        <q-input class="element" outlined v-model="formDev" type="formDev" label="Formule développée" />
       </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="nomAnglais" type="nomAnglais" label="Nom anglais" />
-        <q-input v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" />
+      <div class="q-gutter-md row items-start infoProduit q-pb-md">
+        <q-input class="element" outlined v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" />
+        <q-input class="element" outlined v-model="densite" type="densite" label="Densité" suffix="g/ml" />
       </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="formBrute" type="formBrute" label="Formule brute" />
-        <q-input v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" />
-      </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="formDev" type="formDev" label="Formule développée" />
-        <q-input v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" />
-      </div>
-      <div class="q-gutter-md row items-start">
-        <q-input v-model="densite" type="densite" label="Densité" suffix="g/ml" />
-        <q-btn class="btnEnregistrer" style="background: #DC006B" text-color="white" label="Enregistrer" />
+      <div class="btnEnregistrer">
+        <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" />
       </div>
     </div>
     <div class="q-pa-md">
       <!-- Tableau pour la salle ainsi que la quantité -->
-    <q-table
-      title="Stockage"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-    />
-  </div>
+      <q-table
+        style="width: 800px"
+        title="Stockage"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+        :pagination.sync="pagination"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -72,11 +70,14 @@ export default {
       densite: '0.814',
       dense: false,
       group: null,
-      // Retourne les choix dans le bouton radio
+      sorteproduit: 'Minéral',
+      pagination: {
+        sortBy: 'desc',
+        descending: false,
+        rowsPerPage: 10
+      },
       options: [
-        { label: 'Minéral', value: 'mineral' },
-        { label: 'Organique', value: 'organique' },
-        { label: 'Solution', value: 'solution' }
+        'Minéral', 'Organique', 'Solution'
       ],
       // Affectation des colonnes
       columns: [
@@ -122,11 +123,17 @@ export default {
   }
 }
 </script>
-<style scoped>
-  .btnEnregistrer {
-    text-align: right;
-  }
-  .infoProduit {
-    text-align: center;
-  }
+<style scoped lang="sass">
+  .btnEnregistrer
+    text-align: right
+  .infoProduit
+
+    display: block
+  .element
+    display: inline-block
+  .supprimer
+    text-align: right
+  .q-input, .q-select
+    width: 250px
+    height: 80px
 </style>

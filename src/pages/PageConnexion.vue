@@ -11,15 +11,29 @@
           <q-card-section>
             <q-form @submit="clickMethod" class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
-              <q-input color="pink" square filled clearable v-model="identifiant" type="identifiant" label="Identifiant" ref="elementReference" />
-              <q-input color="pink" square filled clearable v-model="mdp" type="password" label="Mot de passe" />
-              <q-btn type="submit" color="pink" size="lg" class="full-width" label="Connexion"/>
+              <q-input
+                color="pink"
+                square filled clearable
+                v-model="identifiant"
+                type="identifiant"
+                label="Identifiant"
+                ref="elementReference"
+                :rules="[val => validateEmail(val) || 'Email invalide']"
+                lazy-rules />
+              <q-input
+                color="pink"
+                square filled clearable
+                v-model="mdp"
+                label="Mot de passe"
+                :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
+                lazy-rules />
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
             </q-form>
           </q-card-section>
-          <q-card-section class="text-center q-pa-none q-gutter-md">
+          <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
             <!--  Case et lien "Se souvenir de moi "-->
-            <input type="checkbox" id="souvenirMdp" value="" label="Se souvenir de moi">
-            <label for="souvenirMdp" class="text-grey-6">Se souvenir de moi</label>
+            <input class="checkbox" type="checkbox" id="souvenirMdp" value="" label="Se souvenir de moi">
+            <label for="souvenirMdp" class="text-grey-6 souvenirMdp">Se souvenir de moi</label>
           </q-card-section>
         </q-card>
       </div>
@@ -40,6 +54,11 @@ export default {
   methods: {
     clickMethod () {
       this.$router.push('accueil')
+    },
+    validateEmail (email) {
+      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      return re.test(String(email).toLowerCase())
     }
   },
   async mounted () {
@@ -54,5 +73,15 @@ export default {
 }
 .logoDivtec {
   margin-bottom: 25px;
+}
+.checkbox {
+  vertical-align: middle;
+  margin-top: 0;
+}
+.souvenirMdp {
+  vertical-align: middle;
+}
+.casesouvenirMdp {
+  margin-top: 0;
 }
 </style>
