@@ -201,7 +201,7 @@ export default {
       this.$router.push('infoproduit')
     },
     ajout () {
-      this.$router.push('/infoproduit')
+      this.$router.push('/ajout')
     },
     etiquette () {
       this.$router.push('etiquette')
