@@ -8,13 +8,14 @@
       </q-btn>
     </div>
     <div class="recherche q-gutter-md row items-start">
-      <label>Recherche</label>
+      <img src="~assets/recherche.png" width="25" height="25" class="imgrecherche">
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="recherche2" v-model="recherche" label="Numéro interne" />
-      <q-input class="recherche2" v-model="recherche" label="Nom officiel" />
-      <q-input class="recherche2" v-model="recherche" label="Formule Brute" />
+      <q-input class="elementrecherche" v-model="recherche" label="Numéro interne" />
+      <q-input class="elementrecherche" v-model="recherche" label="Nom officiel" />
+      <q-input class="elementrecherche" v-model="recherche" label="Formule Brute" />
     </div>
     <!-- Tableau de produit chimique -->
+    <!-- "filter" permet d'effectuer une recherche dans le tableau -->
     <q-table
       title="Liste des produits"
       :data="data"
@@ -39,6 +40,7 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td auto-width>
+            <!-- Permet de dérouler une partie du tableau -->
             <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
           </q-td>
         <!-- Affectation de chaque ligne -->
@@ -221,10 +223,14 @@ export default {
   margin-top: 0.3%
   margin-bottom: 3%
 
-.recherche2
+.elementrecherche
   display: inline-block
 
 .salleQuantite
   text-align: center
+
+.imgrecherche
+  margin: 0px
+  vertical-align: middle
 
 </style>
