@@ -28,12 +28,12 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
                 lazy-rules />
-              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" @click="lsRememberMe"/>
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
             <!--  Case et lien "Se souvenir de moi "-->
-            <q-checkbox v-model="souvenirdeMoi" id="souvenirMdp" value="" label="Se souvenir de moi" color="primary"/>
+            <q-checkbox v-model="souvenirdeMoi" id="rememberMe" for="rememberMe" value="lsRememberMe" label="Se souvenir de moi" color="primary"/>
           </q-card-section>
         </q-card>
       </div>
@@ -56,7 +56,16 @@ export default {
     clickMethod () {
       this.$router.push('accueil')
     },
-    // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
+    lsRememberMe () {
+      if (rmCheck.checked && emailInput.value !== '') {
+        localStorage.username = emailInput.value
+        localStorage.checkbox = rmCheck.value
+      } else {
+        localStorage.username = ''
+        localStorage.checkbox = ''
+      }
+    },
+    // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -68,6 +77,16 @@ export default {
     await this.$nextTick()
     this.$refs.elementReference.$el.focus()
   }
+}
+const rmCheck = document.getElementById('rememberMe'),
+  emailInput = document.getElementById('email')
+
+if (localStorage.checkbox && localStorage.checkbox !== '') {
+  rmCheck.setAttribute('checked', 'checked')
+  emailInput.value = localStorage.username
+} else {
+  rmCheck.removeAttribute('checked')
+  emailInput.value = ''
 }
 </script>
 <style>
