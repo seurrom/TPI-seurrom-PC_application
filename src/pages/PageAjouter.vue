@@ -23,14 +23,14 @@
         <q-input class="element" outlined v-model="nomAnglais"    label="Nom anglais"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" />
-        <q-input class="element" outlined v-model="formBrute" type="formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" />
-        <q-input class="element" outlined v-model="formDev" type="formDev" label="Formule développée" />
+        <q-input class="element" outlined v-model="masseMolaire"  label="Masse molaire"         suffix="g/mole" />
+        <q-input class="element" outlined v-model="formBrute"     label="Formule brute" />
+        <q-input class="element" outlined v-model="tempEbul"      label="Température ébulition" suffix="g/mole" />
+        <q-input class="element" outlined v-model="formDev"       label="Formule développée" />
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" />
-        <q-input class="element" outlined v-model="densite" type="densite" label="Densité" suffix="g/ml" />
+        <q-input class="element" outlined v-model="tempFusion"    label="Température fusion"  suffix="°C" />
+        <q-input class="element" outlined v-model="densite"       label="Densité"             suffix="g/ml" />
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->

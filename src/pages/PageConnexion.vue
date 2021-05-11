@@ -33,8 +33,7 @@
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
             <!--  Case et lien "Se souvenir de moi "-->
-            <input class="checkbox" type="checkbox" id="souvenirMdp" value="" label="Se souvenir de moi">
-            <label for="souvenirMdp" class="text-grey-6 souvenirMdp">Se souvenir de moi</label>
+            <q-checkbox v-model="souvenirdeMoi" id="souvenirMdp" value="" label="Se souvenir de moi" color="primary"/>
           </q-card-section>
         </q-card>
       </div>
@@ -48,7 +47,8 @@ export default {
     return {
       // Retourne le user et le pwd
       identifiant: '',
-      mdp: ''
+      mdp: '',
+      souvenirdeMoi: true
     }
   },
   // Permet d'effectuer la navigation
