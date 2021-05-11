@@ -56,15 +56,6 @@ export default {
     clickMethod () {
       this.$router.push('accueil')
     },
-    lsRememberMe () {
-      if (rmCheck.checked && emailInput.value !== '') {
-        localStorage.username = emailInput.value
-        localStorage.checkbox = rmCheck.value
-      } else {
-        localStorage.username = ''
-        localStorage.checkbox = ''
-      }
-    },
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
@@ -77,16 +68,6 @@ export default {
     await this.$nextTick()
     this.$refs.elementReference.$el.focus()
   }
-}
-const rmCheck = document.getElementById('rememberMe'),
-  emailInput = document.getElementById('email')
-
-if (localStorage.checkbox && localStorage.checkbox !== '') {
-  rmCheck.setAttribute('checked', 'checked')
-  emailInput.value = localStorage.username
-} else {
-  rmCheck.removeAttribute('checked')
-  emailInput.value = ''
 }
 </script>
 <style>
