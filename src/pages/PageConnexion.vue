@@ -28,7 +28,7 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 4 || 'Minimum 4 caractère']"
                 lazy-rules />
-              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" @click="lsRememberMe"/>
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" @click="lsRememberMe" value="Login"/>
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
@@ -41,6 +41,14 @@
   </q-page>
 </template>
 <script>
+const rmCheck = document.getElementById('rememberMe'), emailInput = document.getElementById('email')
+if (localStorage.checkbox && localStorage.checkbox !== '') {
+  rmCheck.setAttribute('checked', 'checked')
+  emailInput.value = localStorage.username
+} else {
+  rmCheck.removeAttribute('checked')
+  emailInput.value = ''
+}
 export default {
   name: 'PageAccueil',
   data () {
@@ -61,6 +69,15 @@ export default {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
+    },
+    lsRememberMe () {
+      if (rmCheck.checked && emailInput.value !== '') {
+        localStorage.username = emailInput.value
+        localStorage.checkbox = rmCheck.value
+      } else {
+        localStorage.username = ''
+        localStorage.checkbox = ''
+      }
     }
   },
   // Permet de mettre le focus sur l'élément "Identifiant"
