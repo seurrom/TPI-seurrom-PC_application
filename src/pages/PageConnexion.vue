@@ -9,7 +9,7 @@
         <!-- Création du Q-card permettant de faire un contenu groupé -->
         <q-card square bordered class="q-pa-lg shadow-1">
           <q-card-section>
-            <q-form @submit="clickMethod" class="q-gutter-md">
+            <q-form class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
               <!-- Règle permettant de gérer les erreurs dans l'adresse mail et dans le mot de passe -->
               <q-input
@@ -42,6 +42,7 @@
 </template>
 <script>
 const rmCheck = document.getElementById('rememberMe'), emailInput = document.getElementById('email')
+
 if (localStorage.checkbox && localStorage.checkbox !== '') {
   rmCheck.setAttribute('checked', 'checked')
   emailInput.value = localStorage.username
