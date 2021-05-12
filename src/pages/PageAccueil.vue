@@ -10,9 +10,7 @@
     <div class="recherche q-gutter-md row items-start">
       <img src="~assets/recherche.png" width="25" height="25" class="imgrecherche">
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="elementrecherche" v-model="recherche" label="Numéro interne" />
-      <q-input class="elementrecherche" v-model="recherche" label="Nom officiel" />
-      <q-input class="elementrecherche" v-model="recherche" label="Formule Brute" />
+      <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
     <!-- Tableau de produit chimique -->
     <!-- "filter" permet d'effectuer une recherche dans le tableau -->
