@@ -1,5 +1,5 @@
 import { api } from 'boot/axios'
-import { Loading } from 'quasar'
+import { Loading, LocaStorage } from 'quasar'
 
 // State : données du magasin
 const state = {
@@ -26,13 +26,15 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   connecterUtilisateur ({ commit }, payload) {
-    Loading.show()
     const that = this
+    Loading.show()
     api.post('/login', payload)
       .then(function (response) {
+        console.log('CONNEXION OK', response)
         commit('setUser', response.data.user)
         commit('setToken', response.data.access_token)
         that.$router.push('/accueil')
+        Loading.hide()
       })
       .catch(function (error) {
         Loading.hide()

@@ -126,6 +126,7 @@ export default {
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
+      etat: 'Commande en coursjm',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',

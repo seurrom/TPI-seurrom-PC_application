@@ -25,9 +25,9 @@
                 square filled clearable
                 v-model="form.password"
                 label="Mot de passe"
-                :rules="[ val => val.length >= 8 || 'Minimum 8 caractères']"
+                :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
-              <q-btn to="/accueil" type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
