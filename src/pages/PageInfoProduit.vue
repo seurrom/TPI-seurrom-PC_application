@@ -10,27 +10,28 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"  outlined  v-model="nomOfficiel"   label="Nom officiel"/>
-        <q-input class="element" outlined v-model="nomAnglais"    label="Nom anglais"/>
-        <q-input  class="element"  outlined  v-model="autreNom"      label="Autre nom"/>
-        <q-input class="element" outlined v-model="autreNom2"     label="Autre nom 2"/>
+        <q-input  class="element"   outlined  v-model="nomOfficiel"    label="Nom officiel"/>
+        <q-input class="element"    outlined v-model="nomAnglais"      label="Nom anglais"/>
+        <q-input  class="element"   outlined  v-model="autreNom"       label="Autre nom"/>
+        <q-input class="element"    outlined v-model="autreNom2"       label="Autre nom 2"/>
         <!-- Liste déroulante pour les sortes de produits -->
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-select class="element"  outlined  v-model="sorteproduit"  label="Sorte de produit" :options="options"/>
-        <q-select class="element"  outlined  v-model="concentration"  label="Concentration" :options="optionsConcentration"/>
-        <q-select class="element"  outlined  v-model="famille"  label="Famille" :options="optionsFamille"/>
-        <q-select class="element"  outlined  v-model="purete"  label="Pureté" :options="optionsPurete"/>
+        <q-select class="element"  outlined  v-model="sorteproduit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="concentration"  label="Concentration"     :options="optionsConcentration"/>
+        <q-select class="element"  outlined  v-model="famille"        label="Famille"           :options="optionsFamille"/>
+        <q-select class="element"  outlined  v-model="purete"         label="Pureté"            :options="optionsPurete"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="densite" type="densite" label="Densité" suffix="g/ml" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="masseMolaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="tempEbul"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="tempFusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="formBrute" type="formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="formDev" type="formDev" label="Formule développée" />
+        <q-input class="element" outlined v-model="formBrute" label="Formule brute" />
+        <q-input class="element" outlined v-model="formDev"   label="Formule développée" />
+        <q-select class="element"  outlined  v-model="etat" label="État" :options="optionsEtat"/>
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
@@ -82,6 +83,7 @@ export default {
       masseMolaire: '102.17',
       tempFusion: '-52',
       densite: '0.814',
+      etat: 'Commande en cours',
       dense: false,
       group: null,
       sorteproduit: 'Minéral',
@@ -108,6 +110,9 @@ export default {
       ],
       optionsPurete: [
         'Aucune', 'Pour analyse', 'Pour synthèse', 'Pour usage biochimique', 'Puriss', 'Purum', 'Redistillé', 'Technique'
+      ],
+      optionsEtat: [
+        'Commande en cours', 'Quantité de produit faible'
       ],
       // A
       // Affectation des colonnes

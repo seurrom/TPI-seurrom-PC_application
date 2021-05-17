@@ -3,14 +3,14 @@
     <q-header elevated>
       <q-toolbar style="background: #DC006B">
         <!-- Bouton permettant d'aller sur la page "Accueil" -->
-        <q-btn @click="accueil" size="lg">
-          <img src="~assets/back.png" width="10" height="18">
+        <q-btn class="boxshadow" @click="accueil" size="lg">
+          <img src="~assets/back.png" width="14 " height="18">
         </q-btn>
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
           Gestion des produits
         </q-toolbar-title>
         <!-- Bouton de déconnexion -->
-        <q-btn @click="deconnexion" size="lg">
+        <q-btn class="boxshadow" @click="deconnexion" size="lg">
           <img src="~assets/deconnexion.png" width="22" height="18">
         </q-btn>
       </q-toolbar>
@@ -41,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .boxshadow
+  ::before {
+    content: none;
+  }
+</style>
