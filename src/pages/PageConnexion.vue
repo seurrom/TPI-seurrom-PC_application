@@ -9,14 +9,13 @@
         <!-- Création du Q-card permettant de faire un contenu groupé -->
         <q-card square bordered class="q-pa-lg shadow-1">
           <q-card-section>
-            <q-form @submit="clickMethod" class="q-gutter-md">
+            <q-form @submit="submitForm" class="q-gutter-md">
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
               <!-- Règle permettant de gérer les erreurs dans l'adresse mail et dans le mot de passe -->
               <q-input
                 color="pink"
                 square filled clearable
-                v-model="identifiant"
-                type="identifiant"
+                v-model="form.email"
                 label="Identifiant"
                 ref="elementReference"
                 :rules="[val => validateEmail(val) || 'Email invalide']"
@@ -24,11 +23,11 @@
               <q-input
                 color="pink"
                 square filled clearable
-                v-model="mdp"
+                v-model="form.password"
                 label="Mot de passe"
                 :rules="[ val => val.length >= 8 || 'Minimum 8 caractères']"
                 lazy-rules />
-              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
+              <q-btn to="/accueil" type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
@@ -42,20 +41,25 @@
   </q-page>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'PageAccueil',
   data () {
     return {
       // Retourne le user et le pwd
-      identifiant: '',
-      mdp: '',
+      form: {
+        email: '',
+        password: ''
+      },
       souvenirdeMoi: true
     }
   },
   // Permet d'effectuer la navigation
   methods: {
-    clickMethod () {
-      this.$router.push('accueil')
+    ...mapActions('auth', ['connecterUtilisateur']),
+    submitForm () {
+      alert('Formulaire envoyé !')
+      this.connecterUtilisateur(this.form)
     },
     // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {

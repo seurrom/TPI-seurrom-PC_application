@@ -21,7 +21,7 @@
       :filter="recherche"
       row-key="name"
       :pagination.sync="pagination"
-      :etat="data[6]"
+      :etat="data[5]"
     >
       <template v-slot:header="props">
         <q-tr :props="props">
