@@ -21,7 +21,6 @@
       :filter="recherche"
       row-key="name"
       :pagination.sync="pagination"
-      :etat="data[5]"
     >
       <template v-slot:header="props">
         <q-tr :props="props">
@@ -37,7 +36,7 @@
         </q-tr>
       </template>
       <template v-slot:body="props">
-        <q-tr :props="props" v-if="etat==='Commande en cours'">
+        <q-tr :props="props" v-if="props.row.etat==='Commande en cours'">
           <q-td auto-width>
             <!-- Permet de dérouler une partie du tableau -->
             <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
@@ -54,11 +53,11 @@
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
             <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
           </q-td>
         </q-tr>
-        <q-tr :props="props" v-else-if="etat==='Quantité de produit faible'">
+        <q-tr :props="props" v-else-if="props.row.etat==='Quantité de produit faible'">
           <q-td auto-width>
             <!-- Permet de dérouler une partie du tableau -->
             <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
@@ -75,7 +74,7 @@
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
             <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
             <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
           </q-td>
         </q-tr>
@@ -94,9 +93,9 @@
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
+            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
@@ -126,7 +125,7 @@ export default {
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
-      etat: 'Commande en coursjm',
+      // etat: 'Commande en coursdd',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',
@@ -151,7 +150,7 @@ export default {
       // Retourne les informations liées au produit
       data: [
         {
-          id: 1,
+          id: 0,
           name: '12030',
           ninterne: 300,
           nomOff: 'Alcool Hexylique',
@@ -159,10 +158,12 @@ export default {
           etat: 'Commande en cours'
         },
         {
+          id: 1,
           name: '57653',
           ninterne: 300,
           nomOff: 'Albert',
-          formBrute: '6H14O'
+          formBrute: '6H14O',
+          etat: 'Quantité de produit faible'
         },
         {
           name: '876655',

@@ -21,6 +21,7 @@
                 :rules="[val => validateEmail(val) || 'Email invalide']"
                 lazy-rules />
               <q-input
+                type="password"
                 color="pink"
                 square filled clearable
                 v-model="form.password"
@@ -48,8 +49,8 @@ export default {
     return {
       // Retourne le user et le pwd
       form: {
-        email: '',
-        password: ''
+        email: 'test@test.com',
+        password: '12345'
       },
       souvenirdeMoi: true
     }
@@ -58,7 +59,6 @@ export default {
   methods: {
     ...mapActions('auth', ['connecterUtilisateur']),
     submitForm () {
-      alert('Formulaire envoyé !')
       this.connecterUtilisateur(this.form)
     },
     // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide

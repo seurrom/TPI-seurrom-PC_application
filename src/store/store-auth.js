@@ -1,5 +1,5 @@
 import { api } from 'boot/axios'
-import { Loading, LocaStorage } from 'quasar'
+import { Loading, LocalStorage } from 'quasar'
 
 // State : données du magasin
 const state = {
@@ -31,14 +31,40 @@ const actions = {
     api.post('/login', payload)
       .then(function (response) {
         console.log('CONNEXION OK', response)
-        commit('setUser', response.data.user)
-        commit('setToken', response.data.access_token)
+        commit('setUser', payload.email)
+        commit('setToken', response.data.token)
+        LocalStorage.set('user', state.user)
+        LocalStorage.set('token', state.token)
         that.$router.push('/accueil')
         Loading.hide()
       })
       .catch(function (error) {
         Loading.hide()
         console.log(error.response)
+      })
+  },
+  deconnecterUtilisateur ({ commit, state }) {
+    Loading.show()
+    const that = this
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + state.token }
+    }
+    // Déconnexion de l'API
+    api.post('/logout', {}, config)
+      .catch(function (error) {
+        throw error
+      })
+      .finally(function () {
+        // Réinitialise user et token
+        commit('setUser', null)
+        commit('setToken', null)
+        // Vide le locaStorage
+        LocalStorage.clear()
+        // Redirige l'utilisateur vers la page de connexion
+        that.$router.push('/connexion')
+        // location.reload() // recharge la page du navigateur
+        Loading.hide()
       })
   }
 }

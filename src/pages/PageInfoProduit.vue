@@ -10,7 +10,7 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"   outlined  v-model="nomOfficiel"    label="Nom officiel"/>
+        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].nomOff"    label="Nom officiel"/>
         <q-input class="element"    outlined v-model="nomAnglais"      label="Nom anglais"/>
         <q-input  class="element"   outlined  v-model="autreNom"       label="Autre nom"/>
         <q-input class="element"    outlined v-model="autreNom2"       label="Autre nom 2"/>
@@ -132,7 +132,8 @@ export default {
       data: [
         {
           name: 'A2',
-          quantite: '5L'
+          quantite: '5L',
+          nomOff: 'FJKDJFLKSDJFSD'
         },
         {
           name: 'B4',
