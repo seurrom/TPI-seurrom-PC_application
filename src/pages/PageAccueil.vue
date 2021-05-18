@@ -16,7 +16,7 @@
     <!-- "filter" permet d'effectuer une recherche dans le tableau -->
     <q-table
       title="Liste des produits"
-      :data="data"
+      :data="produits.produits"
       :columns="columns"
       :filter="recherche"
       row-key="name"
@@ -113,6 +113,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   // Nom de la page
   name: 'PageAccueil',
@@ -144,11 +145,11 @@ export default {
           sortable: true
         },
         { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'ninterne', sortable: true },
-        { name: 'nomOff', label: 'Nom officiel', field: 'nomOfficiel', sortable: true, style: 'width: 10px' },
-        { name: 'formBrute', label: 'Formule brute', field: 'formBrute' }
-      ],
+        { name: 'nomOff', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
+        { name: 'formBrute', label: 'Formule brute', field: 'formule' }
+      ]
       // Retourne les informations liées au produit
-      data: [
+      /* data: [
         {
           id: '1',
           name: '12030',
@@ -237,11 +238,12 @@ export default {
           salle: ['A2'],
           quantite: ['B7']
         }
-      ]
+      ] */
     }
   },
   // Création des méthodes pour effectuer la navigation
   methods: {
+    // ...mapActions('produits', ['getProduitsApi']),
     infoproduit () {
       this.$router.push('infoproduit')
     },
@@ -254,8 +256,12 @@ export default {
     tablbord () {
       this.$router.push('tablbord')
     }
+  },
+  computed: {
+    ...mapState('produits', ['produits'])
   }
 }
+
 </script>
 
 <style scoped lang="sass">

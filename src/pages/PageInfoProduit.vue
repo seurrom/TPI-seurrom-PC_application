@@ -10,28 +10,28 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].nomOfficiel"    label="Nom officiel"/>
-        <q-input class="element"    outlined v-model="data[$route.params.id - 1].nomAnglais"      label="Nom anglais"/>
-        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].autreNom"       label="Autre nom"/>
-        <q-input class="element"    outlined v-model="data[$route.params.id - 1].autreNom2"       label="Autre nom 2"/>
+        <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].nomOfficiel"    label="Nom officiel"/>
+        <q-input class="element"    outlined v-model="produits[$route.params.id - 1].nomAnglais"      label="Nom anglais"/>
+        <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].autreNom"       label="Autre nom"/>
+        <q-input class="element"    outlined v-model="produits[$route.params.id - 1].autreNom2"       label="Autre nom 2"/>
         <!-- Liste déroulante pour les sortes de produits -->
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].sorteproduit"   label="Sorte de produit"  :options="options"/>
-        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].concentration"  label="Concentration"     :options="optionsConcentration"/>
-        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].famille"        label="Famille"           :options="optionsFamille"/>
-        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].purete"         label="Pureté"            :options="optionsPurete"/>
+        <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].sorteproduit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].concentration"  label="Concentration"     :options="optionsConcentration"/>
+        <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].famille"        label="Famille"           :options="optionsFamille"/>
+        <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].purete"         label="Pureté"            :options="optionsPurete"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].masseMolaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].tempEbul"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].tempFusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].masseMolaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].tempEbul"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].tempFusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="data[$route.params.id - 1].formDev"   label="Formule développée" />
-        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].etat" label="État" :options="optionsEtat"/>
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].formBrute" label="Formule brute" />
+        <q-input class="element" outlined v-model="produits[$route.params.id - 1].formDev"   label="Formule développée" />
+        <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].etat" label="État" :options="optionsEtat"/>
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
@@ -43,7 +43,7 @@
       <q-table
         style="width: 800px"
         title="Stockage"
-        :data="data"
+        :data="produits"
         :columns="columns"
         row-key="salle"
         :pagination.sync="pagination"
@@ -52,6 +52,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   methods: {
     clickMethod () {
@@ -64,10 +65,13 @@ export default {
       return re.test(String(number).toLowerCase())
     }
   },
+  computed: {
+    ...mapState('produits', ['produits'])
+  },
   name: 'PageInfoProduit',
   data () {
     return {
-      data: [
+      /* data: [
         {
           id: '1',
           name: '12030',
@@ -156,7 +160,7 @@ export default {
           salle: ['A2'],
           quantite: ['B7']
         }
-      ],
+      ], */
       // Déclaration des variables
       text: '',
       ph: '',

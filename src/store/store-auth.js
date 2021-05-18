@@ -25,7 +25,7 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  connecterUtilisateur ({ commit }, payload) {
+  connecterUtilisateur ({ commit, dispatch, state }, payload) {
     const that = this
     Loading.show()
     api.post('/login', payload)
@@ -35,6 +35,7 @@ const actions = {
         commit('setToken', response.data.token)
         LocalStorage.set('user', state.user)
         LocalStorage.set('token', state.token)
+        dispatch('produits/getProduitsApi', null, { root: true })
         that.$router.push('/accueil')
         Loading.hide()
       })

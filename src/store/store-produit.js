@@ -2,8 +2,8 @@ import { api } from 'boot/axios'
 
 // State : données du magasin
 const state = {
-  produit: [],
-  produitChargees: false
+  produits: [],
+  produitsCharges: false
 }
 
 /*
@@ -11,11 +11,8 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
-  setTaches (state, taches) {
-    state.taches = taches
-  },
-  setproduitChargees (state, valeur) {
-    state.produitChargees = valeur
+  setProduits (state, produits) {
+    state.produits = produits
   }
 }
 /*
@@ -23,19 +20,18 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  getProduitApi ({ commit, rootState }) {
+  getProduitsApi ({ commit, rootState }) {
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
-    api.get('/produit', config)
+    api.get('/produits', config)
       .then(function (response) {
-        commit('setProduit', response.data)
-        commit('setProduitChargees', true)
+        commit('setProduits', response.data)
       })
       .catch(function (error) {
-
+        console.log(error.response)
       })
-  },
+  }
 }
 
 /*
@@ -45,8 +41,8 @@ Sert à calculer, trier, filtrer ou formater les donneés
  */
 const getters = {
   // Prend le state comme 1er paramètre
-  taches: (state) => {
-    return state.taches
+  produits: (state) => {
+    return state.produits
   }
 }
 
