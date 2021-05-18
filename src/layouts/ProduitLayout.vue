@@ -10,7 +10,7 @@
           Gestion des produits
         </q-toolbar-title>
         <!-- Bouton de déconnexion -->
-        <q-btn class="boxshadow" @click="deconnexion" size="lg">
+        <q-btn class="boxshadow" @click="deconnecterUtilisateur" size="lg">
           <img src="~assets/deconnexion.png" width="22" height="18">
         </q-btn>
       </q-toolbar>
@@ -28,13 +28,15 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'ProduitLayout',
+  computed: {
+    ...mapState('auth', ['user'])
+  },
   // Methéode permettant la navigation entre les pages
   methods: {
-    deconnexion () {
-      this.$router.push('/')
-    },
+    ...mapActions('auth', ['deconnecterUtilisateur']),
     accueil () {
       this.$router.push({ path: 'accueil' })
     }

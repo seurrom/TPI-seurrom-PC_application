@@ -28,12 +28,12 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
-              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion"/>
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login"/>
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
             <!--  Case et lien "Se souvenir de moi "-->
-            <q-checkbox v-model="souvenirdeMoi" id="souvenirMdp" value="" label="Se souvenir de moi" color="primary" class="souvenirMdp"/>
+            <q-checkbox v-model="souvenirdeMoi" value="lsRememberMe" id="rememberMe" label="Se souvenir de moi" color="primary" class="souvenirMdp"/>
             <a href="https://passwordreset.microsoftonline.com/?ru=https%3a%2f%2flogin.microsoftonline.com%2f2424a8a7-7ecd-4244-be7e-046fa0432420%2freprocess%3fctx%3drQIIAZVRv4sTQRjdyebWJN5hvMrykFTCJPPN7O5Mwlnszu4eqIcWgmhz7I8JCV6ye7sbOa9RrASb-wdUOBAkpSDIVYKNpDGl3F8QbBQbLU2wsTwfj8f3eF_x8b5rOrSh1yJ_wfBKMen3AcdqNf2DfLPRfP356a_vRNv6ip_U33_6spgiGJRlVvQ6nWT4qFRxuxiEucrS4bhsx-mos9dP81HRSVQ_nOyX7bDIDj8gNEdogdC0csB44FLXgoC51LK8Ljh2NwAHfMflPnVtzgKQYBJPsmVmUez70vbNQFrCt4EtaQUBcGG50uPSsTzJoetzW9qEUotT05YedG2f0YB7AgLvrHLptjMpB3QlaT48Uj8r9dWNe1lalFP9XE2801vUpGYoQo65ihO8NCaOFFeYmHY_JCZb5mSmG2mmxsNkXkXfqutE79VqjaZ2RdvSflfRydqyzxcwu19WtndOLr96u3jzUputdW4dqHCnpKNBSe-NIvZ4IsfjXfIwf7B_1zlybxaTG4QX2a45KYrr0INjAx0bxqlRr-lN7aou78DCQD8M9PyCdlr__-fML6KzdWjU4zTKw3EyTDZbAFEiiGBYcEWwCZGFo4gLTKLYZLEIhRLhs41zrX3c0P4A0&mkt=fr&hosted=0&device_platform=Windows+10&username=romane.seuret%40divtec.ch"> Mot de passe oublié</a>
           </q-card-section>
         </q-card>
@@ -43,6 +43,18 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+/*
+const rmCheck = document.getElementById('rememberMe'),
+  emailInput = document.getElementById('email')
+
+if (localStorage.checkbox && localStorage.checkbox !== '') {
+  rmCheck.setAttribute('checked', 'checked')
+  emailInput.value = localStorage.username
+} else {
+  rmCheck.removeAttribute('checked')
+  emailInput.value = ''
+}
+*/
 export default {
   name: 'PageAccueil',
   data () {
@@ -67,6 +79,17 @@ export default {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     }
+    /*
+    lsRememberMe () {
+      if (rmCheck.checked && emailInput.value !== '') {
+        localStorage.username = emailInput.value
+        localStorage.checkbox = rmCheck.value
+      } else {
+        localStorage.username = ''
+        localStorage.checkbox = ''
+      }
+    }
+    */
   },
   // Permet de mettre le focus sur l'élément "Identifiant"
   async mounted () {

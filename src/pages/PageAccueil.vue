@@ -46,15 +46,15 @@
               v-for="col in props.cols"
               :key="col.name"
               :props="props"
-              style="background-color: #1D1D1D"
+              style="background-color: #ff5555"
             >
               {{ col.value }}
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> i </q-btn></router-link>
+            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr :props="props" v-else-if="props.row.etat==='Quantité de produit faible'">
@@ -67,15 +67,15 @@
               v-for="col in props.cols"
               :key="col.name"
               :props="props"
-              style="background-color: #D89999"
+              style="background-color: #fffa54"
             >
               {{ col.value }}
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> i </q-btn></router-link>
+            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr :props="props" v-else>
@@ -94,7 +94,7 @@
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
             <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit"> i </q-btn></router-link>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px" @click="infoproduit"> i </q-btn></router-link>
             <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
@@ -144,98 +144,98 @@ export default {
           sortable: true
         },
         { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'ninterne', sortable: true },
-        { name: 'nomOff', label: 'Nom officiel', field: 'nomOff', sortable: true, style: 'width: 10px' },
+        { name: 'nomOff', label: 'Nom officiel', field: 'nomOfficiel', sortable: true, style: 'width: 10px' },
         { name: 'formBrute', label: 'Formule brute', field: 'formBrute' }
       ],
       // Retourne les informations liées au produit
       data: [
         {
-          id: 0,
+          id: '1',
           name: '12030',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O',
-          etat: 'Commande en cours'
+          nomOfficiel: 'Hexanol',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Commande en cours',
+          salle: ['A2'],
+          quantite: ['B7']
         },
         {
-          id: 1,
-          name: '57653',
-          ninterne: 300,
-          nomOff: 'Albert',
-          formBrute: '6H14O',
-          etat: 'Quantité de produit faible'
-        },
-        {
-          name: '876655',
-          ninterne: 300,
-          nomOff: 'Bernard',
-          formBrute: '6H14O'
-        },
-        {
-          name: '5644535',
-          ninterne: 300,
-          nomOff: 'Claude',
-          formBrute: '6H14O'
-        },
-        {
-          name: '907656',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '45890',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '9876',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '876543',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '345678',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
+          id: '2',
           name: '12030',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
+          nomOfficiel: 'Dioxame',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: '',
+          salle: ['A2'],
+          quantite: ['B7']
         },
         {
+          id: '3',
           name: '12030',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
+          nomOfficiel: 'Alcool',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: '',
+          salle: ['A2'],
+          quantite: ['B7']
         },
         {
+          id: '4',
           name: '12030',
           ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '12030',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
-        },
-        {
-          name: '12030',
-          ninterne: 300,
-          nomOff: 'Alcool Hexylique',
-          formBrute: '6H14O'
+          nomOfficiel: 'Chimie',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Quantité de produit faible',
+          salle: ['A2'],
+          quantite: ['B7']
         }
       ]
     }

@@ -53,7 +53,8 @@ const actions = {
     // Déconnexion de l'API
     api.post('/logout', {}, config)
       .catch(function (error) {
-        throw error
+        Loading.hide()
+        console.log(error.response)
       })
       .finally(function () {
         // Réinitialise user et token
@@ -62,7 +63,7 @@ const actions = {
         // Vide le locaStorage
         LocalStorage.clear()
         // Redirige l'utilisateur vers la page de connexion
-        that.$router.push('/connexion')
+        that.$router.push('/')
         // location.reload() // recharge la page du navigateur
         Loading.hide()
       })

@@ -10,28 +10,28 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].nomOff"    label="Nom officiel"/>
-        <q-input class="element"    outlined v-model="nomAnglais"      label="Nom anglais"/>
-        <q-input  class="element"   outlined  v-model="autreNom"       label="Autre nom"/>
-        <q-input class="element"    outlined v-model="autreNom2"       label="Autre nom 2"/>
+        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].nomOfficiel"    label="Nom officiel"/>
+        <q-input class="element"    outlined v-model="data[$route.params.id - 1].nomAnglais"      label="Nom anglais"/>
+        <q-input  class="element"   outlined  v-model="data[$route.params.id - 1].autreNom"       label="Autre nom"/>
+        <q-input class="element"    outlined v-model="data[$route.params.id - 1].autreNom2"       label="Autre nom 2"/>
         <!-- Liste déroulante pour les sortes de produits -->
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-select class="element"  outlined  v-model="sorteproduit"   label="Sorte de produit"  :options="options"/>
-        <q-select class="element"  outlined  v-model="concentration"  label="Concentration"     :options="optionsConcentration"/>
-        <q-select class="element"  outlined  v-model="famille"        label="Famille"           :options="optionsFamille"/>
-        <q-select class="element"  outlined  v-model="purete"         label="Pureté"            :options="optionsPurete"/>
+        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].sorteproduit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].concentration"  label="Concentration"     :options="optionsConcentration"/>
+        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].famille"        label="Famille"           :options="optionsFamille"/>
+        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].purete"         label="Pureté"            :options="optionsPurete"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="masseMolaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="tempEbul"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="tempFusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].masseMolaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].tempEbul"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].tempFusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="formDev"   label="Formule développée" />
-        <q-select class="element"  outlined  v-model="etat" label="État" :options="optionsEtat"/>
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].formBrute" label="Formule brute" />
+        <q-input class="element" outlined v-model="data[$route.params.id - 1].formDev"   label="Formule développée" />
+        <q-select class="element"  outlined  v-model="data[$route.params.id - 1].etat" label="État" :options="optionsEtat"/>
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
@@ -45,7 +45,7 @@
         title="Stockage"
         :data="data"
         :columns="columns"
-        row-key="name"
+        row-key="salle"
         :pagination.sync="pagination"
       />
     </div>
@@ -67,26 +67,101 @@ export default {
   name: 'PageInfoProduit',
   data () {
     return {
+      data: [
+        {
+          id: '1',
+          name: '12030',
+          ninterne: 300,
+          nomOfficiel: 'Hexanol',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Commande en cours',
+          salle: ['A2'],
+          quantite: ['B7']
+        },
+        {
+          id: '2',
+          name: '12030',
+          ninterne: 300,
+          nomOfficiel: 'Dioxame',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: '',
+          salle: ['A2'],
+          quantite: ['B7']
+        },
+        {
+          id: '3',
+          name: '12030',
+          ninterne: 300,
+          nomOfficiel: 'Alcool',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: '',
+          salle: ['A2'],
+          quantite: ['B7']
+        },
+        {
+          id: '4',
+          name: '12030',
+          ninterne: 300,
+          nomOfficiel: 'Chimie',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Quantité de produit faible',
+          salle: ['A2'],
+          quantite: ['B7']
+        }
+      ],
       // Déclaration des variables
       text: '',
       ph: '',
-      nomOfficiel: 'Hexanol',
-      autreNom: 'Alcool hexylique',
-      autreNom2: 'Alcool C6',
-      nomAnglais: '1-hexanole',
-      formBrute: 'C6H14O',
-      formDev: 'CH3(CH2)5OH',
-      famille: 'Alcool',
-      concentration: 'Aucune',
-      purete: 'Purum',
-      tempEbul: '102.17',
-      masseMolaire: '102.17',
-      tempFusion: '-52',
-      densite: '0.814',
-      etat: 'Commande en cours',
       dense: false,
       group: null,
-      sorteproduit: 'Minéral',
       // Permet d'afficher plus d'élément dans le tableau
       pagination: {
         sortBy: 'desc',
@@ -114,47 +189,18 @@ export default {
       optionsEtat: [
         'Commande en cours', 'Quantité de produit faible'
       ],
-      // A
       // Affectation des colonnes
       columns: [
         {
-          name: 'name',
+          name: 'salle',
           required: true,
           label: 'Salle',
           align: 'center',
-          field: row => row.name,
+          field: row => row.salle,
           format: val => `${val}`,
           sortable: true
         },
         { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
-      ],
-      // Affectation des lignes des quantités et des salles
-      data: [
-        {
-          name: 'A2',
-          quantite: '5L',
-          nomOff: 'FJKDJFLKSDJFSD'
-        },
-        {
-          name: 'B4',
-          quantite: '35L'
-        },
-        {
-          name: 'B8',
-          quantite: '1L'
-        },
-        {
-          name: 'K56',
-          quantite: '5L'
-        },
-        {
-          name: 'S34',
-          quantite: '67L'
-        },
-        {
-          name: 'T6',
-          quantite: '2L'
-        }
       ]
     }
   }
