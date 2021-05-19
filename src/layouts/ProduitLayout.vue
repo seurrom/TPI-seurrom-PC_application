@@ -4,7 +4,7 @@
       <q-toolbar style="background: #DC006B">
         <!-- Bouton permettant d'aller sur la page "Accueil" -->
         <q-btn class="boxshadow" @click="accueil" size="lg">
-          <img src="~assets/back.png" width="14 " height="18">
+          <img src="~assets/back.png" width="12 " height="18">
         </q-btn>
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
           Gestion des produits
