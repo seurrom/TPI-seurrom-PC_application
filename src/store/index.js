@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import auth from './store-auth'
+// Importe le store produit en lui donnant un nom
 import produits from './store-produit'
-
-// import example from './module-example'
+// Importe le store auth en lui donnant un nom
+import auth from './store-auth'
 
 Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
+      // Permet de lier le magasin store auth à l'application
       auth,
+      // Permet de lier le magasin store produits à l'application
       produits
     },
-
-    // enable strict mode (adds overhead!)
-    // for dev mode only
     strict: process.env.DEV
   })
 
