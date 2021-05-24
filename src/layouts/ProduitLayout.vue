@@ -38,7 +38,7 @@ export default {
   methods: {
     ...mapActions('auth', ['deconnecterUtilisateur']),
     accueil () {
-      this.$router.push({ path: 'accueil' })
+      this.$router.push({ path: '/accueil' })
     }
   }
 }

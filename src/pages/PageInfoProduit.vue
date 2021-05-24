@@ -10,7 +10,7 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"   outlined  v-model="getIdProduits[$route.params.id].nom_fr"    label="Nom officiel"/>
+        <q-input  class="element"   outlined  v-model="produit.nom_fr"    label="Nom officiel"/>
         <!-- <q-input class="element"    outlined v-model="getIdProduits[$route.params.id].nom_en"      label="Nom anglais"/> -->
         <!-- <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].autreNom"       label="Autre nom"/>
         <q-input class="element"    outlined v-model="produits[$route.params.id - 1].autreNom2"       label="Autre nom 2"/>
@@ -52,11 +52,13 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
+    ...mapState('auth', ['auth']),
     ...mapState('produits', ['produits']),
-    ...mapGetters('getIdProduits', ['getIdProduits'])
+    ...mapGetters('produits', ['getProduitById']),
+    ...mapActions('produits', ['getProduitsApi'])
   },
   methods: {
     clickMethod () {
@@ -68,10 +70,14 @@ export default {
       return re.test(String(number).toLowerCase())
     }
   },
+  updated () {
+    console.log("I'M UPDATEEEEEEEEEED")
+    this.produit = this.getProduitById(parseInt(this.$route.params.id))
+  },
   name: 'PageInfoProduit',
   data () {
     return {
-      idTest: '96',
+      produit: '',
       /* data: [
         {
           id: '1',

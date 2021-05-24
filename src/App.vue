@@ -12,8 +12,9 @@ export default {
   methods: {
     ...mapActions('auth', ['setUser'])
   },
-  mounted () {
+  updated () {
     // Récupère les données du localStorage
+    console.log('VUE MOUNTED')
     const user = this.$q.localStorage.getItem('user')
     const token = this.$q.localStorage.getItem('token')
     // Si un utilisateur et un token exisent
@@ -21,10 +22,12 @@ export default {
       // Construction de l'objet data
       const data = {
         user: user,
-        access_token: token
+        token: token
       }
       // Définit l'utilisateur en cours
       this.setUser(data)
+    } else {
+      this.$router.push('/')
     }
   }
 }

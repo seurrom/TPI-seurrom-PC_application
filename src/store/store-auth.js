@@ -28,11 +28,11 @@ const actions = {
   connecterUtilisateur ({ commit, dispatch, state }, payload) {
     const that = this
     Loading.show()
-    api.post('/login', payload)
+    return api.post('/login', payload)
       .then(function (response) {
         console.log('CONNEXION OK', response)
+        dispatch('setUser', response.data)
         commit('setUser', payload.email)
-        commit('setToken', response.data.token)
         LocalStorage.set('user', state.user)
         LocalStorage.set('token', state.token)
         dispatch('produits/getProduitsApi', null, { root: true })
@@ -42,7 +42,14 @@ const actions = {
       .catch(function (error) {
         Loading.hide()
         console.log(error.response)
+        throw new Error('Identifiants invalides')
       })
+  },
+  setUser ({ commit, dispatch }, data) {
+    // Sauvegarde les données de l'utilisater et le token dans le magasin
+    commit('setUser', data.user)
+    commit('setToken', data.token)
+    // Redirige l'utilisateur vers la page des tâches
   },
   deconnecterUtilisateur ({ commit, state }) {
     Loading.show()
@@ -62,7 +69,8 @@ const actions = {
         commit('setUser', null)
         commit('setToken', null)
         // Vide le locaStorage
-        LocalStorage.clear()
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
         // Redirige l'utilisateur vers la page de connexion
         that.$router.push('/')
         // location.reload() // recharge la page du navigateur

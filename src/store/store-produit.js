@@ -21,6 +21,7 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   getProduitsApi ({ commit, rootState }) {
+    console.log(rootState.auth.token)
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
@@ -44,8 +45,8 @@ const getters = {
   produits: (state) => {
     return state.produits
   },
-  getIdProduits: (state) => (id) => {
-    return state.produits.find(produits => produits.id === id)
+  getProduitById: (state) => (id) => {
+    return state.produits.produits.find(prod => prod.id === id)
   }
 }
 

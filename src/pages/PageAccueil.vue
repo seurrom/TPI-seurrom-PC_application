@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   // Nom de la page
   name: 'PageAccueil',
@@ -243,7 +243,6 @@ export default {
   },
   // Création des méthodes pour effectuer la navigation
   methods: {
-    // ...mapActions('produits', ['getProduitsApi']),
     infoproduit () {
       this.$router.push('infoproduit')
     },
@@ -258,7 +257,9 @@ export default {
     }
   },
   computed: {
+    ...mapActions('produits', ['getProduitsApi']),
     ...mapState('produits', ['produits'])
+    // ...mapState('auth', ['auth'])
   }
 }
 

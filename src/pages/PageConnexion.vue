@@ -10,14 +10,18 @@
         <q-card square bordered class="q-pa-lg shadow-1">
           <q-card-section>
             <q-form @submit="submitForm" class="q-gutter-md">
+              <label v-if= 'connexionInvalide'>
+                E-mail ou mot de passe incorrect
+              </label>
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
               <!-- Règle permettant de gérer les erreurs dans l'adresse mail -->
               <q-input
                 color="pink"
                 square filled clearable
                 v-model="form.email"
-                label="Identifiant"
+                label="E-mail"
                 ref="elementReference"
+                for="email"
                 :rules="[val => validateEmail(val) || 'Email invalide']"
                 lazy-rules />
               <q-input
@@ -25,10 +29,11 @@
                 color="pink"
                 square filled clearable
                 v-model="form.password"
+                for="password"
                 label="Mot de passe"
                 :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
-              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
+              <q-btn type="submit" @click="lsRememberMe" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
           </q-card-section>
           <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
@@ -49,27 +54,16 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-/*
-const rmCheck = document.getElementById('rememberMe'),
-  emailInput = document.getElementById('email')
-
-if (localStorage.checkbox && localStorage.checkbox !== '') {
-  rmCheck.setAttribute('checked', 'checked')
-  emailInput.value = localStorage.username
-} else {
-  rmCheck.removeAttribute('checked')
-  emailInput.value = ''
-}
-*/
 export default {
   name: 'PageAccueil',
   data () {
     return {
       // Retourne le user et le pwd
       form: {
-        email: 'test@test.com',
-        password: '12345'
+        email: '',
+        password: ''
       },
+      connexionInvalide: false,
       souvenirdeMoi: true
     }
   },
@@ -77,29 +71,41 @@ export default {
   methods: {
     ...mapActions('auth', ['connecterUtilisateur']),
     submitForm () {
+      const page = this
       this.connecterUtilisateur(this.form)
+        .catch(function (e) {
+          page.connexionInvalide = true
+        })
     },
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
-    }
-    /*
+    },
     lsRememberMe () {
-      if (rmCheck.checked && emailInput.value !== '') {
-        localStorage.username = emailInput.value
-        localStorage.checkbox = rmCheck.value
+      if (this.rmCheck.ariaChecked === 'true' && this.emailInput.value !== '') {
+        localStorage.username = this.emailInput.value
+        localStorage.checkbox = this.rmCheck.ariaChecked
       } else {
         localStorage.username = ''
         localStorage.checkbox = ''
       }
     }
-    */
   },
   // Permet de mettre le focus sur l'élément "Identifiant"
   async mounted () {
     await this.$nextTick()
     this.$refs.elementReference.$el.focus()
+    this.rmCheck = document.getElementById('rememberMe')
+    this.emailInput = document.getElementById('email')
+
+    if (localStorage.checkbox && localStorage.checkbox !== '') {
+      this.souvenirdeMoi = true
+      this.form.email = localStorage.username
+    } else {
+      this.souvenirdeMoi = false
+      this.emailInput.value = ''
+    }
   }
 }
 </script>
