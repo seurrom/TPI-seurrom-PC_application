@@ -140,13 +140,13 @@ export default {
           required: true,
           label: 'N° CAS',
           align: 'center',
-          field: row => row.name,
+          field: row => row.num_cas,
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'ninterne', sortable: true },
-        { name: 'nomOff', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
-        { name: 'formBrute', label: 'Formule brute', field: 'formule' }
+        { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'num_interne', sortable: true },
+        { name: 'nomOff', align: 'center', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
+        { name: 'formBrute', align: 'center', label: 'Formule brute', field: 'formule' }
       ]
       // Retourne les informations liées au produit
       /* data: [

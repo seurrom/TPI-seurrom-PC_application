@@ -79,9 +79,8 @@ export default {
     submitForm () {
       this.connecterUtilisateur(this.form)
     },
-    // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
+    // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
-      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     }

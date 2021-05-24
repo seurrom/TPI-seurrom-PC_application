@@ -10,13 +10,13 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].nomOfficiel"    label="Nom officiel"/>
-        <q-input class="element"    outlined v-model="produits[$route.params.id - 1].nomAnglais"      label="Nom anglais"/>
-        <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].autreNom"       label="Autre nom"/>
+        <q-input  class="element"   outlined  v-model="getIdProduits[$route.params.id].nom_fr"    label="Nom officiel"/>
+        <!-- <q-input class="element"    outlined v-model="getIdProduits[$route.params.id].nom_en"      label="Nom anglais"/> -->
+        <!-- <q-input  class="element"   outlined  v-model="produits[$route.params.id - 1].autreNom"       label="Autre nom"/>
         <q-input class="element"    outlined v-model="produits[$route.params.id - 1].autreNom2"       label="Autre nom 2"/>
-        <!-- Liste déroulante pour les sortes de produits -->
+        Liste déroulante pour les sortes de produits -->
       </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
+      <!-- <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].sorteproduit"   label="Sorte de produit"  :options="options"/>
         <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].concentration"  label="Concentration"     :options="optionsConcentration"/>
         <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].famille"        label="Famille"           :options="optionsFamille"/>
@@ -32,7 +32,7 @@
         <q-input class="element" outlined v-model="produits[$route.params.id - 1].formBrute" label="Formule brute" />
         <q-input class="element" outlined v-model="produits[$route.params.id - 1].formDev"   label="Formule développée" />
         <q-select class="element"  outlined  v-model="produits[$route.params.id - 1].etat" label="État" :options="optionsEtat"/>
-      </div>
+      </div> -->
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
         <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" @submit="clickMethod" />
@@ -52,25 +52,26 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
+  computed: {
+    ...mapState('produits', ['produits']),
+    ...mapGetters('getIdProduits', ['getIdProduits'])
+  },
   methods: {
     clickMethod () {
       this.$router.push('accueil')
     },
     // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateNumber (number) {
-      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^-?\d+(\.\d+)?$/
       return re.test(String(number).toLowerCase())
     }
   },
-  computed: {
-    ...mapState('produits', ['produits'])
-  },
   name: 'PageInfoProduit',
   data () {
     return {
+      idTest: '96',
       /* data: [
         {
           id: '1',
@@ -159,11 +160,76 @@ export default {
           etat: 'Quantité de produit faible',
           salle: ['A2'],
           quantite: ['B7']
+        },
+        {
+          id: '5',
+          name: '354345',
+          ninterne: 3455,
+          nomOfficiel: 'Produit chimique',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C27H0',
+          formDev: 'CH3(CH2)5OH',
+          etat: '',
+          salle: ['A2'],
+          quantite: ['B7']
+        },
+        {
+          id: '6',
+          name: '23434',
+          ninterne: 78667,
+          nomOfficiel: 'Cindy',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Commande en cours',
+          salle: ['A2'],
+          quantite: ['B7']
+        },
+        {
+          id: '7',
+          name: '342234',
+          ninterne: 76567,
+          nomOfficiel: 'Charbon',
+          nomAnglais: '1-hexanole',
+          autreNom: 'Alcool hexylique',
+          autreNom2: 'Alcool C6',
+          sorteProduit: 'Minéral',
+          concentration: 'Aucune',
+          famille: 'Alcool',
+          purete: 'Purum',
+          masseMolaire: '102.17',
+          tempEbul: '102.17',
+          tempFusion: '-52',
+          densite: '0.814',
+          formBrute: 'C6H14O',
+          formDev: 'CH3(CH2)5OH',
+          etat: 'Quantité de produit faible',
+          salle: ['A2'],
+          quantite: ['B7']
         }
-      ], */
+      ],
+      */
       // Déclaration des variables
-      text: '',
-      ph: '',
       dense: false,
       group: null,
       // Permet d'afficher plus d'élément dans le tableau

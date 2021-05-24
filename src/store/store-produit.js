@@ -43,6 +43,9 @@ const getters = {
   // Prend le state comme 1er paramètre
   produits: (state) => {
     return state.produits
+  },
+  getIdProduits: (state) => (id) => {
+    return state.produits.find(produits => produits.id === id)
   }
 }
 
