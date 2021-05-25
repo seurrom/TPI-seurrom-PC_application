@@ -31,7 +31,7 @@
                 :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
                 <label class="connexionInvalide" v-if= 'connexionInvalide'>
-                  E-mail ou mot de passe incorrect
+                  E-mail et/ou mot de passe incorrect(s)
                 </label>
               <q-btn type="submit" @click="lsRememberMe" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
