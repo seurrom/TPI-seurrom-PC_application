@@ -6,13 +6,10 @@
         <img src="~assets/logo-divtec.png" alt="Logo de la DIVTEC">
       </div>
       <div class="row">
-        <!-- Création du Q-card permettant de faire un contenu groupé -->
+          <!-- Création du Q-card permettant de faire un contenu groupé -->
         <q-card square bordered class="q-pa-lg shadow-1">
           <q-card-section>
             <q-form @submit="submitForm" class="q-gutter-md">
-              <label v-if= 'connexionInvalide'>
-                E-mail ou mot de passe incorrect
-              </label>
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
               <!-- Règle permettant de gérer les erreurs dans l'adresse mail -->
               <q-input
@@ -33,6 +30,9 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
+                <label class="connexionInvalide" v-if= 'connexionInvalide'>
+                  E-mail ou mot de passe incorrect
+                </label>
               <q-btn type="submit" @click="lsRememberMe" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
           </q-card-section>
@@ -126,5 +126,11 @@ export default {
 }
 .casesouvenirMdp {
   margin-top: 0;
+}
+.connexionInvalide {
+  color: red;
+  display: block;
+  text-align: center;
+  font-weight: bold;
 }
 </style>

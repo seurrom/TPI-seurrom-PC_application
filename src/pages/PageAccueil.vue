@@ -2,10 +2,8 @@
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
       <!-- Boutons "ajouter" et "tableau de bord" -->
-      <q-btn @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter" />
-      <q-btn @click="tablbord">
-        <img src="~assets/tabl_bord.png" width="18" height="18">
-      </q-btn>
+      <q-btn class="styleBoutonAjoutTabl" @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter"/>
+      <q-btn class="styleBoutonAjoutTabl" @click="tablbord" style="background: #DC006B" text-color="white" label="Tableau de bord"/>
     </div>
     <div class="recherche q-gutter-md row items-start">
       <img src="~assets/recherche.png" width="25" height="25" class="imgrecherche">
@@ -285,4 +283,6 @@ export default {
   margin: 0px
   vertical-align: middle
 
+.styleBoutonAjoutTabl
+  margin-right: 5px
 </style>

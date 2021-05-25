@@ -13,10 +13,10 @@
         <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
         <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
         <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
-        <q-input class="element"    outlined v-model="produit.autreNom2"       label="Autre nom 2"/>
+        <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-select class="element"  outlined  v-model="produit.sorteproduit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
         <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
         <q-select class="element"  outlined  v-model="produit.famille"        label="Famille"           :options="optionsFamille"/>
         <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
