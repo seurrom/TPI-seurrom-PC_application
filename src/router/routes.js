@@ -1,7 +1,7 @@
 const routes = [
   {
     // Route permettant d'afficher le MainLayout à la page PageConnexion.vue
-    path: '/',
+    path: '/connexion',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/PageConnexion.vue') }
@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/Produitlayout.vue'),
     children: [
-      { path: 'accueil', component: () => import('src/pages/PageAccueil.vue'), meta: { titrePage: 'Produits' } },
+      { path: '', component: () => import('src/pages/PageAccueil.vue'), meta: { titrePage: 'Produits' } },
       { path: 'infoproduit/:id', component: () => import('src/pages/PageInfoProduit.vue'), meta: { titrePage: 'Informations du produit' } },
       { path: 'etiquette', component: () => import('src/pages/PageEtiquette.vue'), meta: { titrePage: 'Étiquette' } },
       { path: 'tablbord', component: () => import('src/pages/PageTableaudeBord.vue'), meta: { titrePage: 'Tableau de bord' } },

@@ -30,9 +30,11 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
                 lazy-rules />
+                <!-- Message d'erreur en cas de connexion invalide -->
                 <label class="connexionInvalide" v-if= 'connexionInvalide'>
                   E-mail et/ou mot de passe incorrect(s)
                 </label>
+              <!-- Bouton de connexion -->
               <q-btn type="submit" @click="lsRememberMe" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
           </q-card-section>
@@ -63,11 +65,12 @@ export default {
         email: '',
         password: ''
       },
+      // Retourne si la connexion est invalide ou non
       connexionInvalide: false,
       souvenirdeMoi: true
     }
   },
-  // Permet d'effectuer la navigation
+  // Appele l'action connecterUtilisateur et regarde s'il y a une erreur
   methods: {
     ...mapActions('auth', ['connecterUtilisateur']),
     submitForm () {
@@ -82,6 +85,7 @@ export default {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
     },
+    // Permet d'effectuer la fonctionnalité se souvenir de moi
     lsRememberMe () {
       if (this.rmCheck.ariaChecked === 'true' && this.emailInput.value !== '') {
         localStorage.username = this.emailInput.value
@@ -92,7 +96,7 @@ export default {
       }
     }
   },
-  // Permet de mettre le focus sur l'élément "Identifiant"
+  // Permet de mettre le focus sur l'élément "Identifiant" et de checker si l'utilisateur a mis la case se souvenir de moi
   async mounted () {
     await this.$nextTick()
     this.$refs.elementReference.$el.focus()

@@ -25,23 +25,30 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  // Permet de connecter l'utilisateur grâce à la méthode POST
   connecterUtilisateur ({ commit, dispatch, state }, payload) {
     const that = this
+    // Affiche le logo de chargement
     Loading.show()
     return api.post('/login', payload)
       .then(function (response) {
-        console.log('CONNEXION OK', response)
         dispatch('setUser', response.data)
+        // Commit l'utilisateur
         commit('setUser', payload.email)
+        // Stock dans le Local Storage l'utilisateur et le token
         LocalStorage.set('user', state.user)
         LocalStorage.set('token', state.token)
+        // Appelle l'action getProduitsApi afin de récupérer les produits de l'API
         dispatch('produits/getProduitsApi', null, { root: true })
-        that.$router.push('/accueil')
+        // Envoie l'utilisateur sur la page d'accueil
+        that.$router.push('/')
+        // Cache le logo de chargement
         Loading.hide()
       })
-      .catch(function (error) {
+      .catch(function () {
+        // Cache le logo de chargement
         Loading.hide()
-        console.log(error.response)
+        // En cas d'erreur affiche le message suivant
         throw new Error('Identifiants invalides')
       })
   },
@@ -49,9 +56,10 @@ const actions = {
     // Sauvegarde les données de l'utilisater et le token dans le magasin
     commit('setUser', data.user)
     commit('setToken', data.token)
-    // Redirige l'utilisateur vers la page des tâches
   },
+  // Permet de déconnecter un utilisateur
   deconnecterUtilisateur ({ commit, state }) {
+    // Affiche le logo
     Loading.show()
     const that = this
     // Configuration du header avec token
@@ -72,7 +80,7 @@ const actions = {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         // Redirige l'utilisateur vers la page de connexion
-        that.$router.push('/')
+        that.$router.push('/connexion')
         // location.reload() // recharge la page du navigateur
         Loading.hide()
       })

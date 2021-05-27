@@ -12,6 +12,7 @@
     </div>
     <!-- Tableau de produit chimique -->
     <!-- "filter" permet d'effectuer une recherche dans le tableau -->
+    <!-- filterFn permet d'effectuer une recherche même si il y a des accents ou des masjucules -->
     <q-table
       title="Liste des produits"
       :data="produits.produits"
@@ -99,7 +100,7 @@
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <!-- Deuxième partie du tableau -->
+            <!-- Affiche les armoires et les quantités dans l'expand -->
             <div class="salleQuantite q-gutter-md row">
               <q-table
                 style="width: 100%"
@@ -123,15 +124,14 @@ export default {
   name: 'PageAccueil',
   data () {
     return {
+      // Déclaration des variables
       produit: '',
       recherche: '',
-      // Déclaration des variables
       nomOfficiel: '',
       numInterne: '',
       formuleBrute: '',
       salle: 'A2',
       quantite: '43L',
-      // etat: 'Commande en coursdd',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',
@@ -153,6 +153,7 @@ export default {
         { name: 'nomOff', align: 'center', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
         { name: 'formBrute', align: 'center', label: 'Formule brute', field: 'formule' }
       ],
+      // Colonnes du tableau d'armoire et quantité
       columns2: [
         {
           name: 'salle',
@@ -167,8 +168,10 @@ export default {
       ]
     }
   },
-  // Création des méthodes pour effectuer la navigation
   methods: {
+    // Importe l'action getProduitsApi du magasin produits
+    ...mapActions('produits', ['getProduitsApi']),
+    // Navigation
     infoproduit () {
       this.$router.push('infoproduit')
     },
@@ -181,6 +184,7 @@ export default {
     tablbord () {
       this.$router.push('tablbord')
     },
+    // Permet de filter avec majuscule ou sans accent
     filterFn () {
       /* https://www.davidbcalhoun.com/2019/matching-accented-strings-in-javascript/ */
       if (this.recherche !== '') {
@@ -195,12 +199,15 @@ export default {
       return input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     }
   },
+  // Permet de récupérer les produits
   computed: {
-    ...mapActions('produits', ['getProduitsApi']),
     ...mapState('produits', ['produits'])
+  },
+  // Appelle l'action getProduitsApi qui retourne tous les produits de l'API
+  mounted () {
+    this.getProduitsApi()
   }
 }
-
 </script>
 
 <style scoped lang="sass">

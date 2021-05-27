@@ -31,14 +31,16 @@
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'ProduitLayout',
+  // Appelle l'utilisateur du magasin auth
   computed: {
     ...mapState('auth', ['user'])
   },
   // Methéode permettant la navigation entre les pages
+  // Ainsi que la méthode afin de pouvoir déconnecter un utilisateur
   methods: {
     ...mapActions('auth', ['deconnecterUtilisateur']),
     accueil () {
-      this.$router.push({ path: '/accueil' })
+      this.$router.push({ path: '/' })
     }
   }
 }

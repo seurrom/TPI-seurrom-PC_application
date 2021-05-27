@@ -2,6 +2,7 @@
   <div class="q-pa-md">
     <div class="q-ml-xl">
       <div class="supprimer">
+        <!-- Bouton supprimer -->
         <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
       </div>
       <div>
@@ -9,7 +10,7 @@
         <h6>Information du produit</h6>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <!-- Input des informations du produit -->
+        <!-- Affiche toutes les informations détaillées d'un produit -->
         <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
         <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
         <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
@@ -38,7 +39,7 @@
       </div>
     </div>
     <div class="q-pa-md">
-      <!-- Tableau pour la salle ainsi que la quantité -->
+      <!-- Tableau pour la salle ainsi et la quantité -->
       <q-table
         style="width: 800px"
         title="Stockage"
@@ -53,31 +54,38 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
+  // Appelle toutes les fonctionnalités des magasins utiles
   computed: {
     ...mapState('auth', ['auth']),
     ...mapState('produits', ['produits']),
-    ...mapGetters('produits', ['getProduitById']),
-    ...mapActions('produits', ['getProduitsApi'])
+    ...mapGetters('produits', ['getProduitById'])
   },
   methods: {
+    // Appelle l'action getProduitsApi
+    ...mapActions('produits', ['getProduitsApi']),
+    // Redirige l'utilisateur sur la page accueil
     clickMethod () {
-      this.$router.push('accueil')
+      this.$router.push('/')
     },
-    // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
+    // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateNumber (number) {
       const re = /^-?\d+(\.\d+)?$/
       return re.test(String(number).toLowerCase())
     }
   },
-  updated () {
+  // Appelle les produits de l'API avant que l'écran ne soit monté
+  beforeMount () {
+    this.getProduitsApi()
+  },
+  // Appelle les produits par l'ID fournit en paramètre pendant que l'écran soit monté
+  mounted () {
     this.produit = this.getProduitById(parseInt(this.$route.params.id))
-    console.log("I'M UPDATEEEEEEEEEED")
   },
   name: 'PageInfoProduit',
   data () {
     return {
-      produit: '',
       // Déclaration des variables
+      produit: '',
       dense: false,
       group: null,
       // Permet d'afficher plus d'élément dans le tableau

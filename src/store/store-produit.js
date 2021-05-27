@@ -20,7 +20,6 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   getProduitsApi ({ commit, rootState }) {
-    console.log(rootState.auth.token)
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
