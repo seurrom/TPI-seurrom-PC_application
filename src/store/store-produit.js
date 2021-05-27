@@ -2,8 +2,7 @@ import { api } from 'boot/axios'
 
 // State : données du magasin
 const state = {
-  produits: [],
-  produitsCharges: false
+  produits: []
 }
 
 /*

@@ -14,7 +14,6 @@ export default {
   },
   updated () {
     // Récupère les données du localStorage
-    console.log('VUE MOUNTED')
     const user = this.$q.localStorage.getItem('user')
     const token = this.$q.localStorage.getItem('token')
     // Si un utilisateur et un token exisent

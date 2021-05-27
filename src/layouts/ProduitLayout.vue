@@ -3,14 +3,14 @@
     <q-header elevated>
       <q-toolbar style="background: #DC006B">
         <!-- Bouton permettant d'aller sur la page "Accueil" -->
-        <q-btn class="boxshadow" @click="accueil" size="lg">
+        <q-btn class="boxshadow" @click="accueil" size="lg" v-if="$route.meta.titrePage !== 'Produits'">
           <img src="~assets/back.png" width="12 " height="18">
         </q-btn>
         <q-toolbar-title class="flex flex-center" style="background: #DC006B">
           Gestion des produits
         </q-toolbar-title>
         <!-- Bouton de déconnexion -->
-        <q-btn class="boxshadow" @click="deconnecter" size="lg">
+        <q-btn class="boxshadow" @click="deconnecterUtilisateur" size="lg">
           <img src="~assets/deconnexion.png" width="22" height="18">
         </q-btn>
       </q-toolbar>
@@ -28,19 +28,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'ProduitLayout',
   computed: {
-    ...mapActions('auth', ['deconnecterUtilisateur'])
+    ...mapState('auth', ['user'])
   },
   // Methéode permettant la navigation entre les pages
   methods: {
+    ...mapActions('auth', ['deconnecterUtilisateur']),
     accueil () {
       this.$router.push({ path: '/accueil' })
-    },
-    deconnecter () {
-      this.deconnecterUtilisateur()
     }
   }
 }

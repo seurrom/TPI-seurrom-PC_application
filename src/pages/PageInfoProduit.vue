@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="q-ml-xl">
       <div class="supprimer">
-        <q-btn style="background: #DC006B" text-color="white" size="lg"  label="Supprimer" />
+        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
       </div>
       <div>
         <!-- Titre de la page -->
@@ -34,7 +34,7 @@
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" @submit="clickMethod" />
+        <q-btn style="background: #DC006B" text-color="white" label="Enregistrer" @submit="clickMethod" />
       </div>
     </div>
     <div class="q-pa-md">
@@ -42,7 +42,7 @@
       <q-table
         style="width: 800px"
         title="Stockage"
-        :data="produit"
+        :data="produit.armoires"
         :columns="columns"
         row-key="salle"
         :pagination.sync="pagination"
@@ -70,8 +70,8 @@ export default {
     }
   },
   updated () {
-    console.log("I'M UPDATEEEEEEEEEED")
     this.produit = this.getProduitById(parseInt(this.$route.params.id))
+    console.log("I'M UPDATEEEEEEEEEED")
   },
   name: 'PageInfoProduit',
   data () {
@@ -112,7 +112,7 @@ export default {
         {
           name: 'salle',
           required: true,
-          label: 'Salle',
+          label: 'Armoire',
           align: 'center',
           field: row => row.salle,
           format: val => `${val}`,
