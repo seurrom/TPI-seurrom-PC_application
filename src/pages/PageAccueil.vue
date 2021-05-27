@@ -102,7 +102,7 @@
             <!-- Deuxième partie du tableau -->
             <div class="salleQuantite q-gutter-md row">
               <q-table
-                style="width: 800px"
+                style="width: 100%"
                 :data="props.row.armoires"
                 :columns="columns2"
                 row-key="salle"
