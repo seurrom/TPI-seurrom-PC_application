@@ -20,9 +20,10 @@ export default function (/* { store, ssrContext } */) {
     if (!user && to.path !== '/connexion') {
       // Redirige l'utilisateur la page de connexion
       next('/connexion')
+    } else {
+      // Sinon continue
+      next()
     }
-    // Sinon continue
-    next()
   })
 
   return Router
