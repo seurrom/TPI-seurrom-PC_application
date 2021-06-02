@@ -31,7 +31,7 @@
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
         <q-input class="element" outlined v-model="produit.formDev"   label="Formule développée" />
-        <q-select class="element"  outlined  v-model="produit.etat" label="État" :options="optionsEtat"/>
+        <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
@@ -47,7 +47,22 @@
         :columns="columns"
         row-key="salle"
         :pagination.sync="pagination"
-      />
+      >
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td
+                v-for="col in props.cols"
+                :key="col.name"
+                :props="props"
+              >
+                {{ col.value }}
+          </q-td>
+          <q-td auto-width>
+            <q-btn color="pink" label="Modifier" @click="editItem(props.row)" size=sm no-caps></q-btn>
+          </q-td>
+        </q-tr>
+      </template>
+      </q-table>
     </div>
   </div>
 </template>
@@ -66,6 +81,18 @@ export default {
     // Redirige l'utilisateur sur la page accueil
     clickMethod () {
       this.$router.push('/')
+    },
+    editItem (item) {
+      this.editedIndex = this.data.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.show_dialog = true
+    },
+    close () {
+      this.show_dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
     },
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateNumber (number) {
@@ -88,6 +115,16 @@ export default {
       produit: '',
       dense: false,
       group: null,
+      show_dialog: false,
+      editedIndex: -1,
+      editedItem: {
+        salle: '',
+        quantite: 0
+      },
+      defaultItem: {
+        salle: '',
+        quantite: 0
+      },
       // Permet d'afficher plus d'élément dans le tableau
       pagination: {
         sortBy: 'desc',
