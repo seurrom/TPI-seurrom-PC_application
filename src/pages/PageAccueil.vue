@@ -108,6 +108,7 @@
                 :columns="columns2"
                 row-key="salle"
                 :pagination.sync="pagination"
+                hide-bottom
               />
             </div>
           </q-td>
