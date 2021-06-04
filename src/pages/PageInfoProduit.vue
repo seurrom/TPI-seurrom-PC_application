@@ -44,30 +44,6 @@
         title="Stockage"
         :data="produit.armoires"
         :columns="columns"
-        row-key="salle"
-        :pagination.sync="pagination"
-        class="elementTablBouton"
-      >
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td v-for="col in props.cols" :key="col.name" :props="props">
-            {{ col.value }}
-            <q-popup-edit v-model="props.row.salle">
-              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
-            </q-popup-edit>
-            <q-popup-edit v-model="props.row.quantite">
-              <q-input v-model="props.row.quantite" dense autofocus counter></q-input>
-            </q-popup-edit>
-          </q-td>
-        </q-tr>
-      </template>
-      </q-table>
-      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
-      <q-table
-        style="width: 800px"
-        title="Stockage"
-        :data="produit.armoires"
-        :columns="columns"
         row-key="name"
         :pagination.sync="pagination"
         class="elementTablBouton"
