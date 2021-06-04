@@ -19,7 +19,7 @@
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
         <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
-        <q-select class="element"  outlined  v-model="produit.famille"        label="Famille"           :options="optionsFamille"/>
+        <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
         <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
