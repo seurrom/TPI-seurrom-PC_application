@@ -10,7 +10,7 @@
           Gestion des produits
         </q-toolbar-title>
         <!-- Bouton de déconnexion -->
-        <q-btn class="boxshadow" @click="deconnecterUtilisateur" size="lg">
+        <q-btn class="boxshadow titre" @click="deconnecterUtilisateur" size="lg">
           <img src="~assets/deconnexion.png" width="22" height="18">
         </q-btn>
       </q-toolbar>
@@ -50,5 +50,9 @@ export default {
   .boxshadow
   ::before {
     content: none;
+  }
+  .titre {
+    position: absolute;
+    right: 1px;
   }
 </style>
