@@ -38,8 +38,7 @@
         <q-btn style="background: #DC006B" text-color="white" label="Enregistrer" @submit="clickMethod" />
       </div>
     </div>
-    <div class="q-pa-md">
-      <!-- Tableau pour la salle ainsi et la quantité -->
+    <div class="q-pa-md boutonAjt">
       <q-table
         style="width: 800px"
         title="Stockage"
@@ -47,22 +46,70 @@
         :columns="columns"
         row-key="salle"
         :pagination.sync="pagination"
+        class="elementTablBouton"
       >
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td
-                v-for="col in props.cols"
-                :key="col.name"
-                :props="props"
-              >
-                {{ col.value }}
-          </q-td>
-          <q-td auto-width>
-            <q-btn color="pink" label="Modifier" @click="editItem(props.row)" size=sm no-caps></q-btn>
+          <q-td v-for="col in props.cols" :key="col.name" :props="props">
+            {{ col.value }}
+            <q-popup-edit v-model="props.row.salle">
+              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            </q-popup-edit>
+            <q-popup-edit v-model="props.row.quantite">
+              <q-input v-model="props.row.quantite" dense autofocus counter></q-input>
+            </q-popup-edit>
           </q-td>
         </q-tr>
       </template>
       </q-table>
+      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
+      <q-table
+        style="width: 800px"
+        title="Stockage"
+        :data="produit.armoires"
+        :columns="columns"
+        row-key="name"
+        :pagination.sync="pagination"
+        class="elementTablBouton"
+      >
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="salle" :props="props">
+            {{ props.row.salle }}
+            <q-popup-edit v-model="props.row.salle">
+              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            </q-popup-edit>
+          </q-td>
+          <q-td key="quantite" :props="props">
+            {{ props.row.quantite }}
+            <q-popup-edit v-model="props.row.quantite">
+              <q-input v-model="props.row.quantite" dense autofocus counter></q-input>
+            </q-popup-edit>
+          </q-td>
+        </q-tr>
+      </template>
+      </q-table>
+      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
+      <div class="q-pa-sm q-gutter-sm">
+        <q-dialog v-model="show_dialog">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Ajouter un nouveau lieu de stockage</div>
+          </q-card-section>
+
+          <q-card-section>
+            <div class="row">
+              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
+              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
+            </div>
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup @click="addRow" ></q-btn>
+          </q-card-actions>
+        </q-card>
+        </q-dialog>
+      </div>
     </div>
   </div>
 </template>
@@ -82,22 +129,18 @@ export default {
     clickMethod () {
       this.$router.push('/')
     },
-    editItem (item) {
-      this.editedIndex = this.data.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.show_dialog = true
-    },
-    close () {
-      this.show_dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateNumber (number) {
       const re = /^-?\d+(\.\d+)?$/
       return re.test(String(number).toLowerCase())
+    },
+    addRow () {
+      if (this.editedIndex > -1) {
+        Object.assign(this.data[this.editedIndex], this.editedItem)
+      } else {
+        this.data.push(this.editedItem)
+      }
+      this.close()
     }
   },
   // Appelle les produits de l'API avant que l'écran ne soit monté
@@ -152,6 +195,9 @@ export default {
       optionsEtat: [
         'Commande en cours', 'Quantité de produit faible'
       ],
+      optionsArmoires: [
+        'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'H1', 'H2', 'C1 - E1', 'C1 - E2', 'C1 - E3', 'C1 - E4', 'C1 - E5', 'C1 - E6', 'C2 - E1', 'C2 - E2', 'C2 - E3', 'C2 - E4', 'C2 - E5', 'C2 - E6'
+      ],
       // Affectation des colonnes
       columns: [
         {
@@ -163,7 +209,7 @@ export default {
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
+        { name: 'quantite', align: 'center', label: 'Quantité', field: row => row.quantite, sortable: true }
       ]
     }
   }
@@ -182,4 +228,10 @@ export default {
   .q-input, .q-select
     width: 250px
     height: 80px
+  .btnAjout
+    display: block
+  .elementTablBouton
+    display: inline-block
+  .bouton
+    margin-left: 10px
 </style>
