@@ -28,7 +28,7 @@
                 v-model="form.password"
                 for="password"
                 label="Mot de passe"
-                :rules="[ val => val.length >= 3 || 'Minimum 8 caractères']"
+                :rules="[ val => val.length >= 8 || 'Minimum 8 caractères']"
                 lazy-rules />
                 <!-- Message d'erreur en cas de connexion invalide -->
                 <label class="connexionInvalide" v-if= 'connexionInvalide'>

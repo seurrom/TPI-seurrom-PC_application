@@ -30,7 +30,7 @@
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
-        <q-input class="element" outlined v-model="produit.formDev"   label="Formule développée" />
+        <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule développée" />
         <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
       </div>
       <div class="btnEnregistrer">
