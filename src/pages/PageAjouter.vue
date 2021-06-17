@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="q-ml-xl">
       <div class="supprimer">
-        <q-btn style="background: #DC006B" text-color="white" size="lg"  label="Supprimer" />
+        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
       </div>
       <div>
         <!-- Titre de la page -->
@@ -34,11 +34,30 @@
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" @submit="clickMethod" />
+        <q-btn style="background: #DC006B" text-color="white" label="Ajouter" @submit="ajouter" />
       </div>
     </div>
-    <div class="q-pa-md">
-      <!-- Tableau pour la salle ainsi que la quantité -->
+    <div class="q-pa-sm q-gutter-sm">
+        <q-dialog v-model="show_dialog">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Ajouter un nouveau lieu de stockage</div>
+          </q-card-section>
+
+          <q-card-section>
+            <div class="row">
+              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
+              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
+            </div>
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup @click="addRow" ></q-btn>
+          </q-card-actions>
+        </q-card>
+        </q-dialog>
+      </div>
+    <div class="q-pa-md boutonAjt">
       <q-table
         style="width: 800px"
         title="Stockage"
@@ -46,20 +65,33 @@
         :columns="columns"
         row-key="name"
         :pagination.sync="pagination"
-      />
-      <div class="btnEnregistrer">
-        <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white"  size="lg"  label="Enregistrer" />
-      </div>
+        class="elementTablBouton"
+      >
+      <template>
+      </template>
+      </q-table>
+      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'PageInfoProduit',
   data () {
     return {
       // Déclaration des variables
+      show_dialog: false,
+      show_dialog_supprimer: false,
+      editedIndex: -1,
+      editedItem: {
+        salle: '',
+        quantite: 0
+      },
+      defaultItem: {
+        salle: '',
+        quantite: 0
+      },
       data: [],
       text: '',
       ph: '',
@@ -97,6 +129,9 @@ export default {
       optionsPurete: [
         'Aucune', 'Pour analyse', 'Pour synthèse', 'Pour usage biochimique', 'Puriss', 'Purum', 'Redistillé', 'Technique'
       ],
+      optionsArmoires: [
+        'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'H1', 'H2', 'C1 - E1', 'C1 - E2', 'C1 - E3', 'C1 - E4', 'C1 - E5', 'C1 - E6', 'C2 - E1', 'C2 - E2', 'C2 - E3', 'C2 - E4', 'C2 - E5', 'C2 - E6'
+      ],
       // Permet d'afficher plus d'élément dans le tableau
       pagination: {
         sortBy: 'desc',
@@ -119,6 +154,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('produits', ['getProduitsApi']),
     clickMethod () {
       this.$router.push('accueil')
     },
@@ -127,6 +163,25 @@ export default {
       // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
       const re = /^-?\d+(\.\d+)?$/
       return re.test(String(number).toLowerCase())
+    },
+    ajouter () {
+      this.ajouterProduit()
+    },
+    addRow () {
+      this.ajouterStockage(this.produit.id)
+      if (this.editedIndex > -1) {
+        Object.assign(this.produit.armoires[this.editedIndex], this.editedItem)
+      } else {
+        this.produit.armoires.push(this.editedItem)
+      }
+      this.close()
+    },
+    close () {
+      this.show_dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
     }
   }
 }
@@ -136,7 +191,6 @@ export default {
   .btnEnregistrer
     text-align: right
   .infoProduit
-
     display: block
   .element
     display: inline-block

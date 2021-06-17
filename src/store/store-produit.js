@@ -30,6 +30,53 @@ const actions = {
       .catch(function (error) {
         console.log(error.response)
       })
+  },
+  ajouterProduit ({ commit, rootState }) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    // API
+    api.post('/produits', config)
+      .then(function (response) {
+        // Ajoute le stockage retournée par l'API au magasin
+        commit('ajouterProduit', response.data)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+      .finally()
+  },
+  ajouterStockage ({ commit, rootState }, id) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    // API
+    api.post('/produits/' + id + '/armoires', config)
+      .then(function (response) {
+        // Ajoute le stockage retournée par l'API au magasin
+        commit('ajouterStockage', response.data)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+      .finally()
+  },
+  supprimerProduit ({ commit, rootState }, id) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+
+    api.delete('/produits/' + id, config)
+      .then(function (response) {
+        commit('supprimerProduit', id)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+      .finally()
   }
 }
 

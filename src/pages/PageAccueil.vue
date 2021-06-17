@@ -2,11 +2,11 @@
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
       <!-- Boutons "ajouter" et "tableau de bord" -->
-      <q-btn class="styleBoutonAjoutTabl" @click="ajout" style="background: #DC006B" text-color="white" label="Ajouter"/>
-      <q-btn class="styleBoutonAjoutTabl" @click="tablbord" style="background: #DC006B" text-color="white" label="Tableau de bord"/>
+      <q-btn class="styleBoutonAjoutTabl" @click="ajout"      text-color="white" label="Ajouter"/>
+      <q-btn class="styleBoutonAjoutTabl" @click="tablbord"   text-color="white" label="Tableau de bord"/>
     </div>
     <div class="recherche q-gutter-md row items-start">
-      <img src="~assets/recherche.png" width="25" height="25" class="imgrecherche">
+      <img src="~assets/recherche.png" class="imgrecherche">
       <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
@@ -52,9 +52,11 @@
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
+              <img src="~assets/imprimante.png" width="18" height="18">
+            </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
+            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr :props="props" v-else-if="props.row.etat==='Quantité de produit faible'">
@@ -73,9 +75,11 @@
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
+              <img src="~assets/imprimante.png" width="18" height="18">
+            </q-btn>
+            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
+            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr :props="props" v-else>
@@ -93,9 +97,11 @@
             </q-td>
           <q-td auto-width>
             <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="etiquette" style="margin-right: 3px"> <img src="~assets/imprimante.png" width="18" height="18"> </q-btn>
+            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
+              <img src="~assets/imprimante.png" width="18" height="18">
+            </q-btn>
             <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px" class="boutontexte"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense @click="infoproduit" style="margin-right: 3px"> FS </q-btn>
+            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
           </q-td>
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
@@ -115,7 +121,31 @@
         </q-tr>
       </template>
     </q-table>
+    <div class="q-pa-sm q-gutter-sm">
+      <q-dialog v-model="show_dialog">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6 titreEtiquette">Étiquette</div>
+        </q-card-section>
+
+        <q-card-section>
+          <div class="etiquette">
+            <q-input class="elementEtiquette"   v-model="nom_off"         label="Nom officiel"></q-input>
+            <q-input class="elementEtiquette"   v-model="form_brute"      label="Formule brute"></q-input>
+            <q-input class="elementEtiquette"   v-model="concentration"   label="Concentration"></q-input>
+            <q-input class="elementEtiquette"   v-model="initiale"        label="Initiale"></q-input>
+            <q-input class="elementEtiquette"   v-model="date"            label="Date"></q-input>
+          </div>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Annuler"   color="primary"   v-close-popup></q-btn>
+          <q-btn flat label="Imprimer"  color="primary"   v-close-popup></q-btn>
+        </q-card-actions>
+      </q-card>
+      </q-dialog>
     </div>
+  </div>
 </template>
 
 <script>
@@ -126,13 +156,14 @@ export default {
   data () {
     return {
       // Déclaration des variables
+      nom_off: '',
+      form_brute: '',
+      concentration: '',
+      initiale: '',
+      date: '',
+      show_dialog: false,
       produit: '',
       recherche: '',
-      nomOfficiel: '',
-      numInterne: '',
-      formuleBrute: '',
-      salle: 'A2',
-      quantite: '43L',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',
@@ -173,14 +204,8 @@ export default {
     // Importe l'action getProduitsApi du magasin produits
     ...mapActions('produits', ['getProduitsApi']),
     // Navigation
-    infoproduit () {
-      this.$router.push('infoproduit')
-    },
     ajout () {
       this.$router.push('/ajout')
-    },
-    etiquette () {
-      this.$router.push('etiquette')
     },
     tablbord () {
       this.$router.push('tablbord')
@@ -229,8 +254,20 @@ export default {
 
 .imgrecherche
   margin: 0px
+  width: 25px
+  height: 25px
   vertical-align: middle
 
 .styleBoutonAjoutTabl
   margin-right: 5px
+  background: #DC006B
+
+.etiquette
+  display: block
+
+.elementEtiquette
+  display: inline-block
+  margin-left: 10px
+  margin-right: 80px
+  margin-bottom: 20px
 </style>

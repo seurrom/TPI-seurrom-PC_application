@@ -3,7 +3,26 @@
     <div class="q-ml-xl">
       <div class="supprimer">
         <!-- Bouton supprimer -->
-        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
+        <q-btn style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
+      </div>
+       <div class="q-pa-sm q-gutter-sm">
+        <q-dialog v-model="show_dialog_supprimer">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Supprimer</div>
+          </q-card-section>
+          <q-card-section>
+            <div class="row">
+              <label>Êtes-vous sûr de vouloir supprimer ?</label>
+            </div>
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="Oui" color="primary" v-close-popup @click="supprimer"></q-btn>
+            <q-btn flat label="Non" color="primary" v-close-popup></q-btn>
+          </q-card-actions>
+        </q-card>
+        </q-dialog>
       </div>
       <div>
         <!-- Titre de la page -->
@@ -38,35 +57,7 @@
         <q-btn style="background: #DC006B" text-color="white" label="Enregistrer" @submit="clickMethod" />
       </div>
     </div>
-    <div class="q-pa-md boutonAjt">
-      <q-table
-        style="width: 800px"
-        title="Stockage"
-        :data="produit.armoires"
-        :columns="columns"
-        row-key="name"
-        :pagination.sync="pagination"
-        class="elementTablBouton"
-      >
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="salle" :props="props">
-            {{ props.row.salle }}
-            <q-popup-edit v-model="props.row.salle">
-              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
-            </q-popup-edit>
-          </q-td>
-          <q-td key="quantite" :props="props">
-            {{ props.row.quantite }}
-            <q-popup-edit v-model="props.row.quantite">
-              <q-input v-model="props.row.quantite" dense autofocus counter></q-input>
-            </q-popup-edit>
-          </q-td>
-        </q-tr>
-      </template>
-      </q-table>
-      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
-      <div class="q-pa-sm q-gutter-sm">
+    <div class="q-pa-sm q-gutter-sm">
         <q-dialog v-model="show_dialog">
         <q-card>
           <q-card-section>
@@ -86,6 +77,34 @@
         </q-card>
         </q-dialog>
       </div>
+    <div class="q-pa-md boutonAjt">
+      <q-table
+        style="width: 800px"
+        title="Stockage"
+        :data="produit.armoires"
+        :columns="columns"
+        row-key="name"
+        :pagination.sync="pagination"
+        class="elementTablBouton"
+      >
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="salle" :props="props">
+            {{ props.row.salle }}
+            <q-popup-edit v-model="props.row.salle">
+              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            </q-popup-edit>
+          </q-td>
+          <q-td key="quantite" :props="props">
+            {{ props.row.quantite + "L"}}
+            <q-popup-edit v-model="props.row.quantite">
+              <q-input v-model="props.row.quantite" dense autofocus counter suffix="L"></q-input>
+            </q-popup-edit>
+          </q-td>
+        </q-tr>
+      </template>
+      </q-table>
+      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
     </div>
   </div>
 </template>
@@ -101,6 +120,8 @@ export default {
   methods: {
     // Appelle l'action getProduitsApi
     ...mapActions('produits', ['getProduitsApi']),
+    ...mapActions('produits', ['supprimerProduit']),
+    ...mapActions('produits', ['ajouterStockage']),
     // Redirige l'utilisateur sur la page accueil
     clickMethod () {
       this.$router.push('/')
@@ -111,12 +132,24 @@ export default {
       return re.test(String(number).toLowerCase())
     },
     addRow () {
+      this.ajouterStockage(this.produit.id)
       if (this.editedIndex > -1) {
-        Object.assign(this.data[this.editedIndex], this.editedItem)
+        Object.assign(this.produit.armoires[this.editedIndex], this.editedItem)
       } else {
-        this.data.push(this.editedItem)
+        this.produit.armoires.push(this.editedItem)
       }
       this.close()
+    },
+    close () {
+      this.show_dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+    supprimer () {
+      this.supprimerProduit(this.produit.id)
+      this.$router.push('/')
     }
   },
   // Appelle les produits de l'API avant que l'écran ne soit monté
@@ -135,6 +168,7 @@ export default {
       dense: false,
       group: null,
       show_dialog: false,
+      show_dialog_supprimer: false,
       editedIndex: -1,
       editedItem: {
         salle: '',
