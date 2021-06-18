@@ -41,6 +41,8 @@ const actions = {
       .then(function (response) {
         // Ajoute le stockage retournée par l'API au magasin
         commit('ajouterProduit', response.data)
+        console.log(response)
+        console.log('OK')
       })
       .catch(function (error) {
         console.log(error.response)

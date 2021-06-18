@@ -1,17 +1,14 @@
 <template>
   <div class="q-pa-md">
     <div class="q-ml-xl">
-      <div class="supprimer">
-        <q-btn style="background: #DC006B" text-color="white" label="Supprimer" />
-      </div>
       <div>
         <!-- Titre de la page -->
         <h6>Information du produit</h6>
       </div>
       <div class="q-gutter-md row items-start infoProduit q-pb-md">
         <!-- Input des informations du produit -->
-        <q-input  class="element"  outlined  v-model="nomOfficiel"   label="Nom officiel"/>
-        <q-input class="element" outlined v-model="nomAnglais"    label="Nom anglais"/>
+        <q-input  class="element"  outlined  v-model="produit.nom_fr"   label="Nom officiel"/>
+        <q-input class="element" outlined v-model="produit.nom_en"    label="Nom anglais"/>
         <q-input  class="element"  outlined  v-model="autreNom"      label="Autre nom"/>
         <q-input class="element" outlined v-model="autreNom2"     label="Autre nom 2"/>
         <!-- Liste déroulante pour les sortes de produits -->
@@ -34,7 +31,7 @@
       </div>
       <div class="btnEnregistrer">
         <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white" label="Ajouter" @submit="ajouter" />
+        <q-btn style="background: #DC006B" text-color="white" label="Ajouter" @click="ajouter" />
       </div>
     </div>
     <div class="q-pa-sm q-gutter-sm">
@@ -67,7 +64,21 @@
         :pagination.sync="pagination"
         class="elementTablBouton"
       >
-      <template>
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td key="salle" :props="props">
+            {{ props.row.salle }}
+            <q-popup-edit v-model="props.row.salle">
+              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            </q-popup-edit>
+          </q-td>
+          <q-td key="quantite" :props="props">
+            {{ props.row.quantite + "L"}}
+            <q-popup-edit v-model="props.row.quantite">
+              <q-input v-model="props.row.quantite" dense autofocus counter suffix="L"></q-input>
+            </q-popup-edit>
+          </q-td>
+        </q-tr>
       </template>
       </q-table>
       <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
@@ -93,6 +104,15 @@ export default {
         quantite: 0
       },
       data: [],
+      produit: [{
+        nom_fr: '',
+        nom_en: '',
+        formule: '',
+        masse_molaire: '',
+        temp_ebulition: '',
+        temp_fusion: '',
+        densite: ''
+      }],
       text: '',
       ph: '',
       nomOfficiel: '',
@@ -141,11 +161,11 @@ export default {
       // Affectation des colonnes
       columns: [
         {
-          name: 'name',
+          name: 'salle',
           required: true,
           label: 'Salle',
           align: 'center',
-          field: row => row.name,
+          field: row => row.salle,
           format: val => `${val}`,
           sortable: true
         },
@@ -154,7 +174,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('produits', ['getProduitsApi']),
+    ...mapActions('produits', ['ajouterProduit']),
     clickMethod () {
       this.$router.push('accueil')
     },
@@ -165,14 +185,14 @@ export default {
       return re.test(String(number).toLowerCase())
     },
     ajouter () {
-      this.ajouterProduit()
+      console.log('cc')
+      this.ajouterProduit(this.produit)
     },
     addRow () {
-      this.ajouterStockage(this.produit.id)
       if (this.editedIndex > -1) {
-        Object.assign(this.produit.armoires[this.editedIndex], this.editedItem)
+        Object.assign(this.data[this.editedIndex], this.editedItem)
       } else {
-        this.produit.armoires.push(this.editedItem)
+        this.data.push(this.editedItem)
       }
       this.close()
     },
