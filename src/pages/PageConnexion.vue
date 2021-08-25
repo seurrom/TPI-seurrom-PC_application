@@ -30,23 +30,12 @@
                 label="Mot de passe"
                 :rules="[ val => val.length >= 8 || 'Minimum 8 caractères']"
                 lazy-rules />
-                <!-- Message d'erreur en cas de connexion invalide -->
-                <label class="connexionInvalide" v-if= 'connexionInvalide'>
-                  E-mail et/ou mot de passe incorrect(s)
-                </label>
               <!-- Bouton de connexion -->
-              <q-btn type="submit" @click="lsRememberMe" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
+              <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
           </q-card-section>
-          <q-card-section class="text-center q-pa-none q-gutter-md casesouvenirMdp">
-            <!--  Case et lien "Se souvenir de moi "-->
-            <q-checkbox
-              v-model="souvenirdeMoi"
-              value="lsRememberMe"
-              id="rememberMe"
-              label="Se souvenir de moi"
-              color="primary"
-              class="souvenirMdp"/>
+          <!-- Lien permettant de réinitialiser son mot de passe en cas d'oubli de mot de passe -->
+          <q-card-section class="text-center q-pa-none q-gutter-md mdpOublie">
             <a href="https://passwordreset.microsoftonline.com/?ru">Mot de passe oublié</a>
           </q-card-section>
         </q-card>
@@ -64,51 +53,23 @@ export default {
       form: {
         email: '',
         password: ''
-      },
-      // Retourne si la connexion est invalide ou non
-      connexionInvalide: false,
-      souvenirdeMoi: true
+      }
     }
+  },
+  // Permet de mettre le focus sur l'élément "Identifiant"
+  async mounted () {
+    this.$refs.elementReference.$el.focus()
   },
   // Appele l'action connecterUtilisateur et regarde s'il y a une erreur
   methods: {
     ...mapActions('auth', ['connecterUtilisateur']),
     submitForm () {
-      const page = this
       this.connecterUtilisateur(this.form)
-        .catch(function (e) {
-          page.connexionInvalide = true
-        })
     },
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateEmail (email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
-    },
-    // Permet d'effectuer la fonctionnalité se souvenir de moi
-    lsRememberMe () {
-      if (this.rmCheck.ariaChecked === 'true' && this.emailInput.value !== '') {
-        localStorage.username = this.emailInput.value
-        localStorage.checkbox = this.rmCheck.ariaChecked
-      } else {
-        localStorage.username = ''
-        localStorage.checkbox = ''
-      }
-    }
-  },
-  // Permet de mettre le focus sur l'élément "Identifiant" et de checker si l'utilisateur a mis la case se souvenir de moi
-  async mounted () {
-    await this.$nextTick()
-    this.$refs.elementReference.$el.focus()
-    this.rmCheck = document.getElementById('rememberMe')
-    this.emailInput = document.getElementById('email')
-
-    if (localStorage.checkbox && localStorage.checkbox !== '') {
-      this.souvenirdeMoi = true
-      this.form.email = localStorage.username
-    } else {
-      this.souvenirdeMoi = false
-      this.emailInput.value = ''
     }
   }
 }
@@ -120,21 +81,7 @@ export default {
 .logoDivtec {
   margin-bottom: 25px;
 }
-.checkbox {
-  vertical-align: middle;
+.mdpOublie {
   margin-top: 0;
-}
-.souvenirMdp {
-  vertical-align: middle;
-  margin-top: 0;
-}
-.casesouvenirMdp {
-  margin-top: 0;
-}
-.connexionInvalide {
-  color: red;
-  display: block;
-  text-align: center;
-  font-weight: bold;
 }
 </style>

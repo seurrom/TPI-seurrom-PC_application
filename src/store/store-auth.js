@@ -1,5 +1,6 @@
 import { api } from 'boot/axios'
 import { Loading, LocalStorage } from 'quasar'
+import { afficherMessageErreur } from 'src/fonctions/message-erreur'
 
 // State : données du magasin
 const state = {
@@ -26,36 +27,36 @@ Elles peuvent être asynchrones !
  */
 const actions = {
   // Permet de connecter l'utilisateur grâce à la méthode POST
-  connecterUtilisateur ({ commit, dispatch, state }, payload) {
-    const that = this
+  connecterUtilisateur ({ commit, dispatch }, payload) {
     // Affiche le logo de chargement
     Loading.show()
-    return api.post('/login', payload)
+    api.post('/login', payload)
       .then(function (response) {
         dispatch('setUser', response.data)
-        // Commit l'utilisateur
-        commit('setUser', payload.email)
-        // Stock dans le Local Storage l'utilisateur et le token
-        LocalStorage.set('user', state.user)
-        LocalStorage.set('token', state.token)
         // Appelle l'action getProduitsApi afin de récupérer les produits de l'API
         dispatch('produits/getProduitsApi', null, { root: true })
-        // Envoie l'utilisateur sur la page d'accueil
-        that.$router.push('/')
         // Cache le logo de chargement
         Loading.hide()
       })
-      .catch(function () {
+      .catch(function (error) {
         // Cache le logo de chargement
         Loading.hide()
         // En cas d'erreur affiche le message suivant
-        throw new Error('Identifiants invalides')
+        afficherMessageErreur(
+          'Adresse e-mail et/ou mot de passe invalide(s) !'
+        )
+        throw error
       })
   },
-  setUser ({ commit, dispatch }, data) {
-    // Sauvegarde les données de l'utilisater et le token dans le magasin
+  setUser ({ commit, dispatch, state }, data) {
+    // Sauvegarde les données de l'utilisateur et le token dans le magasin
     commit('setUser', data.user)
     commit('setToken', data.token)
+    // Stock dans le Local Storage l'utilisateur et le token
+    LocalStorage.set('user', state.user)
+    LocalStorage.set('token', state.token)
+    // Envoie l'utilisateur sur la page d'accueil
+    this.$router.push('/')
   },
   // Permet de déconnecter un utilisateur
   deconnecterUtilisateur ({ commit, state }) {
@@ -69,20 +70,23 @@ const actions = {
     // Déconnexion de l'API
     api.post('/logout', {}, config)
       .catch(function (error) {
-        Loading.hide()
-        console.log(error.response)
+        afficherMessageErreur(
+          'Déconnexion invalide !'
+        )
+        throw error
       })
       .finally(function () {
         // Réinitialise user et token
         commit('setUser', null)
         commit('setToken', null)
         // Vide le locaStorage
-        localStorage.removeItem('user')
-        localStorage.removeItem('token')
+        LocalStorage.user = null
+        LocalStorage.token = null
         // Redirige l'utilisateur vers la page de connexion
         that.$router.push('/connexion')
         // location.reload() // recharge la page du navigateur
         Loading.hide()
+        console.log('déconnexion ok')
       })
   }
 }
