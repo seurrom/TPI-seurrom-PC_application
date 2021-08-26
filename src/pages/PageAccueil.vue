@@ -10,117 +10,7 @@
       <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
-    <!-- Tableau de produit chimique -->
-    <!-- "filter" permet d'effectuer une recherche dans le tableau -->
-    <!-- filterFn permet d'effectuer une recherche même si il y a des accents ou des masjucules -->
-    <q-table
-      title="Liste des produits"
-      :data="produits.produits"
-      :columns="columns"
-      :filter="recherche"
-      :filter-method="filterFn"
-      row-key="nom_fr"
-      :pagination.sync="pagination"
-    >
-      <template v-slot:header="props">
-        <q-tr :props="props">
-          <q-th auto-width />
-          <!-- Affectation de chaque nom de colonne -->
-          <q-th
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-          >
-            {{ col.label }}
-          </q-th>
-        </q-tr>
-      </template>
-      <template v-slot:body="props">
-        <q-tr :props="props" v-if="props.row.etat==='Commande en cours'">
-          <q-td auto-width>
-            <!-- Permet de dérouler une partie du tableau -->
-            <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-          </q-td>
-          <!-- Affectation de chaque ligne -->
-            <q-td
-              v-for="col in props.cols"
-              :key="col.name"
-              :props="props"
-              style="background-color: #ff5555"
-            >
-              {{ col.value }}
-            </q-td>
-          <q-td auto-width>
-            <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
-              <img src="~assets/imprimante.png" width="18" height="18">
-            </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
-          </q-td>
-        </q-tr>
-        <q-tr :props="props" v-else-if="props.row.etat==='Quantité de produit faible'">
-          <q-td auto-width>
-            <!-- Permet de dérouler une partie du tableau -->
-            <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-          </q-td>
-          <!-- Affectation de chaque ligne -->
-            <q-td
-              v-for="col in props.cols"
-              :key="col.name"
-              :props="props"
-              style="background-color: #fffa54"
-            >
-              {{ col.value }}
-            </q-td>
-          <q-td auto-width>
-            <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
-              <img src="~assets/imprimante.png" width="18" height="18">
-            </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
-          </q-td>
-        </q-tr>
-        <q-tr :props="props" v-else>
-          <q-td auto-width>
-            <!-- Permet de dérouler une partie du tableau -->
-            <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-          </q-td>
-          <!-- Affectation de chaque ligne -->
-            <q-td
-              v-for="col in props.cols"
-              :key="col.name"
-              :props="props"
-            >
-              {{ col.value }}
-            </q-td>
-          <q-td auto-width>
-            <!-- Bouton de navigation par rapport au produit en question -->
-            <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
-              <img src="~assets/imprimante.png" width="18" height="18">
-            </q-btn>
-            <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px" class="boutontexte"> i </q-btn></router-link>
-            <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
-          </q-td>
-        </q-tr>
-        <q-tr v-show="props.expand" :props="props">
-          <q-td colspan="100%">
-            <!-- Affiche les armoires et les quantités dans l'expand -->
-            <div class="salleQuantite q-gutter-md row">
-              <q-table
-                style="width: 100%"
-                :data="props.row.armoires"
-                :columns="columns2"
-                row-key="salle"
-                :pagination.sync="pagination"
-                hide-bottom
-              />
-            </div>
-          </q-td>
-        </q-tr>
-      </template>
-    </q-table>
+    <TableauProduits></TableauProduits>
     <div class="q-pa-sm q-gutter-sm">
       <q-dialog v-model="show_dialog">
       <q-card>
@@ -149,10 +39,14 @@
 </template>
 
 <script>
+import TableauProduits from 'src/components/Tableauproduits.vue'
 import { mapState, mapActions } from 'vuex'
 export default {
   // Nom de la page
   name: 'PageAccueil',
+  components: {
+    TableauProduits
+  },
   data () {
     return {
       // Déclaration des variables
