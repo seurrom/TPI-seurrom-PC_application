@@ -117,11 +117,6 @@ export default {
   data () {
     return {
       // Déclaration des variables
-      nom_off: '',
-      form_brute: '',
-      concentration: '',
-      initiale: '',
-      date: '',
       show_dialog: false,
       produit: '',
       recherche: '',

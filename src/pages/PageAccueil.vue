@@ -11,36 +11,11 @@
       <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
     <TableauProduits></TableauProduits>
-    <div class="q-pa-sm q-gutter-sm">
-      <q-dialog v-model="show_dialog">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6 titreEtiquette">Étiquette</div>
-        </q-card-section>
-
-        <q-card-section>
-          <div class="etiquette">
-            <q-input class="elementEtiquette"   v-model="nom_off"         label="Nom officiel"></q-input>
-            <q-input class="elementEtiquette"   v-model="form_brute"      label="Formule brute"></q-input>
-            <q-input class="elementEtiquette"   v-model="concentration"   label="Concentration"></q-input>
-            <q-input class="elementEtiquette"   v-model="initiale"        label="Initiale"></q-input>
-            <q-input class="elementEtiquette"   v-model="date"            label="Date"></q-input>
-          </div>
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="Annuler"   color="primary"   v-close-popup></q-btn>
-          <q-btn flat label="Imprimer"  color="primary"   v-close-popup></q-btn>
-        </q-card-actions>
-      </q-card>
-      </q-dialog>
-    </div>
   </div>
 </template>
 
 <script>
 import TableauProduits from 'src/components/Tableauproduits.vue'
-import { mapState, mapActions } from 'vuex'
 export default {
   // Nom de la page
   name: 'PageAccueil',
@@ -50,53 +25,16 @@ export default {
   data () {
     return {
       // Déclaration des variables
-      nom_off: '',
-      form_brute: '',
-      concentration: '',
-      initiale: '',
-      date: '',
-      show_dialog: false,
-      produit: '',
       recherche: '',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',
         descending: false,
         rowsPerPage: 10
-      },
-      // Retourne les noms des colonnes
-      columns: [
-        {
-          name: 'desc',
-          required: true,
-          label: 'N° CAS',
-          align: 'center',
-          field: row => row.num_cas,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'num_interne', sortable: true },
-        { name: 'nomOff', align: 'center', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
-        { name: 'formBrute', align: 'center', label: 'Formule brute', field: 'formule' }
-      ],
-      // Colonnes du tableau d'armoire et quantité
-      columns2: [
-        {
-          name: 'salle',
-          required: true,
-          label: 'Armoire',
-          align: 'center',
-          field: row => row.salle,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
-      ]
+      }
     }
   },
   methods: {
-    // Importe l'action getProduitsApi du magasin produits
-    ...mapActions('produits', ['getProduitsApi']),
     // Navigation
     ajout () {
       this.$router.push('/ajout')
@@ -118,14 +56,6 @@ export default {
     normalizeInput (input) {
       return input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     }
-  },
-  // Permet de récupérer les produits
-  computed: {
-    ...mapState('produits', ['produits'])
-  },
-  // Appelle l'action getProduitsApi qui retourne tous les produits de l'API
-  mounted () {
-    this.getProduitsApi()
   }
 }
 </script>
@@ -143,9 +73,6 @@ export default {
 .elementrecherche
   display: inline-block
 
-.salleQuantite
-  text-align: center
-
 .imgrecherche
   margin: 0px
   width: 25px
@@ -155,13 +82,4 @@ export default {
 .styleBoutonAjoutTabl
   margin-right: 5px
   background: #DC006B
-
-.etiquette
-  display: block
-
-.elementEtiquette
-  display: inline-block
-  margin-left: 10px
-  margin-right: 80px
-  margin-bottom: 20px
 </style>
