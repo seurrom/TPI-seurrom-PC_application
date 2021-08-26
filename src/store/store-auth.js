@@ -33,6 +33,7 @@ const actions = {
     api.post('/login', payload)
       .then(function (response) {
         dispatch('setUser', response.data)
+        console.log(response.data)
         // Appelle l'action getProduitsApi afin de récupérer les produits de l'API
         dispatch('produits/getProduitsApi', null, { root: true })
         // Cache le logo de chargement
@@ -50,7 +51,7 @@ const actions = {
   },
   setUser ({ commit, dispatch, state }, data) {
     // Sauvegarde les données de l'utilisateur et le token dans le magasin
-    commit('setUser', data.user)
+    commit('setUser', data.user.email)
     commit('setToken', data.token)
     // Stock dans le Local Storage l'utilisateur et le token
     LocalStorage.set('user', state.user)
@@ -80,8 +81,7 @@ const actions = {
         commit('setUser', null)
         commit('setToken', null)
         // Vide le locaStorage
-        LocalStorage.user = null
-        LocalStorage.token = null
+        LocalStorage.clear()
         // Redirige l'utilisateur vers la page de connexion
         that.$router.push('/connexion')
         // location.reload() // recharge la page du navigateur

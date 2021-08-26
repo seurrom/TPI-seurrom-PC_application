@@ -13,30 +13,25 @@
               <!-- Input permettant de rentrer le login/pwd afin de se connecter -->
               <!-- Règle permettant de gérer les erreurs dans l'adresse mail -->
               <q-input
+                autofocus
                 color="pink"
                 square filled clearable
                 v-model="form.email"
                 label="E-mail"
-                ref="elementReference"
                 for="email"
                 :rules="[val => validateEmail(val) || 'Email invalide']"
                 lazy-rules />
               <q-input
+                required
                 type="password"
                 color="pink"
                 square filled clearable
                 v-model="form.password"
                 for="password"
-                label="Mot de passe"
-                :rules="[ val => val.length >= 8 || 'Minimum 8 caractères']"
-                lazy-rules />
+                label="Mot de passe"/>
               <!-- Bouton de connexion -->
               <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
-          </q-card-section>
-          <!-- Lien permettant de réinitialiser son mot de passe en cas d'oubli de mot de passe -->
-          <q-card-section class="text-center q-pa-none q-gutter-md mdpOublie">
-            <a href="https://passwordreset.microsoftonline.com/?ru">Mot de passe oublié</a>
           </q-card-section>
         </q-card>
       </div>
@@ -56,10 +51,6 @@ export default {
       }
     }
   },
-  // Permet de mettre le focus sur l'élément "Identifiant"
-  async mounted () {
-    this.$refs.elementReference.$el.focus()
-  },
   // Appele l'action connecterUtilisateur et regarde s'il y a une erreur
   methods: {
     ...mapActions('auth', ['connecterUtilisateur']),
@@ -74,14 +65,12 @@ export default {
   }
 }
 </script>
-<style>
-.q-card {
-  width: 360px;
-}
-.logoDivtec {
-  margin-bottom: 25px;
-}
-.mdpOublie {
-  margin-top: 0;
-}
+<style lang="sass" scoped>
+
+.q-card
+  width: 360px
+
+.logoDivtec
+  margin-bottom: 25px
+
 </style>
