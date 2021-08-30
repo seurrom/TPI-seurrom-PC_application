@@ -22,7 +22,7 @@
       </q-tr>
     </template>
     <template v-slot:body="props">
-      <q-tr :props="props" v-if="props.row.etat==='Commande en cours'">
+      <q-tr :props="props">
         <q-td auto-width>
           <!-- Permet de dérouler une partie du tableau -->
           <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
@@ -32,7 +32,7 @@
             v-for="col in props.cols"
             :key="col.name"
             :props="props"
-            style="background-color: #ff5555"
+            :class="{rouge:props.row.etat==='Commande en cours', jaune:props.row.etat==='Quantité de produit faible'}"
           >
             {{ col.value }}
           </q-td>
@@ -42,51 +42,6 @@
             <img src="~assets/imprimante.png" width="18" height="18">
           </q-btn>
           <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
-          <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
-        </q-td>
-      </q-tr>
-      <q-tr :props="props" v-else-if="props.row.etat==='Quantité de produit faible'">
-        <q-td auto-width>
-          <!-- Permet de dérouler une partie du tableau -->
-          <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-        </q-td>
-        <!-- Affectation de chaque ligne -->
-          <q-td
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-            style="background-color: #fffa54"
-          >
-            {{ col.value }}
-          </q-td>
-        <q-td auto-width>
-          <!-- Bouton de navigation par rapport au produit en question -->
-          <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
-            <img src="~assets/imprimante.png" width="18" height="18">
-          </q-btn>
-          <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
-          <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
-        </q-td>
-      </q-tr>
-      <q-tr :props="props" v-else>
-        <q-td auto-width>
-          <!-- Permet de dérouler une partie du tableau -->
-          <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
-        </q-td>
-        <!-- Affectation de chaque ligne -->
-          <q-td
-            v-for="col in props.cols"
-            :key="col.name"
-            :props="props"
-          >
-            {{ col.value }}
-          </q-td>
-        <q-td auto-width>
-          <!-- Bouton de navigation par rapport au produit en question -->
-          <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
-            <img src="~assets/imprimante.png" width="18" height="18">
-          </q-btn>
-          <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px" class="boutontexte"> i </q-btn></router-link>
           <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
         </q-td>
       </q-tr>
@@ -118,7 +73,7 @@ export default {
     recherche: {
       type: String,
       default: ''
-    },
+    }
   },
   data () {
     return {
@@ -189,3 +144,11 @@ export default {
   }
 }
 </script>
+<style scoped>
+.rouge {
+  background-color: #FF9B71;
+}
+.jaune {
+  background-color: #FFFD82;
+}
+</style>
