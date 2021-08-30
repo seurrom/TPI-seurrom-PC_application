@@ -114,12 +114,17 @@ import { mapState, mapActions } from 'vuex'
 export default {
   // Nom de la page
   name: 'TableauProduits',
+  props: {
+    recherche: {
+      type: String,
+      default: ''
+    },
+  },
   data () {
     return {
       // Déclaration des variables
       show_dialog: false,
       produit: '',
-      recherche: '',
       // Permet d'afficher + d'éléments dans le tableau
       pagination: {
         sortBy: 'desc',
