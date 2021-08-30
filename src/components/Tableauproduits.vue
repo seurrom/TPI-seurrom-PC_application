@@ -22,7 +22,7 @@
       </q-tr>
     </template>
     <template v-slot:body="props">
-      <q-tr :props="props">
+      <q-tr :props="props" :class="{rouge:props.row.etat==='Commande en cours', jaune:props.row.etat==='Quantité de produit faible'}">
         <q-td auto-width>
           <!-- Permet de dérouler une partie du tableau -->
           <q-btn size="sm" color="pink" round dense @click="props.expand = !props.expand" :icon="props.expand ? 'remove' : 'add'" />
@@ -32,7 +32,6 @@
             v-for="col in props.cols"
             :key="col.name"
             :props="props"
-            :class="{rouge:props.row.etat==='Commande en cours', jaune:props.row.etat==='Quantité de produit faible'}"
           >
             {{ col.value }}
           </q-td>
@@ -41,7 +40,7 @@
           <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
             <img src="~assets/imprimante.png" width="18" height="18">
           </q-btn>
-          <router-link :to="'infoproduit/' + props.row.id"><q-btn size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn></router-link>
+          <q-btn :to="'infoproduit/' + props.row.id" size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn>
           <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
         </q-td>
       </q-tr>
