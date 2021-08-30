@@ -10,7 +10,7 @@
       <!-- Input pour effectuer une recherche dans le tableau -->
       <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
-    <TableauProduits></TableauProduits>
+    <TableauProduits :recherche="recherche"></TableauProduits>
   </div>
 </template>
 
