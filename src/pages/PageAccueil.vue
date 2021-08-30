@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
       <!-- Boutons "ajouter" et "tableau de bord" -->
-      <q-btn class="styleBoutonAjoutTabl" @click="ajout"      text-color="white" label="Ajouter"/>
-      <q-btn class="styleBoutonAjoutTabl" @click="tablbord"   text-color="white" label="Tableau de bord"/>
+      <q-btn class="styleBoutonAjoutTabl" to="/ajout" text-color="white" label="Ajouter"/>
+      <q-btn class="styleBoutonAjoutTabl" to="/tablbord"   text-color="white" label="Tableau de bord"/>
     </div>
     <div class="recherche q-gutter-md row items-start">
       <img src="~assets/recherche.png" class="imgrecherche">
@@ -25,36 +25,7 @@ export default {
   data () {
     return {
       // Déclaration des variables
-      recherche: '',
-      // Permet d'afficher + d'éléments dans le tableau
-      pagination: {
-        sortBy: 'desc',
-        descending: false,
-        rowsPerPage: 10
-      }
-    }
-  },
-  methods: {
-    // Navigation
-    ajout () {
-      this.$router.push('/ajout')
-    },
-    tablbord () {
-      this.$router.push('tablbord')
-    },
-    // Permet de filter avec majuscule ou sans accent
-    filterFn () {
-      /* https://www.davidbcalhoun.com/2019/matching-accented-strings-in-javascript/ */
-      if (this.recherche !== '') {
-        const normalizedRecherche = this.recherche.normalize('NFD').toLowerCase().replace(/[\u0300-\u036f]/g, '')
-        return this.produits.produits.filter(v => this.normalizeInput(v.nom_fr).indexOf(normalizedRecherche) > -1 ||
-        this.normalizeInput(v.num_cas.toString()).indexOf(normalizedRecherche) > -1 ||
-        this.normalizeInput(v.num_interne.toString()).indexOf(normalizedRecherche) > -1 ||
-        this.normalizeInput(v.formule).indexOf(normalizedRecherche) > -1)
-      }
-    },
-    normalizeInput (input) {
-      return input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      recherche: ''
     }
   }
 }
