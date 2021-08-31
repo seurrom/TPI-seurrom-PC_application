@@ -1,6 +1,6 @@
 <template>
   <q-table
-    title="Liste des produits"
+    class="tableauProduit"
     :data="produits.produits"
     :columns="columns"
     :filter="recherche"
@@ -149,5 +149,9 @@ export default {
 }
 .jaune {
   background-color: #FFFD82;
+}
+.tableauProduit {
+  width: 70%;
+  margin-top: 50px;
 }
 </style>

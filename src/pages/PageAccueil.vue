@@ -1,14 +1,12 @@
 <template>
   <div class="q-pa-md">
     <div class="btnAjoutTablBord">
+       <img src="~assets/recherche.png" class="imgrecherche">
+      <!-- Input pour effectuer une recherche dans le tableau -->
+      <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
       <!-- Boutons "ajouter" et "tableau de bord" -->
       <q-btn class="styleBoutonAjoutTabl" to="/ajout" text-color="white" label="Ajouter"/>
       <q-btn class="styleBoutonAjoutTabl" to="/tablbord"   text-color="white" label="Tableau de bord"/>
-    </div>
-    <div class="recherche q-gutter-md row items-start">
-      <img src="~assets/recherche.png" class="imgrecherche">
-      <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
     </div>
     <TableauProduits :recherche="recherche"></TableauProduits>
   </div>
@@ -32,8 +30,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.btnAjoutTablBord
-  text-align: right
 
 .recherche
   text-align: center
@@ -43,6 +39,8 @@ export default {
 
 .elementrecherche
   display: inline-block
+  width: 80%
+  margin-right: 10px
 
 .imgrecherche
   margin: 0px
