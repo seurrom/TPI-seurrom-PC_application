@@ -40,7 +40,8 @@ const actions = {
     api.post('/produits', config)
       .then(function (response) {
         // Ajoute le stockage retournée par l'API au magasin
-        commit('ajouterProduit', response.data)
+        console.log('cc2')
+        commit('setProduits', response.data)
         console.log(response)
         console.log('OK')
       })

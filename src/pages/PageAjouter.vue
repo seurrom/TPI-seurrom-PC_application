@@ -90,8 +90,12 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
+  computed: {
+    ...mapState('auth', ['auth']),
+    ...mapState('produits', ['produits'])
+  },
   name: 'PageInfoProduit',
   data () {
     return {
