@@ -46,7 +46,7 @@
         </q-td>
       </q-tr>
       <q-tr v-show="props.expand" :props="props">
-        <q-td colspan="100%">
+        <q-td v-if="props.row.armoires != ''" colspan="100%">
           <!-- Affiche les armoires et les quantités dans l'expand -->
           <div class="salleQuantite q-gutter-md row">
             <q-table
@@ -57,6 +57,11 @@
               :pagination.sync="pagination"
               hide-bottom
             />
+          </div>
+        </q-td>
+        <q-td v-else>
+          <div class="salleQuantite q-gutter-md row">
+            <label>Produit épuisé !</label>
           </div>
         </q-td>
       </q-tr>
