@@ -2,7 +2,7 @@
   <div class="q-pa-md q-mx-auto template">
     <div class="boutons">
       <!-- Bouton supprimer Bouton enregistrer -->
-      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" label="Enregistrer" />
+      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
       <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
     </div>
     <div class="q-ml-xl">
@@ -52,8 +52,13 @@ export default {
   methods: {
     ...mapActions('produits', ['getProduitsApi']),
     ...mapActions('produits', ['supprimerProduit']),
+    ...mapActions('produits', ['modifierProduit']),
     supprimer () {
       this.supprimerProduit(this.produit.id)
+      this.$router.push('/')
+    },
+    modifier () {
+      this.modifierProduit(this.produit.id)
       this.$router.push('/')
     }
   },

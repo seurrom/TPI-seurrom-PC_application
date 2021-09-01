@@ -59,6 +59,7 @@ const actions = {
       .then(function (response) {
         // Ajoute le stockage retournée par l'API au magasin
         commit('ajouterStockage', response.data)
+        console.log(response)
       })
       .catch(function (error) {
         console.log(error.response)
@@ -74,6 +75,24 @@ const actions = {
     api.delete('/produits/' + id, config)
       .then(function (response) {
         commit('supprimerProduit', id)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+      .finally()
+  },
+  modifierProduit ({ commit, rootState }, id) {
+    // Configuration du header avec token
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    // API
+    api.put('/produits/' + id, config)
+      .then(function (response) {
+        // Ajoute les modifications par l'API au magasin
+        commit('modifierProduit', response.data)
+        console.log(response)
+        console.log('OK')
       })
       .catch(function (error) {
         console.log(error.response)

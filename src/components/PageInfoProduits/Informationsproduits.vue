@@ -75,6 +75,7 @@ export default {
     ...mapActions('produits', ['getProduitsApi']),
     ...mapActions('produits', ['supprimerProduit']),
     ...mapActions('produits', ['ajouterStockage']),
+    ...mapActions('produits', ['modifierProduit']),
     // Permet de refuser les caractères ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
     validateNumber (number) {
       const re = /^-?\d+(\.\d+)?$/
