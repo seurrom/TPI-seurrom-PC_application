@@ -1,13 +1,16 @@
 <template>
   <div class="q-pa-md q-mx-auto">
       <q-table
-        class="tableauStockage"
         title="Stockage"
         :data="produit.armoires"
         :columns="columns"
         row-key="name"
         :pagination.sync="pagination"
       >
+      <template v-slot:top>
+        <q-btn color="primary" class="boutonAjout" label="Add row"  @click="show_dialog = true" no-caps />
+        <q-space />
+      </template>
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="salle" :props="props">
@@ -25,6 +28,26 @@
         </q-tr>
       </template>
       </q-table>
+      <div class="q-pa-sm q-gutter-sm">
+        <q-dialog v-model="show_dialog">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Ajouter un nouveau lieu de stockage</div>
+          </q-card-section>
+
+          <q-card-section>
+            <div class="row">
+              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
+              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
+            </div>
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup @click="addRow" ></q-btn>
+          </q-card-actions>
+        </q-card>
+        </q-dialog>
+      </div>
     </div>
 </template>
 <script>
@@ -111,6 +134,6 @@ export default {
 }
 </script>
 <style scoped lang="sass">
-.tableauStockage
-  width: 60%
+.boutonAjout
+  text-align: right
 </style>

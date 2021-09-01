@@ -13,17 +13,32 @@
   </fieldset>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
-    <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
-    <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
+    <fieldset>
+      <legend class="legend">
+        Famille/sorte de produit
+      </legend>
+      <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
+      <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
+      <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
+    </fieldset>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
-    <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
-    <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
-    <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+    <fieldset>
+      <legend class="legend">
+        Chiffres du produit
+      </legend>
+      <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
+      <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+      <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+    </fieldset>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
-    <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-    <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+    <fieldset>
+      <legend class="legend">
+        État du produit
+      </legend>
+      <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+    </fieldset>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <fieldset>

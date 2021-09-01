@@ -1,11 +1,11 @@
 <template>
   <div class="q-pa-md q-mx-auto template">
+    <div class="boutons">
+      <!-- Bouton supprimer Bouton enregistrer -->
+      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" label="Enregistrer" />
+      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
+    </div>
     <div class="q-ml-xl">
-      <div class="boutons">
-        <!-- Bouton supprimer Bouton enregistrer -->
-        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" label="Enregistrer" />
-        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
-      </div>
        <div class="q-pa-sm q-gutter-sm">
         <q-dialog v-model="show_dialog_supprimer">
         <q-card>
@@ -32,54 +32,26 @@
       <Informationsproduits></Informationsproduits>
     </div>
     <TableauStockage></TableauStockage>
-    <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
-    <div class="q-pa-sm q-gutter-sm">
-        <q-dialog v-model="show_dialog">
-        <q-card>
-          <q-card-section>
-            <div class="text-h6">Ajouter un nouveau lieu de stockage</div>
-          </q-card-section>
-
-          <q-card-section>
-            <div class="row">
-              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
-              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
-            </div>
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <q-btn flat label="OK" color="primary" v-close-popup @click="addRow" ></q-btn>
-          </q-card-actions>
-        </q-card>
-        </q-dialog>
-      </div>
   </div>
 </template>
 <script>
 import Informationsproduits from 'src/components/PageInfoProduits/Informationsproduits.vue'
 import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
+  // Appelle toutes les fonctionnalités des magasins utiles
+  computed: {
+    ...mapState('auth', ['auth']),
+    ...mapState('produits', ['produits']),
+    ...mapGetters('produits', ['getProduitById'])
+  },
   components: {
     Informationsproduits,
     TableauStockage
   },
   methods: {
-    addRow () {
-      this.ajouterStockage(this.produit.id)
-      if (this.editedIndex > -1) {
-        Object.assign(this.produit.armoires[this.editedIndex], this.editedItem)
-      } else {
-        this.produit.armoires.push(this.editedItem)
-      }
-      this.close()
-    },
-    close () {
-      this.show_dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
+    ...mapActions('produits', ['getProduitsApi']),
+    ...mapActions('produits', ['supprimerProduit']),
     supprimer () {
       this.supprimerProduit(this.produit.id)
       this.$router.push('/')
@@ -100,7 +72,6 @@ export default {
       produit: '',
       dense: false,
       group: null,
-      show_dialog: false,
       show_dialog_supprimer: false,
       editedIndex: -1,
       editedItem: {
@@ -136,5 +107,5 @@ export default {
   .bouton
     margin-left: 10px
   .template
-    max-width: 1000px
+    max-width: 500px
 </style>
