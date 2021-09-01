@@ -1,13 +1,12 @@
 <template>
-  <div class="q-pa-md boutonAjt">
+  <div class="q-pa-md q-mx-auto">
       <q-table
-        style="width: 800px"
+        class="tableauStockage"
         title="Stockage"
         :data="produit.armoires"
         :columns="columns"
         row-key="name"
         :pagination.sync="pagination"
-        class="elementTablBouton"
       >
       <template v-slot:body="props">
         <q-tr :props="props">
@@ -111,3 +110,7 @@ export default {
   }
 }
 </script>
+<style scoped lang="sass">
+.tableauStockage
+  width: 60%
+</style>

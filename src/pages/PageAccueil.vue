@@ -1,9 +1,12 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md q-mx-auto template">
     <div class="btnAjoutTablBord">
-       <img src="~assets/recherche.png" class="imgrecherche">
       <!-- Input pour effectuer une recherche dans le tableau -->
-      <q-input class="elementrecherche" v-model="recherche" label="Recherche" />
+      <q-input class="elementrecherche" color="grey-3" label-color="primary" outlined v-model="recherche" label="Recherche">
+        <template v-slot:append>
+          <q-icon name="search" />
+        </template>
+      </q-input>
       <!-- Boutons "ajouter" et "tableau de bord" -->
       <q-btn class="styleBoutonAjoutTabl" to="/ajout" text-color="white" label="Ajouter"/>
       <q-btn class="styleBoutonAjoutTabl" to="/tablbord"   text-color="white" label="Tableau de bord"/>
@@ -39,16 +42,14 @@ export default {
 
 .elementrecherche
   display: inline-block
-  width: 80%
+  width: 70%
   margin-right: 10px
-
-.imgrecherche
-  margin: 0px
-  width: 25px
-  height: 25px
-  vertical-align: middle
 
 .styleBoutonAjoutTabl
   margin-right: 5px
+  margin-bottom: 15px
   background: #DC006B
+
+.template
+  max-width: 1000px
 </style>

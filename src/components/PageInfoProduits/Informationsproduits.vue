@@ -5,21 +5,26 @@
     <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
     <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
     <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
-    <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
+    <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
     <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
     <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
-    <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
-    <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
+    <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
+    <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
     <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+  </div>
+  <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <q-input class="element" outlined v-model="produit.temp_ebulition"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     <q-input class="element" outlined v-model="produit.temp_fusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+    <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
+    <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule développée" />
+    <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
   </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
+   <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
     <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule développée" />
     <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
@@ -125,4 +130,7 @@ export default {
     display: block
   .element
     display: inline-block
+  .q-input, .q-select
+    width: 250px
+    height: 80px
 </style>

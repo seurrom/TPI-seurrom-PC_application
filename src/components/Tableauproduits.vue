@@ -10,9 +10,10 @@
   >
     <template v-slot:header="props">
       <q-tr :props="props">
-        <q-th auto-width />
+        <q-th/>
         <!-- Affectation de chaque nom de colonne -->
         <q-th
+          class="titreTableau"
           v-for="col in props.cols"
           :key="col.name"
           :props="props"
@@ -49,7 +50,7 @@
           <!-- Affiche les armoires et les quantités dans l'expand -->
           <div class="salleQuantite q-gutter-md row">
             <q-table
-              style="width: 100%"
+              class="tableauStockage"
               :data="props.row.armoires"
               :columns="columns2"
               row-key="salle"
@@ -151,7 +152,14 @@ export default {
   background-color: #FFFD82;
 }
 .tableauProduit {
-  width: 70%;
   margin-top: 50px;
+  box-shadow: none;
+}
+.tableauStockage {
+  width: 30%;
+  box-shadow: none;
+}
+.titreTableau {
+  font-size: 18px;
 }
 </style>

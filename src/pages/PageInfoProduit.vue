@@ -1,9 +1,10 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-pa-md q-mx-auto template">
     <div class="q-ml-xl">
-      <div class="supprimer">
-        <!-- Bouton supprimer -->
-        <q-btn style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
+      <div class="boutons">
+        <!-- Bouton supprimer Bouton enregistrer -->
+        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" label="Enregistrer" />
+        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
       </div>
        <div class="q-pa-sm q-gutter-sm">
         <q-dialog v-model="show_dialog_supprimer">
@@ -29,10 +30,6 @@
         <h6>Information du produit</h6>
       </div>
       <Informationsproduits></Informationsproduits>
-      <div class="btnEnregistrer">
-        <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white" label="Enregistrer" />
-      </div>
     </div>
     <TableauStockage></TableauStockage>
     <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
@@ -125,10 +122,10 @@ export default {
 }
 </script>
 <style scoped lang="sass">
-  .btnEnregistrer
+  .boutons
     text-align: right
-  .supprimer
-    text-align: right
+  .btnEnregistrerSupprimer
+    margin-right: 10px
   .q-input, .q-select
     width: 250px
     height: 80px
@@ -138,4 +135,6 @@ export default {
     display: inline-block
   .bouton
     margin-left: 10px
+  .template
+    max-width: 1000px
 </style>
