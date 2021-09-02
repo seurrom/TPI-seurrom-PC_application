@@ -89,7 +89,7 @@ export default {
       pagination: {
         sortBy: 'desc',
         descending: false,
-        rowsPerPage: 10
+        rowsPerPage: 100
       },
       // Retourne les noms des colonnes
       columns: [

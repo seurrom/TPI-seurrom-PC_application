@@ -3,95 +3,22 @@
     <div class="q-ml-xl">
       <div>
         <!-- Titre de la page -->
-        <h6>Information du produit</h6>
+        <h6>Ajout d'un nouveau produit</h6>
       </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <!-- Input des informations du produit -->
-        <q-input  class="element"  outlined  v-model="produit.nom_fr"   label="Nom officiel"/>
-        <q-input class="element" outlined v-model="produit.nom_en"    label="Nom anglais"/>
-        <q-input  class="element"  outlined  v-model="autreNom"      label="Autre nom"/>
-        <!-- Liste déroulante pour les sortes de produits -->
-      </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="autreNom2"     label="Autre nom 2"/>
-        <q-select class="element"  outlined  v-model="sorteproduit"  label="Sorte de produit" :options="options"/>
-        <q-select class="element"  outlined  v-model="concentration"  label="Concentration" :options="optionsConcentration"/>
-      </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-select class="element"  outlined  v-model="famille"  label="Famille" :options="optionsFamille"/>
-        <q-select class="element"  outlined  v-model="purete"  label="Pureté" :options="optionsPurete"/>
-        <q-input class="element" outlined v-model="masseMolaire" type="masseMolaire" label="Masse molaire" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-      </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="tempEbul" type="tempEbul" label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="tempFusion" type="tempFusion" label="Température fusion" suffix="°C" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="densite" type="densite" label="Densité" suffix="g/ml" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-        <q-input class="element" outlined v-model="formBrute" type="formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="formDev" type="formDev" label="Formule développée" />
-      </div>
-      <div class="q-gutter-md row items-start infoProduit q-pb-md">
-        <q-input class="element" outlined v-model="formBrute" type="formBrute" label="Formule brute" />
-        <q-input class="element" outlined v-model="formDev" type="formDev" label="Formule développée" />
-      </div>
-      <div class="btnEnregistrer">
-        <!-- Bouton enregistrer -->
-        <q-btn style="background: #DC006B" text-color="white" label="Ajouter" @click="ajouter" />
-      </div>
-    </div>
-    <div class="q-pa-sm q-gutter-sm">
-        <q-dialog v-model="show_dialog">
-        <q-card>
-          <q-card-section>
-            <div class="text-h6">Ajouter un nouveau lieu de stockage</div>
-          </q-card-section>
-
-          <q-card-section>
-            <div class="row">
-              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
-              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
-            </div>
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <q-btn flat label="OK" color="primary" v-close-popup @click="addRow" ></q-btn>
-          </q-card-actions>
-        </q-card>
-        </q-dialog>
-      </div>
-    <div class="q-pa-md">
-      <q-table
-        class= "tableauStockage"
-        style="width: 800px"
-        title="Stockage"
-        :data="data"
-        :columns="columns"
-        row-key="name"
-        :pagination.sync="pagination"
-      >
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="salle" :props="props">
-            {{ props.row.salle }}
-            <q-popup-edit v-model="props.row.salle">
-              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
-            </q-popup-edit>
-          </q-td>
-          <q-td key="quantite" :props="props">
-            {{ props.row.quantite + "L"}}
-            <q-popup-edit v-model="props.row.quantite">
-              <q-input v-model="props.row.quantite" dense autofocus counter suffix="L"></q-input>
-            </q-popup-edit>
-          </q-td>
-        </q-tr>
-      </template>
-      </q-table>
-      <q-btn class="bouton" round dense color="pink" label="+" @click="show_dialog = true" no-caps></q-btn>
+       <Informationsproduits></Informationsproduits>
+       <TableauStockage></TableauStockage>
     </div>
   </div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex'
+import Informationsproduits from 'src/components/PageInfoProduits/Informationsproduits.vue'
+import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
 export default {
+  components: {
+    Informationsproduits,
+    TableauStockage
+  },
   computed: {
     ...mapState('auth', ['auth']),
     ...mapState('produits', ['produits'])

@@ -22,7 +22,7 @@
       </div>
       <div>
         <!-- Titre de la page -->
-        <h6>Information du produit</h6>
+        <h5>Information du produit</h5>
       </div>
       <Informationsproduits></Informationsproduits>
     </div>
