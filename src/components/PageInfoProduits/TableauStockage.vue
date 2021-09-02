@@ -7,9 +7,10 @@
         :columns="columns"
         row-key="name"
         :pagination.sync="pagination"
+        hide-bottom
       >
       <template v-slot:top>
-        <q-btn color="primary" class="boutonAjout" label="Add row"  @click="show_dialog = true" no-caps />
+        <q-btn color="primary" class="boutonAjout" label="Nouveau stockage"  @click="show_dialog = true" no-caps />
         <q-space />
       </template>
       <template v-slot:body="props">
@@ -115,7 +116,7 @@ export default {
       pagination: {
         sortBy: 'desc',
         descending: false,
-        rowsPerPage: 10
+        rowsPerPage: 1000
       },
       // Affectation des colonnes
       columns: [
@@ -139,4 +140,5 @@ export default {
   text-align: right
 .tableaustockage
   position: fixed
+  width: 20%
 </style>

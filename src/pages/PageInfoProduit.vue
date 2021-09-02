@@ -25,11 +25,11 @@
         <h6>Information du produit</h6>
       </div>
       <Informationsproduits></Informationsproduits>
-      <div class="boutons">
+    </div>
+    <div class="boutons">
       <!-- Bouton supprimer Bouton enregistrer -->
       <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
       <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
-    </div>
     </div>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
 </script>
 <style scoped lang="sass">
   .boutons
-    text-align: right
+    text-align: center
   .btnEnregistrerSupprimer
     margin-right: 10px
   .q-input, .q-select
@@ -109,5 +109,5 @@ export default {
   .bouton
     margin-left: 10px
   .template
-    max-width: 1500px
+    max-width: 1300px
 </style>
