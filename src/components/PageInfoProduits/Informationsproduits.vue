@@ -1,18 +1,16 @@
 <template>
 <div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
-  <fieldset>
-    <legend class="legend">
-      Noms du produit
-    </legend>
-    <!-- Affiche toutes les informations détaillées d'un produit -->
-    <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
-    <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
-    <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
-    <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
-  </fieldset>
-  </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
+    <fieldset>
+     <legend class="legend">
+        Noms du produit
+      </legend>
+      <!-- Affiche toutes les informations détaillées d'un produit -->
+      <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
+      <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
+      <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
+      <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
+    </fieldset>
     <fieldset>
       <legend class="legend">
         Famille/sorte de produit
@@ -21,6 +19,7 @@
       <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
       <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
     </fieldset>
+    <TableauStockage></TableauStockage>
   </div>
   <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <fieldset>
@@ -31,16 +30,6 @@
       <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     </fieldset>
-  </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
-    <fieldset>
-      <legend class="legend">
-        État du produit
-      </legend>
-      <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
-    </fieldset>
-  </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <fieldset>
       <legend class="legend">
         Températures du produit
@@ -49,7 +38,7 @@
       <q-input class="element" outlined v-model="produit.temp_fusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     </fieldset>
   </div>
-   <div class="q-gutter-md row items-start infoProduit q-pb-md">
+  <div class="q-gutter-md row items-start infoProduit q-pb-md">
      <fieldset>
        <legend class="legend">
          Formules du produit
@@ -57,13 +46,23 @@
       <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
       <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule développée" />
      </fieldset>
+     <fieldset>
+      <legend class="legend">
+        État du produit
+      </legend>
+      <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+    </fieldset>
   </div>
 </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
 export default {
+  components: {
+    TableauStockage
+  },
   // Appelle toutes les fonctionnalités des magasins utiles
   computed: {
     ...mapState('auth', ['auth']),

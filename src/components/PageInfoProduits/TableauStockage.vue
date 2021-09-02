@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md q-mx-auto">
       <q-table
+        class="tableaustockage"
         title="Stockage"
         :data="produit.armoires"
         :columns="columns"
@@ -136,4 +137,6 @@ export default {
 <style scoped lang="sass">
 .boutonAjout
   text-align: right
+.tableaustockage
+  position: fixed
 </style>

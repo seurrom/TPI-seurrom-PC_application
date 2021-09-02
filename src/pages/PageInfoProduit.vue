@@ -1,10 +1,5 @@
 <template>
   <div class="q-pa-md q-mx-auto template">
-    <div class="boutons">
-      <!-- Bouton supprimer Bouton enregistrer -->
-      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
-      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
-    </div>
     <div class="q-ml-xl">
        <div class="q-pa-sm q-gutter-sm">
         <q-dialog v-model="show_dialog_supprimer">
@@ -30,13 +25,16 @@
         <h6>Information du produit</h6>
       </div>
       <Informationsproduits></Informationsproduits>
+      <div class="boutons">
+      <!-- Bouton supprimer Bouton enregistrer -->
+      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
+      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
     </div>
-    <TableauStockage></TableauStockage>
+    </div>
   </div>
 </template>
 <script>
 import Informationsproduits from 'src/components/PageInfoProduits/Informationsproduits.vue'
-import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
   // Appelle toutes les fonctionnalités des magasins utiles
@@ -46,8 +44,7 @@ export default {
     ...mapGetters('produits', ['getProduitById'])
   },
   components: {
-    Informationsproduits,
-    TableauStockage
+    Informationsproduits
   },
   methods: {
     ...mapActions('produits', ['getProduitsApi']),
@@ -112,5 +109,5 @@ export default {
   .bouton
     margin-left: 10px
   .template
-    max-width: 500px
+    max-width: 1500px
 </style>
