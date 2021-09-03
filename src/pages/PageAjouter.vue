@@ -38,87 +38,22 @@ export default {
         salle: '',
         quantite: 0
       },
-      data: [],
-      produit: [{
-        nom_fr: '',
-        nom_en: '',
-        formule: '',
-        masse_molaire: '',
-        temp_ebulition: '',
-        temp_fusion: '',
-        densite: ''
-      }],
       text: '',
       ph: '',
-      nomOfficiel: '',
-      autreNom: '',
-      autreNom2: '',
-      nomAnglais: '',
-      formBrute: '',
-      formDev: '',
-      famille: '',
-      concentration: '',
-      purete: '',
-      tempEbul: '',
-      masseMolaire: '',
-      tempFusion: '',
-      densite: '',
       dense: false,
       group: null,
       sorteproduit: '',
-      // Options des listes déroulantes
-      options: [
-        'Minéral', 'Organique', 'Solution'
-      ],
-      optionsFamille: [
-        'Acide', 'Acide aminé', 'Acide minéral', 'Alcool', 'Aldéhyde', 'Amide', 'Amine', 'Aucune', 'Cétone', 'Chimie minérale', 'Composé inorganique', 'Composé minéral', 'composé organique',
-        'Déviré nitré', 'Détergent', 'Ester', 'Ester de glycérine', 'Ether', 'Fixanal', 'Gaz', 'Hydrate de carbone', 'Hydrocarbure', 'Hydrocarbure halogéné', 'Indicateur',
-        'Mélange', 'Phénol', 'Polyol', 'Radioactif', 'Savon/Détergent', 'Sel', 'Sel double', 'Solution', 'Solution tritisol', 'Titrisol'
-      ],
-      optionsConcentration: [
-        '0.00075M', '0.0002M', '0.001M', '0.002M', '0.005M', '0.008M', '0.01%', '0.01M', '0.025M', '0.02M', '0.04%', '0.04M', '0.05%', '0.05M', '0.1%', '0.12M', '0.15M', '0.1N', '0.2%',
-        '0.25M', '0.2M', '0.3%', '0.3M', '0.4M', '0.5%', '0.5M', '0.6M', '0.7M', '1%', '1.25%', '1.5M', '1.75M', '1/1', '1/128M', '1/15M', '1/60', '10%', '10.8M', '100%', '10M',
-        '12%', '12M', '130%', '15%', '16%', '1M', '2%', '2.2M', '2.5%', '20%', '23.5M', '23%', '24%', '2M', '3%', '30%', '32%', '36%', '37%', '3M', '4%', '40%', '45%', '48%', '5%',
-        '50%', '55%', '5M', '60%', '66%', '6M', '7.5M', '75%', '7M', '8%', '80%', '85%', '95-97%', '98%', '99%', 'Aucune', 'Concentré', 'Saturé'
-      ],
-      optionsPurete: [
-        'Aucune', 'Pour analyse', 'Pour synthèse', 'Pour usage biochimique', 'Puriss', 'Purum', 'Redistillé', 'Technique'
-      ],
-      optionsArmoires: [
-        'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'H1', 'H2', 'C1 - E1', 'C1 - E2', 'C1 - E3', 'C1 - E4', 'C1 - E5', 'C1 - E6', 'C2 - E1', 'C2 - E2', 'C2 - E3', 'C2 - E4', 'C2 - E5', 'C2 - E6'
-      ],
       // Permet d'afficher plus d'élément dans le tableau
       pagination: {
         sortBy: 'desc',
         descending: false,
         rowsPerPage: 10
-      },
-      // Affectation des colonnes
-      columns: [
-        {
-          name: 'salle',
-          required: true,
-          label: 'Salle',
-          align: 'center',
-          field: row => row.salle,
-          format: val => `${val}`,
-          sortable: true
-        },
-        { name: 'quantite', align: 'center', label: 'Quantité', field: 'quantite', sortable: true }
-      ]
+      }
     }
   },
   methods: {
+    ...mapActions('produits', ['getProduitsApi']),
     ...mapActions('produits', ['ajouterProduit']),
-    clickMethod () {
-      this.$router.push('accueil')
-    },
-    // Permet de refuser les caractère ainsi que de forcer l'utilisateur à se connecter avec une adresse mail valide
-    validateNumber (number) {
-      // Source : https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-      const re = /^-?\d+(\.\d+)?$/
-      return re.test(String(number).toLowerCase())
-    },
     ajouter () {
       console.log('cc')
       this.ajouterProduit(this.produit)
@@ -138,6 +73,14 @@ export default {
         this.editedIndex = -1
       }, 300)
     }
+  },
+  // Appelle les produits de l'API avant que l'écran ne soit monté
+  beforeMount () {
+    this.getProduitsApi()
+  },
+  // Appelle les produits par l'ID fournit en paramètre pendant que l'écran soit monté
+  mounted () {
+    this.produit = this.getProduitById(parseInt(this.$route.params.id))
   }
 }
 
