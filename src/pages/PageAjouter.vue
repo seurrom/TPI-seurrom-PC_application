@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import Informationsproduits from 'src/components/PageInfoProduits/Informationsproduits.vue'
 import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
 export default {
@@ -21,7 +21,8 @@ export default {
   },
   computed: {
     ...mapState('auth', ['auth']),
-    ...mapState('produits', ['produits'])
+    ...mapState('produits', ['produits']),
+    ...mapGetters('produits', ['getProduitById'])
   },
   name: 'PageInfoProduit',
   data () {
@@ -80,7 +81,7 @@ export default {
   },
   // Appelle les produits par l'ID fournit en paramètre pendant que l'écran soit monté
   mounted () {
-    this.produit = this.getProduitById(parseInt(this.$route.params.id))
+    this.produit = this.getProduitById(86)
   }
 }
 
