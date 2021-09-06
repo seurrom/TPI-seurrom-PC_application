@@ -21,8 +21,6 @@
       <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
     </fieldset>
     <TableauStockage></TableauStockage>
-  </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
     <fieldset>
       <legend class="legend">
         Chiffres du produit
@@ -38,8 +36,6 @@
       <q-input class="element" outlined v-model="produit.temp_ebulition"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       <q-input class="element" outlined v-model="produit.temp_fusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     </fieldset>
-  </div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
      <fieldset>
        <legend class="legend">
          Formules du produit

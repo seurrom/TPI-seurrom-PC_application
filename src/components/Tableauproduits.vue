@@ -38,11 +38,13 @@
           </q-td>
         <q-td auto-width>
           <!-- Bouton de navigation par rapport au produit en question -->
+          <q-btn :to="'infoproduit/' + props.row.id" size="sm" color="pink" round dense style="margin-right: 3px"> <q-icon name="edit" /> </q-btn>
           <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
             <img src="~assets/imprimante.png" width="18" height="18">
           </q-btn>
-          <q-btn :to="'infoproduit/' + props.row.id" size="sm" color="pink" round dense style="margin-right: 3px"> i </q-btn>
-          <q-btn size="sm" color="pink" round dense style="margin-right: 3px"> FS </q-btn>
+          <q-btn size="sm" color="pink" round dense style="margin-right: 3px">
+            <q-icon name="picture_as_pdf" />
+          </q-btn>
         </q-td>
       </q-tr>
       <q-tr v-show="props.expand" :props="props">

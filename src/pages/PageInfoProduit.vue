@@ -114,4 +114,6 @@ export default {
     max-width: 1300px
   .toolbar
     width: 100%
+    position: fixed
+    bottom: 0px
 </style>
