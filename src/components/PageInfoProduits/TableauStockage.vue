@@ -15,7 +15,13 @@
       </template>
       <template v-slot:body="props">
         <q-tr :props="props">
-          <q-td key="salle" :props="props">
+          <q-td>
+            {{ salle }}
+            <q-popup-edit v-model="props.row.armoire">
+              <q-input v-model="props.row.armoire" dense autofocus counter></q-input>
+            </q-popup-edit>
+          </q-td>
+          <q-td key="armoire" :props="props">
             {{ props.row.salle }}
             <q-popup-edit v-model="props.row.salle">
               <q-input v-model="props.row.salle" dense autofocus counter></q-input>
@@ -103,6 +109,7 @@ export default {
       produit: '',
       show_dialog: false,
       show_dialog_supprimer: false,
+      salle: 'B1-12',
       editedIndex: -1,
       editedItem: {
         salle: '',
@@ -122,6 +129,15 @@ export default {
       columns: [
         {
           name: 'salle',
+          required: true,
+          label: 'Salle',
+          align: 'center',
+          field: row => row.salle,
+          format: val => `${val}`,
+          sortable: true
+        },
+        {
+          name: 'armoire',
           required: true,
           label: 'Armoire',
           align: 'center',
