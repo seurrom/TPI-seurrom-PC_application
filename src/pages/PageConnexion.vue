@@ -29,6 +29,7 @@
                 v-model="form.password"
                 for="password"
                 label="Mot de passe"/>
+              <q-select square filled clearable  v-model="form.domaine" label="Domaine" :options="optionsDomaine"/>
               <!-- Bouton de connexion -->
               <q-btn type="submit" color="pink" size="lg" style="width: 278px" label="Connexion" value="Login" />
             </q-form>
@@ -47,8 +48,12 @@ export default {
       // Retourne le user et le pwd
       form: {
         email: '',
-        password: ''
-      }
+        password: '',
+        domaine: 'DIVTEC'
+      },
+      optionsDomaine: [
+        'DIVTEC', 'Lycée'
+      ]
     }
   },
   // Appele l'action connecterUtilisateur et regarde s'il y a une erreur

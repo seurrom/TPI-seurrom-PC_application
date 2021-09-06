@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="q-gutter-md row items-start infoProduit q-pb-md">
+  <div class="q-gutter-md row items-start">
     <fieldset>
      <legend class="legend">
         Noms du produit
@@ -20,12 +20,11 @@
       <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
       <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
     </fieldset>
-    <TableauStockage></TableauStockage>
     <fieldset>
       <legend class="legend">
         Chiffres du produit
       </legend>
-      <q-select class="element"  outlined  v-model="produit.concentration"  label="Concentration"     :options="optionsConcentration"/>
+      <q-input class="element"  outlined  v-model="produit.concentration"  label="Concentration"/>
       <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
       <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
     </fieldset>
@@ -56,6 +55,7 @@
       </legend>
       <q-input class="element"  outlined v-model="fichede_securite" label="Fiche de sécurité"/>
     </fieldset>
+    <TableauStockage></TableauStockage>
   </div>
 </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md q-mx-auto">
+  <div class="q-pa-md q-mx-auto row">
       <q-table
         class="tableaustockage"
         title="Stockage"
@@ -142,6 +142,5 @@ export default {
 .boutonAjout
   text-align: right
 .tableaustockage
-  position: fixed
-  width: 20%
+  width: 900px
 </style>
