@@ -59,9 +59,9 @@
             />
           </div>
         </q-td>
-        <q-td v-else>
+        <q-td colspan="2" v-else>
           <div class="salleQuantite q-gutter-md row">
-            <label>Produit épuisé !</label>
+            <label class="labelProduit">Produit épuisé !</label>
           </div>
         </q-td>
       </q-tr>
@@ -89,7 +89,7 @@ export default {
       pagination: {
         sortBy: 'desc',
         descending: false,
-        rowsPerPage: 100
+        rowsPerPage: 50
       },
       // Retourne les noms des colonnes
       columns: [
@@ -166,5 +166,8 @@ export default {
 }
 .titreTableau {
   font-size: 18px;
+}
+.labelProduit {
+  width: 100%
 }
 </style>

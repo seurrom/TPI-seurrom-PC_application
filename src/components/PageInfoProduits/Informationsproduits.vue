@@ -18,6 +18,7 @@
       <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
       <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
       <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
+      <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
     </fieldset>
     <TableauStockage></TableauStockage>
   </div>
@@ -48,9 +49,16 @@
      </fieldset>
      <fieldset>
       <legend class="legend">
-        État du produit
+        État du produit / Remarque
       </legend>
       <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+      <q-input class="element"  outlined v-model="produit.remarque" label="Remarque"/>
+    </fieldset>
+    <fieldset>
+      <legend class="legend">
+        Fiche de sécurité
+      </legend>
+      <q-input class="element"  outlined v-model="fichede_securite" label="Fiche de sécurité"/>
     </fieldset>
   </div>
 </div>
@@ -79,11 +87,19 @@ export default {
     validateNumber (number) {
       const re = /^-?\d+(\.\d+)?$/
       return re.test(String(number).toLowerCase())
+    },
+    ficheSecurite () {
+      if (this.produit.fiche_securite === 1) {
+        this.fichede_securite = 'lien'
+      } else {
+        this.fichede_securite = 'Pas de fiche de sécurité !'
+      }
     }
   },
   // Appelle les produits de l'API avant que l'écran ne soit monté
   beforeMount () {
     this.getProduitsApi()
+    this.ficheSecurite()
   },
   // Appelle les produits par l'ID fournit en paramètre pendant que l'écran soit monté
   mounted () {
@@ -94,6 +110,7 @@ export default {
     return {
       // Déclaration des variables
       produit: '',
+      fichede_securite: '',
       dense: false,
       group: null,
       show_dialog: false,

@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-md q-mx-auto template">
-    <div class="q-ml-xl">
+  <div>
+    <div class="q-pa-md q-mx-auto template">
        <div class="q-pa-sm q-gutter-sm">
         <q-dialog v-model="show_dialog_supprimer">
         <q-card>
@@ -26,11 +26,13 @@
       </div>
       <Informationsproduits></Informationsproduits>
     </div>
-    <div class="boutons">
-      <!-- Bouton supprimer Bouton enregistrer -->
-      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
-      <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
-    </div>
+    <q-toolbar style="background: #DC006B" class="toolbar">
+      <div class="boutons">
+        <!-- Bouton supprimer Bouton enregistrer -->
+        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="modifier" label="Enregistrer" />
+        <q-btn class="btnEnregistrerSupprimer" style="background: #DC006B" text-color="white" @click="show_dialog_supprimer = true" label="Supprimer" />
+      </div>
+    </q-toolbar>
   </div>
 </template>
 <script>
@@ -110,4 +112,6 @@ export default {
     margin-left: 10px
   .template
     max-width: 1300px
+  .toolbar
+    width: 100%
 </style>
