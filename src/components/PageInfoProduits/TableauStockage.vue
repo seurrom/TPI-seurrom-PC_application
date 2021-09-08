@@ -159,4 +159,5 @@ export default {
   text-align: right
 .tableaustockage
   width: 900px
+  margin-bottom: 100px
 </style>

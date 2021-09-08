@@ -51,6 +51,13 @@
     </fieldset>
     <fieldset>
       <legend class="legend">
+        Numéros
+      </legend>
+      <q-input class="element"  outlined v-model="produit.num_cas" label="Numéro CAS"/>
+      <q-input class="element"  outlined v-model="produit.num_interne" label="Numéro interne"/>
+    </fieldset>
+    <fieldset>
+      <legend class="legend">
         Fiche de sécurité
       </legend>
       <q-input class="element"  outlined v-model="fichede_securite" label="Fiche de sécurité"/>
