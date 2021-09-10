@@ -16,9 +16,14 @@
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td>
+            <q-btn class="btnSupp" size="sm" color="pink" round dense style="margin-right: 3px" @click="deleteRow">
+            <q-icon name="delete" />
+          </q-btn>
+          </q-td>
+          <q-td>
             {{ salle }}
-            <q-popup-edit v-model="props.row.armoire">
-              <q-input v-model="props.row.armoire" dense autofocus counter></q-input>
+            <q-popup-edit v-model="props.row.salle">
+              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
             </q-popup-edit>
           </q-td>
           <q-td key="armoire" :props="props">
@@ -45,8 +50,9 @@
 
           <q-card-section>
             <div class="row">
-              <q-select class="element" :options="optionsArmoires" v-model="editedItem.salle" label="Armoire"></q-select>
-              <q-input v-model="editedItem.quantite" label="Quantité"></q-input>
+              <q-input class="ajout" v-model="editedItem.salle" label="Salle"></q-input>
+              <q-select class="ajout" :options="optionsArmoires" v-model="editedItem.armoire" label="Armoire"></q-select>
+              <q-input class="ajout" v-model="editedItem.quantite" label="Quantité"></q-input>
             </div>
           </q-card-section>
 
@@ -82,6 +88,15 @@ export default {
       }
       this.close()
     },
+    deleteRow () {
+      this.ajouterStockage(this.produit.id)
+      if (this.editedIndex > -1) {
+        Object.assign(this.produit.armoires[this.editedIndex], this.editedItem)
+      } else {
+        this.produit.armoires.delete(this.editedItem)
+      }
+      this.close()
+    },
     close () {
       this.show_dialog = false
       setTimeout(() => {
@@ -113,10 +128,12 @@ export default {
       editedIndex: -1,
       editedItem: {
         salle: '',
+        armoire: '',
         quantite: 0
       },
       defaultItem: {
         salle: '',
+        armoire: '',
         quantite: 0
       },
       // Permet d'afficher plus d'élément dans le tableau
@@ -127,6 +144,13 @@ export default {
       },
       // Affectation des colonnes
       columns: [
+        {
+          name: 'delete',
+          required: true,
+          label: '',
+          align: 'center',
+          sortable: true
+        },
         {
           name: 'salle',
           required: true,
@@ -141,7 +165,7 @@ export default {
           required: true,
           label: 'Armoire',
           align: 'center',
-          field: row => row.salle,
+          field: row => row.armoire,
           format: val => `${val}`,
           sortable: true
         },
@@ -160,4 +184,9 @@ export default {
 .tableaustockage
   width: 900px
   margin-bottom: 100px
+.btnSupp
+  text-align: center
+.ajout
+  margin-right: 10px
+  width: 200px
 </style>
