@@ -60,6 +60,7 @@
               hide-bottom
             />
           </div>
+          <TableauStockage></TableauStockage>
         </q-td>
         <q-td colspan="2" v-else>
           <div class="salleQuantite q-gutter-md row">
@@ -73,7 +74,11 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import TableauStockage from 'src/components/TableauStockage.vue'
 export default {
+  components: {
+    TableauStockage
+  },
   // Nom de la page
   name: 'TableauProduits',
   props: {
