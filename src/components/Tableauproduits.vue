@@ -50,16 +50,6 @@
       <q-tr v-show="props.expand" :props="props">
         <q-td v-if="props.row.armoires != ''" colspan="100%">
           <!-- Affiche les armoires et les quantités dans l'expand -->
-          <div class="salleQuantite q-gutter-md row">
-            <q-table
-              class="tableauStockage"
-              :data="props.row.armoires"
-              :columns="columns2"
-              row-key="salle"
-              :pagination.sync="pagination"
-              hide-bottom
-            />
-          </div>
           <TableauStockage></TableauStockage>
         </q-td>
         <q-td colspan="2" v-else>
@@ -74,7 +64,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import TableauStockage from 'src/components/TableauStockage.vue'
+import TableauStockage from 'src/components/PageInfoProduits/TableauStockage.vue'
 export default {
   components: {
     TableauStockage
