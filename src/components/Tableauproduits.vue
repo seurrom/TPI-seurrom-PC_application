@@ -42,9 +42,7 @@
           <q-btn size="sm" color="pink" round dense @click="show_dialog = true" style="margin-right: 3px">
             <img src="~assets/imprimante.png" width="18" height="18">
           </q-btn>
-          <q-btn size="sm" color="pink" round dense style="margin-right: 3px">
-            <q-icon name="picture_as_pdf" />
-          </q-btn>
+          <q-btn size="sm" color="pink" round dense style="margin-right: 3px">FDS</q-btn>
         </q-td>
       </q-tr>
       <q-tr v-show="props.expand" :props="props">
@@ -91,17 +89,17 @@ export default {
       // Retourne les noms des colonnes
       columns: [
         {
-          name: 'desc',
+          name: 'ninterne',
           required: true,
-          label: 'N° CAS',
           align: 'center',
-          field: row => row.num_cas,
+          label: 'N° Interne',
+          field: row => row.num_interne,
           format: val => `${val}`,
           sortable: true
         },
-        { name: 'ninterne', align: 'center', label: 'N° Interne', field: 'num_interne', sortable: true },
         { name: 'nomOff', align: 'center', label: 'Nom officiel', field: 'nom_fr', sortable: true, style: 'width: 10px' },
-        { name: 'formBrute', align: 'center', label: 'Formule brute', field: 'formule' }
+        { name: 'formBrute', align: 'center', label: 'Formule brute', field: 'formule' },
+        { name: 'desc', label: 'N° CAS', align: 'center', field: 'num_cas' }
       ],
       // Colonnes du tableau d'armoire et quantité
       columns2: [

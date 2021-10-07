@@ -1,69 +1,78 @@
 <template>
 <div>
-  <div class="q-gutter-md row items-start">
-    <fieldset>
-     <legend class="legend">
-        Noms du produit
-      </legend>
-      <!-- Affiche toutes les informations détaillées d'un produit -->
-      <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
-      <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
-      <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Autre nom"/>
-      <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre nom 2"/>
-    </fieldset>
-    <fieldset>
+  <div class="infoproduit q-gutter-md items-start row">
+    <div class="col-md-4">
+      <fieldset>
       <legend class="legend">
-        Famille/sorte de produit
-      </legend>
-      <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
-      <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
-      <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
-      <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
-    </fieldset>
-    <fieldset>
-      <legend class="legend">
-        Chiffres du produit
-      </legend>
-      <q-input class="element"  outlined  v-model="produit.concentration"  label="Concentration"/>
-      <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-      <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/ml"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-    </fieldset>
-    <fieldset>
-      <legend class="legend">
-        Températures du produit
-      </legend>
-      <q-input class="element" outlined v-model="produit.temp_ebulition"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-      <q-input class="element" outlined v-model="produit.temp_fusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
-    </fieldset>
-     <fieldset>
+          Noms du produit
+        </legend>
+        <!-- Affiche toutes les informations détaillées d'un produit -->
+        <q-input class="element"  outlined v-model="produit.num_cas" label="Numéro CAS"/>
+        <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
+        <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
+        <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Synonyme"/>
+        <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre synonyme"/>
+      </fieldset>
+      <fieldset>
        <legend class="legend">
          Formules du produit
        </legend>
       <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
-      <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule développée" />
+      <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule semi-développée" />
      </fieldset>
-     <fieldset>
-      <legend class="legend">
-        État du produit / Remarque
-      </legend>
-      <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
-      <q-input class="element"  outlined v-model="produit.remarque" label="Remarque"/>
-    </fieldset>
-    <fieldset>
-      <legend class="legend">
-        Numéros
-      </legend>
-      <q-input class="element"  outlined v-model="produit.num_cas" label="Numéro CAS"/>
-      <q-input class="element"  outlined v-model="produit.num_interne" label="Numéro interne"/>
-    </fieldset>
-    <fieldset>
-      <legend class="legend">
-        Fiche de sécurité
-      </legend>
-      <q-input class="element"  outlined v-model="fichede_securite" label="Fiche de sécurité"/>
-    </fieldset>
-    <TableauStockage></TableauStockage>
+      <fieldset>
+        <legend class="legend">
+          Concentration
+        </legend>
+        <q-input class="element"  outlined  v-model="produit.concentration"  label="Concentration"/>
+        <q-input class="element" outlined v-model="produit.masse_molaire"  label="Masse molaire"         suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+      </fieldset>
+      <fieldset>
+        <legend class="legend">
+          Numéros
+        </legend>
+        <q-input class="element"  outlined v-model="produit.num_interne" label="Numéro interne"/>
+      </fieldset>
+      <fieldset>
+        <legend class="legend">
+          Remarque
+        </legend>
+        <textarea class="textarea"  outlined v-model="produit.remarque" label="Remarque"/>
+      </fieldset>
+    </div>
+    <div class="col-md-4">
+      <fieldset>
+        <legend class="legend">
+          État du produit
+        </legend>
+        <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+      </fieldset>
+      <fieldset>
+        <legend class="legend">
+          Fiche de sécurité
+        </legend>
+        <q-input class="element"  outlined v-model="fichede_securite" label="Fiche de sécurité"/>
+      </fieldset>
+      <fieldset>
+        <legend class="legend">
+          Famille/sorte de produit
+        </legend>
+        <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
+        <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
+        <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
+      </fieldset>
+      <fieldset>
+        <legend class="legend">
+          Constantes physiques
+        </legend>
+        <q-input class="element" outlined v-model="produit.temp_ebulition"      label="Température ébulition" suffix="g/mole" :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produit.temp_fusion"    label="Température fusion"    suffix="°C"     :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+        <q-input class="element" outlined v-model="produit.densite"       label="Densité" suffix="g/cm3"                 :rules="[val =>validateNumber(val) || 'Uniquement des chiffres']" lazy-rules/>
+      </fieldset>
+      </div>
   </div>
+  <TableauStockage></TableauStockage>
 </div>
 </template>
 
@@ -180,4 +189,10 @@ export default {
     height: 80px
   .legend
     font-size: 18px
+  .textarea
+    width: 400px
+    height: 200px
+
+  .fieldset
+    max-width: 450px
 </style>
