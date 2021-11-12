@@ -12,6 +12,9 @@ Les mutations ne peuvent pas être asynchrones !!!
 const mutations = {
   setProduits (state, produits) {
     state.produits = produits
+  },
+  setStocks (state, stock) {
+    state.stock = stock
   }
 }
 /*
@@ -50,13 +53,25 @@ const actions = {
       })
       .finally()
   },
+  getStocksApi ({ commit, rootState }, id) {
+    const config = {
+      headers: { Authorization: 'Bearer ' + rootState.auth.token }
+    }
+    api.get('/produits/' + id + '/stock', config)
+      .then(function (response) {
+        commit('setStocks', response.data)
+      })
+      .catch(function (error) {
+        console.log(error.response)
+      })
+  },
   ajouterStockage ({ commit, rootState }, id) {
     // Configuration du header avec token
     const config = {
       headers: { Authorization: 'Bearer ' + rootState.auth.token }
     }
     // API
-    api.post('/produits/' + id + '/armoires', config)
+    api.post('/produits/' + id + '/stock', config)
       .then(function (response) {
         // Ajoute le stockage retournée par l'API au magasin
         commit('ajouterStockage', response.data)

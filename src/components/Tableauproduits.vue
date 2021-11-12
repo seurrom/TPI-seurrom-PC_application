@@ -93,7 +93,7 @@ export default {
           required: true,
           align: 'center',
           label: 'N° Interne',
-          field: row => row.num_interne,
+          field: row => row.num_inventaire,
           format: val => `${val}`,
           sortable: true
         },
@@ -126,7 +126,7 @@ export default {
         const normalizedRecherche = this.recherche.normalize('NFD').toLowerCase().replace(/[\u0300-\u036f]/g, '')
         return this.produits.produits.filter(v => this.normalizeInput(v.nom_fr).indexOf(normalizedRecherche) > -1 ||
         this.normalizeInput(v.num_cas.toString()).indexOf(normalizedRecherche) > -1 ||
-        this.normalizeInput(v.num_interne.toString()).indexOf(normalizedRecherche) > -1 ||
+        this.normalizeInput(v.num_inventaire.toString()).indexOf(normalizedRecherche) > -1 ||
         this.normalizeInput(v.formule).indexOf(normalizedRecherche) > -1)
       }
     },

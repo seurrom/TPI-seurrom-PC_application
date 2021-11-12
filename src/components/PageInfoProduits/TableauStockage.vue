@@ -21,21 +21,21 @@
           </q-btn>
           </q-td>
           <q-td>
-            {{ salle }}
-            <q-popup-edit v-model="props.row.salle">
-              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            {{ props.row.salle.nom }}
+            <q-popup-edit v-model="props.row.salle.nom">
+              <q-input v-model="props.row.salle.nom" dense autofocus counter></q-input>
             </q-popup-edit>
           </q-td>
           <q-td key="armoire" :props="props">
-            {{ props.row.salle }}
-            <q-popup-edit v-model="props.row.salle">
-              <q-input v-model="props.row.salle" dense autofocus counter></q-input>
+            {{ props.row.nom }}
+            <q-popup-edit v-model="props.row.nom">
+              <q-input v-model="props.row.nom" dense autofocus counter></q-input>
             </q-popup-edit>
           </q-td>
           <q-td key="quantite" :props="props">
-            {{ props.row.quantite + "L"}}
-            <q-popup-edit v-model="props.row.quantite">
-              <q-input v-model="props.row.quantite" dense autofocus counter suffix="L"></q-input>
+            {{ props.row.emplacement.quantite + "L"}}
+            <q-popup-edit v-model="props.row.emplacement.quantite">
+              <q-input v-model="props.row.emplacement.quantite" dense autofocus counter suffix="L"></q-input>
             </q-popup-edit>
           </q-td>
         </q-tr>

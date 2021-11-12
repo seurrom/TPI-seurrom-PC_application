@@ -33,7 +33,6 @@ const actions = {
     api.post('/login', payload)
       .then(function (response) {
         dispatch('setUser', response.data)
-        console.log(response.data)
         // Appelle l'action getProduitsApi afin de récupérer les produits de l'API
         dispatch('produits/getProduitsApi', null, { root: true })
         // Cache le logo de chargement
@@ -41,6 +40,8 @@ const actions = {
       })
       .catch(function (error) {
         // Cache le logo de chargement
+        console.log(error)
+        console.log(payload)
         Loading.hide()
         // En cas d'erreur affiche le message suivant
         afficherMessageErreur(
@@ -51,7 +52,7 @@ const actions = {
   },
   setUser ({ commit, dispatch, state }, data) {
     // Sauvegarde les données de l'utilisateur et le token dans le magasin
-    commit('setUser', data.user.email)
+    commit('setUser', data.credentials.email)
     commit('setToken', data.token)
     // Stock dans le Local Storage l'utilisateur et le token
     LocalStorage.set('user', state.user)

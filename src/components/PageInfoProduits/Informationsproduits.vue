@@ -10,15 +10,15 @@
         <q-input class="element"  outlined v-model="produit.num_cas" label="Numéro CAS"/>
         <q-input  class="element"   outlined  v-model="produit.nom_fr"        label="Nom officiel"/>
         <q-input class="element"    outlined v-model="produit.nom_en"  label="Nom anglais"/>
-        <q-input  class="element"   outlined  v-model="produit.autre_nom"       label="Synonyme"/>
-        <q-input class="element"    outlined v-model="produit.autre_nom2"       label="Autre synonyme"/>
+        <q-input  class="element"   outlined  v-model="produit.synonyme"       label="Synonyme"/>
+        <q-input class="element"    outlined v-model="produit.autre_synonyme"       label="Autre synonyme"/>
       </fieldset>
       <fieldset>
        <legend class="legend">
          Formules du produit
        </legend>
       <q-input class="element" outlined v-model="produit.formule" label="Formule brute" />
-      <q-input class="element" outlined v-model="produit.formule_developee"   label="Formule semi-développée" />
+      <q-input class="element" outlined v-model="produit.formule_developpee"   label="Formule semi-développée" />
      </fieldset>
       <fieldset>
         <legend class="legend">
@@ -31,7 +31,7 @@
         <legend class="legend">
           Numéros
         </legend>
-        <q-input class="element"  outlined v-model="produit.num_interne" label="Numéro interne"/>
+        <q-input class="element"  outlined v-model="produit.num_inventaire" label="Numéro interne"/>
       </fieldset>
       <fieldset>
         <legend class="legend">
@@ -45,7 +45,7 @@
         <legend class="legend">
           État du produit
         </legend>
-        <q-input class="element"  outlined v-model="produit.etat" label="État" disable/>
+        <q-input class="element"  outlined v-model="produit.etat.etat_produit" label="État" disable/>
       </fieldset>
       <fieldset>
         <legend class="legend">
@@ -57,10 +57,10 @@
         <legend class="legend">
           Famille/sorte de produit
         </legend>
-        <q-select class="element"  outlined  v-model="produit.sorte_produit"   label="Sorte de produit"  :options="options"/>
+        <q-select class="element"  outlined  v-model="produit.sorte.nom"   label="Sorte de produit"  :options="options"/>
         <q-select class="element"  outlined  v-model="produit.famille.nom"        label="Famille"           :options="optionsFamille"/>
-        <q-select class="element"  outlined  v-model="produit.purete"         label="Pureté"            :options="optionsPurete"/>
-        <q-input class="element"    outlined v-model="produit.toxicite"       label="Toxicité"/>
+        <q-select class="element"  outlined  v-model="produit.purete.purete"         label="Pureté"            :options="optionsPurete"/>
+        <q-input class="element"    outlined v-model="produit.toxicite.nom"       label="Toxicité"/>
       </fieldset>
       <fieldset>
         <legend class="legend">
